@@ -62,7 +62,7 @@ const Alerts = () => {
                         <tbody>
                             {eventsDisplayed.map((item) => {
                                 return (
-                                    <tr className='event-row' onClick={() => handleRowClick(item)}>
+                                    <tr key={item.id} className='event-row' onClick={() => handleRowClick(item)}>
                                         <td>{item.id}</td>
                                         <td>{item.desc}</td>
                                         {item.severity === 'Warning' && 
@@ -87,9 +87,6 @@ const Alerts = () => {
                 </div>
             </div>
             <Switch>
-                <Route path='/alerts/:eventID'>
-                <EventDetails eventItem={eventToDisplay} />
-                </Route>
             </Switch>
         </div>
     )
