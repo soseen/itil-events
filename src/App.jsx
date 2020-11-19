@@ -3,8 +3,9 @@ import './App.css';
 import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Status from './Routes/Status'
-import Events from './Routes/Events'
+import Tasks from './Routes/Tasks'
 import Alerts from './Routes/Alerts'
+import Rules from './Routes/Rules'
 import EventDetails from './Routes/EventDetails'
 
 
@@ -16,6 +17,8 @@ const App = () => {
         <Switch>
           <Route path='/' exact component={Status} />
           <Route path='/alerts' component={Alerts} />
+          <Route path='/rules' component={Rules} />
+          <Route path='/tasks' component={Tasks} />
         </Switch>
       </Router>
     </div>

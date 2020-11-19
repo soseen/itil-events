@@ -9,17 +9,17 @@ export const SideNavData = [
         icon: <AiFillHome />
     },
     {
-        name: 'Zdarzenia',
+        name: 'Alerts',
         route: '/alerts',
         icon: <AiFillAlert />
     },
     {
-        name: 'Reguły',
+        name: 'Rules',
         route: '/rules',
         icon: <AiFillWarning />
     },
     {
-        name: 'Zadania',
+        name: 'Tasks',
         route: '/tasks',
         icon: <BsFillPersonFill />
     },

@@ -1,10 +1,10 @@
 import React from 'react';
-import './Status.css'
+import './Rules.css'
 
 const Status = () => {
     return(
         <div className='page-container'>
-            <h1 className='page-title'>Status</h1>
+            <h1 className='page-title'>Rules</h1>
         </div>
     )
 }

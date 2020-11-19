@@ -13,4 +13,4 @@ const EventDetails = (eventItem) => {
     )
 }
 
-export default EventDetails
+export default EventDetails;
