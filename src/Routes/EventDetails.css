@@ -1,4 +1,6 @@
 .event-details-wrapper {
+    margin: auto;
     color: black;
     margin-top: 60px;
+    background-color: #1f1f1f;
 }
