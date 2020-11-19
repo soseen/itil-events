@@ -1,11 +1,11 @@
 import React from 'react';
-import './Events.css'
+import './Tasks.css'
 
-const Events = () => {
+const Tasks = () => {
     return(
         <div className='page-container'>
         </div> 
     )
 }
 
-export default Events;
+export default Tasks;
