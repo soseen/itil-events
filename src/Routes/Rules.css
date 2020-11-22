@@ -12,41 +12,34 @@
     border-radius: 10%;
 }
 
+.severity-box {
+    padding: 3px;
+    margin: auto;
+    color: black;
+}
+
 .severity-warning {
     background-color: #0070b1;
-    padding: 2px;
-    margin: auto;
-    box-shadow: 0px 0px 3px 1px #0070b1;
-    color: black;
+    box-shadow: 0px 0px 6px 1px#0070b1;
 }
 
 .severity-minor {
     background-color: #d8d400;
-    padding: 2px;
-    margin: auto;
-    box-shadow: 0px 0px 3px 1px #d8d400;
-    color: black;
+    box-shadow: 0px 0px 6px 1px#d8d400;
 }
 
 .severity-major {
     background-color: #e46600;
-    padding: 2px;
-    margin: auto;
-    box-shadow: 0px 0px 3px 1px #e46600;
-    color: black;
+    box-shadow: 0px 0px 6px 1px #e46600;
 }
 
 .severity-critical {
     background-color: #ff0000;
-    padding: 2px;
-    margin: auto;
-    box-shadow: 0px 0px 3px 1px #ff0000;
-    color: black;
+    box-shadow: 0px 0px 6px 1px #ff0000;
 }
 
-.events-table-container {
+.rules-table-container {
     margin: 100px auto;
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -82,12 +75,12 @@
     border-bottom: 1px solid #cecece;
 }
 
-.event-row td:nth-child(3),
+.rules-row td:nth-child(3),
 .content-table thead th:nth-child(3){
     text-align: center;
 }
 
-.content-table tbody tr:nth-child(2n){
+.rules-table tbody tr:nth-child(2n){
     background-color: #dbdbdb;
 }
 
@@ -96,7 +89,7 @@
 }
 
 
-.events-table-nav {
+.rules-table-nav {
     background-color:  #202020;
     display: flex;
     justify-content: space-between;
@@ -105,7 +98,7 @@
     /* border-bottom: 5px solid #161616;*/
 }
 
-.events-table-nav p {
+.rules-table-nav p {
     font-size: 1.8rem;
     letter-spacing: 2px;
     color: #ffffff;
@@ -159,3 +152,44 @@
 .filters-container button:hover{
     transform: scale(1.04);
 }
+
+.priority-container {
+    margin: auto 0;
+    vertical-align: middle;
+    height: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.priority-box {
+    width: 30px;
+    height: 15px;
+    margin-right: 2px;
+}
+
+.priority-box:nth-child(1) {
+    background-color: green;
+    box-shadow: 0px 0px 2px 1px green;
+}
+
+.priority-box:nth-child(2) {
+    background-color: green;
+    box-shadow: 0px 0px 2px 1px green;
+}
+
+.priority-box:nth-child(3) {
+    background-color: #d8d400;
+    box-shadow: 0px 0px 2px 1px #d8d400;
+}
+
+.priority-box:nth-child(4) {
+    background-color:#e46600;
+    box-shadow: 0px 0px 2px 1px#e46600;
+}
+
+.priority-box:nth-child(5) {
+    background-color:red;
+    box-shadow: 0px 0px 2px 1px red;
+}
+
