@@ -8,7 +8,7 @@ export const RulesData = [
         priority: 2,
         attribute: 'CPU',
         operator: '>',
-        treshold: '80%',
+        value: '80%',
         date: '25-03-2020'
     },
     {
@@ -18,7 +18,7 @@ export const RulesData = [
         priority: 4,
         attribute: 'Router #05423',
         operator: '=',
-        treshold: 'disconnected',
+        value: 'disconnected',
         date: '12-04-2020'
     },
     {
@@ -28,7 +28,7 @@ export const RulesData = [
         priority: 5,
         attribute: 'Application service',
         operator: '=',
-        treshold: `couldn't establish connection`,
+        value: `couldn't establish connection`,
         date: '13-03-2020'
     },
     {
@@ -38,7 +38,7 @@ export const RulesData = [
         priority: 1,
         attribute: 'Database',
         operator: '>',
-        treshold: '70%',
+        value: '70%',
         date: '12-04-2020'
     },
     {
@@ -48,7 +48,7 @@ export const RulesData = [
         priority: 1,
         attribute: 'Latency',
         operator: '>',
-        treshold: '150',
+        value: '150',
         date: '11-07-2020'
     },
     {
@@ -58,7 +58,7 @@ export const RulesData = [
         priority: 5,
         attribute: 'Proxy connection',
         operator: '=',
-        treshold: 'disconnected',
+        value: 'disconnected',
         date: '03-01-2020'
     },
     {
@@ -68,7 +68,7 @@ export const RulesData = [
         priority: 4,
         attribute: 'Database',
         operator: '=',
-        treshold: 'no access',
+        value: 'no access',
         date: '08-07-2020'
     },
     {
@@ -78,7 +78,7 @@ export const RulesData = [
         priority: 2,
         attribute: 'Port 01',
         operator: '=',
-        treshold: 'disconnected',
+        value: 'disconnected',
         date: '17-08-2020'
     },
     {
@@ -88,7 +88,7 @@ export const RulesData = [
         priority: 2,
         attribute: 'Port 02',
         operator: '=',
-        treshold: 'disconnected',
+        value: 'disconnected',
         date: '17-08-2020'
     },
     {
@@ -98,7 +98,7 @@ export const RulesData = [
         priority: 2,
         attribute: 'Port 03',
         operator: '=',
-        treshold: 'disconnected',
+        value: 'disconnected',
         date: '17-08-2020'
     },
     {
@@ -108,7 +108,7 @@ export const RulesData = [
         priority: 3,
         attribute: 'Tomcat server',
         operator: '=',
-        treshold: 'disconnected',
+        value: 'disconnected',
         date: '11-04-2020'
     },
     {
@@ -118,7 +118,7 @@ export const RulesData = [
         priority: 3,
         attribute: 'Tibco service',
         operator: '=',
-        treshold: 'disconnected',
+        value: 'disconnected',
         date: '11-04-2020'
     },
     {
@@ -128,7 +128,7 @@ export const RulesData = [
         priority: 3,
         attribute: 'Alteon server',
         operator: '=',
-        treshold: 'disconnected',
+        value: 'disconnected',
         date: '12-04-2020'
     },
     {
@@ -138,7 +138,7 @@ export const RulesData = [
         priority: 2,
         attribute: 'Server response time',
         operator: '>',
-        treshold: '3000ms',
+        value: '3000ms',
         date: '10-06-2020'
     }
 ]

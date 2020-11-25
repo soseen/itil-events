@@ -39,12 +39,14 @@ const Alerts = ({eventsData, itemCallback}) => {
                     <div className='events-table-nav'>
                         <p>Alerts</p>
                         <div className='filters-container'>
-                            <button className='button-filter' onClick={filterList} value={'All'}>All</button>
-                            <button className='button-filter' onClick={filterList} value={'Warning'}>Warning</button>
-                            <button className='button-filter' onClick={filterList} value={'Minor'}>Minor</button>
-                            <button className='button-filter' onClick={filterList} value={'Major'}>Major</button>
-                            <button className='button-filter' onClick={filterList} value={'Critical'}>Critical</button>
-                        </div>                    
+                            <div className='buttons-container'>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'All'}>All</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Warning'}>Warning</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Minor'}>Minor</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Major'}>Major</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Critical'}>Critical</button>
+                            </div>
+                        </div>       
                     </div>
                     <table className='content-table'>
                         <thead>

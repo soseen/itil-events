@@ -9,6 +9,39 @@ const Rules = ({rulesData, itemCallback}) => {
 
     const [rulesDisplayed, setRulesDisplayed] = useState(rulesData);
 
+    const filterList = (e) => {
+
+        if(e.target.name === 'select-priority') {
+            if(e.target.value === 'All'){
+                setRulesDisplayed(rulesData);
+            } else {
+                let temp = [];
+                console.log(`prio z e.target.vaule ${e.target.value}`);
+                for(let i=0; i < rulesData.length; i++){
+                    console.log(`prio z rules data ${rulesData[i].priority}`);
+                    if(rulesData[i].priority.toString() === e.target.value.toString()){
+                        temp.push(rulesData[i]);
+                    }
+                }
+                console.log(temp);
+                setRulesDisplayed(temp);
+            }    
+        }
+        else if(e.target.name === 'button-filter'){
+            if(e.target.value === 'All'){
+                setRulesDisplayed(rulesData);
+            } else {
+                let temp = [];
+                for(let i=0; i < rulesData.length; i++){
+                    if(rulesData[i].severity === e.target.value){
+                        temp.push(rulesData[i]);
+                    }
+                }
+                setRulesDisplayed(temp);
+            }
+        }
+    }
+
     const handleRowClick = (item) => {
         itemCallback('rule', item);
         console.log(item.severity);
@@ -21,7 +54,22 @@ const Rules = ({rulesData, itemCallback}) => {
                     <div className='rules-table-nav'>
                         <p>Alerts</p>
                         <div className='filters-container'>
-                            <button className='button-filter'>All</button>
+                            <select name='select-priority' className='select-filter' onChange={filterList}>
+                                <option value="Priority" disabled value>Priority</option>
+                                <option value='All'>All</option>
+                                <option value={1}>1</option>
+                                <option value={2}>2</option>
+                                <option value={3}>3</option>
+                                <option value={4}>4</option>
+                                <option value={5}>5</option>
+                            </select>
+                            <div className='buttons-container'>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'All'}>All</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Warning'}>Warning</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Minor'}>Minor</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Major'}>Major</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Critical'}>Critical</button>
+                            </div>
                         </div>                    
                     </div>
                     <table className='content-table'>
