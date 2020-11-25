@@ -1,27 +1,25 @@
 import React, { useState } from 'react';
 import './Alerts.css'
-import { EventsData } from '../components/EventsData.jsx';
 import { useHistory, useRouteMatch, Switch, Route, Link} from 'react-router-dom';
 import EventDetails from './EventDetails';
 
-const Alerts = () => {
+const Alerts = ({eventsData, itemCallback}) => {
 
     let history = useHistory();
-    let { path, url } = useRouteMatch();
+    let { url } = useRouteMatch();
 
-    const [eventsDisplayed, setEventsDisplayed] = useState(EventsData);
-    const [eventToDisplay, setEventToDisplay] = useState(EventsData[0]);
+
+    const [eventsDisplayed, setEventsDisplayed] = useState(eventsData);
 
     const filterList = (e) => {
-        console.log(e.target.value);
         if(e.target.value === 'All'){
-            setEventsDisplayed(EventsData);
+            setEventsDisplayed(eventsData);
         } else {
             let temp = [];
-            for(let i=0; i < EventsData.length; i++){
-                if(EventsData[i].severity === e.target.value){
-                    console.log(EventsData[i]);
-                    temp.push(EventsData[i]);
+            for(let i=0; i < eventsData.length; i++){
+                if(eventsData[i].severity === e.target.value){
+                    console.log(eventsData[i]);
+                    temp.push(eventsData[i]);
                 }
             setEventsDisplayed(temp);
             }
@@ -29,8 +27,7 @@ const Alerts = () => {
     }
 
     const handleRowClick = (item) => {
-        console.log(item);
-        setEventToDisplay(item);
+        itemCallback('event', item);
         history.push(`${url}/${item.id}`);
     }
 
@@ -42,12 +39,14 @@ const Alerts = () => {
                     <div className='events-table-nav'>
                         <p>Alerts</p>
                         <div className='filters-container'>
-                            <button className='button-filter' onClick={filterList} value={'All'}>All</button>
-                            <button className='button-filter' onClick={filterList} value={'Warning'}>Warning</button>
-                            <button className='button-filter' onClick={filterList} value={'Minor'}>Minor</button>
-                            <button className='button-filter' onClick={filterList} value={'Major'}>Major</button>
-                            <button className='button-filter' onClick={filterList} value={'Critical'}>Critical</button>
-                        </div>                    
+                            <div className='buttons-container'>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'All'}>All</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Warning'}>Warning</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Minor'}>Minor</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Major'}>Major</button>
+                                <button name='button-filter' className='button-filter' onClick={filterList} value={'Critical'}>Critical</button>
+                            </div>
+                        </div>       
                     </div>
                     <table className='content-table'>
                         <thead>
@@ -62,7 +61,7 @@ const Alerts = () => {
                         <tbody>
                             {eventsDisplayed.map((item) => {
                                 return (
-                                    <tr className='event-row' onClick={() => handleRowClick(item)}>
+                                    <tr key={item.id} className='event-row' onClick={() => handleRowClick(item)}>
                                         <td>{item.id}</td>
                                         <td>{item.desc}</td>
                                         {item.severity === 'Warning' && 
@@ -86,11 +85,6 @@ const Alerts = () => {
                     </table>
                 </div>
             </div>
-            <Switch>
-                <Route path='/alerts/:eventID'>
-                <EventDetails eventItem={eventToDisplay} />
-                </Route>
-            </Switch>
         </div>
     )
 }

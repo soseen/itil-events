@@ -11,6 +11,7 @@
     position: fixed;
     top: 0;
     width: 100%;
+    font-family: 'Dosis', sans-serif;
 }
 
 .menu {
@@ -58,6 +59,7 @@ ul {
     left: -100%;
     transition: 800ms;
     border-right: 2px solid #0daaa2;
+    z-index: 5;
 }
 
 .side-menu.active {

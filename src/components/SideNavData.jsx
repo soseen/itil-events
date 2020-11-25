@@ -24,7 +24,7 @@ export const SideNavData = [
         icon: <BsFillPersonFill />
     },
     {
-        name: 'Wyloguj',
+        name: 'Log Out',
         route: '/',
         icon: <AiOutlineLogout />
     }
