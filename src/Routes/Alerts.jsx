@@ -33,7 +33,7 @@ const Alerts = ({eventsData, itemCallback}) => {
 
 
     return(
-        <div className='page-container'>
+        <div className='alerts-page-container'>
             <div className='page-content'>
                 <div className='events-table-container'>
                     <div className='events-table-nav'>

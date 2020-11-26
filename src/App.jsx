@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
@@ -10,6 +10,7 @@ import RuleDetails from './Routes/RuleDetails'
 import {EventsData} from './components/EventsData'
 import { useHistory } from 'react-router-dom';
 import {RulesData} from './components/RulesData';
+import { ServicesData } from './components/ServicesData';
 
 
 const App = () => {
@@ -17,6 +18,12 @@ const App = () => {
   let history = useHistory();
   const [eventToDisplay, setEventToDisplay] = useState(EventsData[0]);
   const [ruleToDisplay, setRuleToDisplay] = useState(RulesData[0]);
+
+  // useEffect(() => {
+  //   eventsData.forEach(element => {
+      
+  //   });
+  // }, [])
 
 
   console.log(EventsData);
@@ -37,7 +44,9 @@ const App = () => {
       <Router>
         <Navbar />
         <Switch>
-          <Route path='/' exact component={Status} />
+          <Route path='/' exact>
+            <Status servicesData={ServicesData} eventsData={EventsData} />
+          </Route>
           <Route path='/alerts' exact>
             <Alerts eventsData={EventsData} itemCallback={itemCallback}/>
           </Route>
