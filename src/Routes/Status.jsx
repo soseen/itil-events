@@ -1,54 +1,62 @@
 import React, { useEffect, useState } from 'react';
 import './Status.css'
+import {useRouteMatch, useHistory} from 'react-router-dom';
+import DataChart from '../components/DataChart';
 
-const Status = ({servicesData, eventsData}) => {
+const Status = ({services, itemCallback, eventsData}) => {
 
-    const [services, setServices] = useState(servicesData);
     const [serviceEvents, setServiceEvents] = useState([]);
+    let history = useHistory();
+    // let { url } = useRouteMatch();
     
-    useEffect(() => {
+    // useEffect(() => {
 
-        // let serviceArray = eventsData.map(service => ({
-        //     id: event.id
-        // }))
+    //     // let serviceArray = eventsData.map(service => ({
+    //     //     id: event.id
+    //     // }))
 
 
-        let serviceArray = services;
+    //     let serviceArray = services;
 
-        for(let i=0; i<serviceArray.length; i++){
-            serviceArray[i].events = [];
-            serviceArray[i].status = 1;
-        }
+    //     for(let i=0; i<serviceArray.length; i++){
+    //         serviceArray[i].events = [];
+    //         serviceArray[i].status = 1;
+    //     }
 
-        for(let i=0; i< serviceArray.length; i++){
-            for(let j=0; j<eventsData.length; j++){
-                if(eventsData[j].service !== null ){
-                    eventsData[j].service.forEach(element => {
-                        // console.log(`serwis ${serviceArray[i].id}`);
-                        // console.log(`zdarzenie ${element}`);
-                        if(element === serviceArray[i].id){
-                            serviceArray[i].events = [...serviceArray[i].events, eventsData[j]];
-                            if(eventsData[j].severity === 'Critical' && serviceArray[i].status < 5){
-                                serviceArray[i].status = 5;
-                            } else if (eventsData[j].severity === 'Major' && serviceArray[i].status < 4) {
-                                serviceArray[i].status = 4;
-                            } else if (eventsData[j].severity === 'Minor' && serviceArray[i].status < 3) {
-                                serviceArray[i].status = 3;
-                            } else if (eventsData[j].severity === 'Warning' && serviceArray[i].status < 2) {
-                                serviceArray[i].status = 2;
-                            }
-                        }
-                    });
-                }
-            }
-        }
+    //     for(let i=0; i< serviceArray.length; i++){
+    //         for(let j=0; j<eventsData.length; j++){
+    //             if(eventsData[j].service !== null ){
+    //                 eventsData[j].service.forEach(element => {
+    //                     // console.log(`serwis ${serviceArray[i].id}`);
+    //                     // console.log(`zdarzenie ${element}`);
+    //                     if(element === serviceArray[i].id){
+    //                         serviceArray[i].events = [...serviceArray[i].events, eventsData[j]];
+    //                         if(eventsData[j].severity === 'Critical' && serviceArray[i].status < 5){
+    //                             serviceArray[i].status = 5;
+    //                         } else if (eventsData[j].severity === 'Major' && serviceArray[i].status < 4) {
+    //                             serviceArray[i].status = 4;
+    //                         } else if (eventsData[j].severity === 'Minor' && serviceArray[i].status < 3) {
+    //                             serviceArray[i].status = 3;
+    //                         } else if (eventsData[j].severity === 'Warning' && serviceArray[i].status < 2) {
+    //                             serviceArray[i].status = 2;
+    //                         }
+    //                     }
+    //                 });
+    //             }
+    //         }
+    //     }
 
-        console.log(serviceArray);
-        setServices(serviceArray);
-    }, [eventsData, services]);
+    //     console.log(serviceArray);
+    //     setServices(serviceArray);
+    // }, [eventsData, services]);
 
-    const displayRelatedEvents = (serviceEvents) => {
-        setServiceEvents(serviceEvents)
+    const displayRelatedEvents = (events) => {
+        setServiceEvents(events)
+    }
+
+    const handleRowClick = (item) => {
+        itemCallback('event', item);
+        history.push(`alerts/${item.id}`);
     }
 
     return(
@@ -86,7 +94,7 @@ const Status = ({servicesData, eventsData}) => {
                                     <tbody>
                                         {serviceEvents.map((item, index) => {
                                             return (
-                                                <tr key={item.id} className='event-row'>
+                                                <tr key={item.id} className='event-row' onClick={() => handleRowClick(item)}>
                                                     <td>{item.id}</td>
                                                     <td>{item.desc}</td>
                                                     {item.severity === 'Warning' && 
@@ -111,9 +119,12 @@ const Status = ({servicesData, eventsData}) => {
                         </div>
                     </div>
                     <div className='stats-container'>
-                        <div className='stats'>
-
+                        <div className='doughnut-chart-container'>
+                            <DataChart eventsData={eventsData} type='Doughnut' />
                         </div>
+                        <div className='line-chart-container'>
+                            <DataChart eventsData={eventsData} type='Line' />
+                        </div>           
                     </div>
                 </div>
             </div>
