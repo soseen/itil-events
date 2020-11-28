@@ -19,9 +19,10 @@ const App = () => {
   const [ruleToDisplay, setRuleToDisplay] = useState(RulesData[0]);
   const [services, setServices] = useState(ServicesData);
   const [eventsData, setEventsData] = useState(EventsData);
-  
+
     useEffect(() => {
-        let serviceArray = services;
+        
+      let serviceArray = services;
 
         for(let i=0; i<serviceArray.length; i++){
             serviceArray[i].events = [];
@@ -53,7 +54,7 @@ const App = () => {
 
         console.log(serviceArray);
         setServices(serviceArray);
-    }, [services]);
+    }, [services, eventsData]);
 
   
   const itemCallback = (itemType, item) => {
