@@ -45,13 +45,11 @@ const App = () => {
       if (!service.events || service.events.length === 0) {
         return service;
       }
-      const highestSeverity = service.events.reduce((current, { severity }) => {
-        console.log("current", current);
-        console.log("severity", severity);
-        return SEVERITIES_STATUSES[severity] > SEVERITIES_STATUSES[current]
+      const highestSeverity = service.events.reduce((current, { severity }) => 
+        SEVERITIES_STATUSES[severity] > SEVERITIES_STATUSES[current]
           ? severity
-          : current;
-      }, "None");
+          : current
+      , "None");
 
       return { ...service, status: SEVERITIES_STATUSES[highestSeverity] };
     });
