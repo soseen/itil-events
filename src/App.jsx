@@ -7,6 +7,7 @@ import Alerts from './Routes/Alerts'
 import Rules from './Routes/Rules'
 import EventDetails from './Routes/EventDetails'
 import RuleDetails from './Routes/RuleDetails'
+import NewEventForm from './Routes/NewEventForm'
 import {EventsData} from './components/EventsData'
 import {RulesData} from './components/RulesData';
 import { ServicesData } from './components/ServicesData';
@@ -17,7 +18,8 @@ const App = () => {
   const [eventToDisplay, setEventToDisplay] = useState(EventsData[0]);
   const [ruleToDisplay, setRuleToDisplay] = useState(RulesData[0]);
   const [services, setServices] = useState(ServicesData);
- 
+  const [eventsData, setEventsData] = useState(EventsData);
+  
     useEffect(() => {
         let serviceArray = services;
 
@@ -27,20 +29,20 @@ const App = () => {
         }
 
         for(let i=0; i< serviceArray.length; i++){
-            for(let j=0; j<EventsData.length; j++){
-                if(EventsData[j].service !== null ){
-                    EventsData[j].service.forEach(element => {
+            for(let j=0; j<eventsData.length; j++){
+                if(eventsData[j].service !== null ){
+                    eventsData[j].service.forEach(element => {
                         // console.log(`serwis ${serviceArray[i].id}`);
                         // console.log(`zdarzenie ${element}`);
                         if(element === serviceArray[i].id){
-                            serviceArray[i].events = [...serviceArray[i].events, EventsData[j]];
-                            if(EventsData[j].severity === 'Critical' && serviceArray[i].status < 5){
+                            serviceArray[i].events = [...serviceArray[i].events, eventsData[j]];
+                            if(eventsData[j].severity === 'Critical' && serviceArray[i].status < 5){
                                 serviceArray[i].status = 5;
-                            } else if (EventsData[j].severity === 'Major' && serviceArray[i].status < 4) {
+                            } else if (eventsData[j].severity === 'Major' && serviceArray[i].status < 4) {
                                 serviceArray[i].status = 4;
-                            } else if (EventsData[j].severity === 'Minor' && serviceArray[i].status < 3) {
+                            } else if (eventsData[j].severity === 'Minor' && serviceArray[i].status < 3) {
                                 serviceArray[i].status = 3;
-                            } else if (EventsData[j].severity === 'Warning' && serviceArray[i].status < 2) {
+                            } else if (eventsData[j].severity === 'Warning' && serviceArray[i].status < 2) {
                                 serviceArray[i].status = 2;
                             }
                         }
@@ -68,16 +70,18 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <Navbar />
         <Switch>
           <Route path='/' exact>
-            <Status services={services} itemCallback={itemCallback} eventsData={EventsData}/>
+            <Status services={services} itemCallback={itemCallback} eventsData={eventsData}/>
           </Route>
           <Route path='/alerts' exact>
-            <Alerts eventsData={EventsData} itemCallback={itemCallback}/>
+            <Alerts eventsData={eventsData} itemCallback={itemCallback}/>
           </Route>
           <Route path='/alerts/:eventID'>
-            <EventDetails eventToDisplay={eventToDisplay} />
+            <EventDetails eventToDisplay={eventToDisplay} exact/>
+          </Route>
+          <Route path='/event-form'>
+            <NewEventForm eventsData={eventsData} services={services}/>
           </Route>
           <Route path='/rules' exact>
             <Rules rulesData={RulesData} itemCallback={itemCallback}/>
@@ -86,6 +90,7 @@ const App = () => {
             <RuleDetails ruleToDisplay={ruleToDisplay} />
           </Route>
         </Switch>
+        <Navbar />
       </Router>
     </div>
   );

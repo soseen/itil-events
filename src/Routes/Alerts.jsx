@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Alerts.css'
-import { useHistory, useRouteMatch, Switch, Route, Link} from 'react-router-dom';
-import EventDetails from './EventDetails';
+import { useHistory, useRouteMatch, Link} from 'react-router-dom';
 
 const Alerts = ({eventsData, itemCallback}) => {
 
@@ -36,6 +35,9 @@ const Alerts = ({eventsData, itemCallback}) => {
         <div className='alerts-page-container'>
             <div className='page-content'>
                 <div className='events-table-container'>
+                    <Link to={`/event-form`}>
+                    <button className='new-event-button'>New Event</button>
+                    </Link>
                     <div className='events-table-nav'>
                         <p>Alerts</p>
                         <div className='filters-container'>

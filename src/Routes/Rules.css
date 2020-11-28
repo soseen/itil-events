@@ -46,7 +46,7 @@
     width: 90%;
     box-shadow: 2px 10px 15px 4px black;
     border-top: 2px solid #0daaa2;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
 .content-table {
@@ -94,26 +94,31 @@
 
 
 .rules-table-nav {
-    background-color:  #202020;
+    background-color:  #20202099;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px ;
+    padding: 20px 0;
     /* border-bottom: 5px solid #161616;*/
 }
 
 .rules-table-nav p {
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-    color: #ffffff;
+    background-color: #0daaa2;
+    box-shadow: 2px 5px 15px 2px black;
+    width: 250px;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 20px 0;
 }
 
-.filters-container {
-    padding: 10px 10px;
+.rules-table-container .filters-container {
+    padding: 10px 20px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    height: 40px;
+    height: 60px;
 }
 
 .select-filter::before,
@@ -141,8 +146,9 @@
     box-shadow: 0px 3px 5px 2px black;
 }
 
-.buttons-container {
+.rules-table-container .buttons-container {
     display: flex;
+    align-items: center;
     flex-basis: 150px;
     height: 40px;
     box-shadow: 0px 3px 5px 2px black;
@@ -155,6 +161,7 @@
     border: none;
     cursor: pointer;
     margin-right: 0px;
+    height: 100%;
 }
 
 .buttons-container button:focus {

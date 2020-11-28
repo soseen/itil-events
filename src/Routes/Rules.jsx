@@ -52,7 +52,7 @@ const Rules = ({rulesData, itemCallback}) => {
         <div className='page-container'>
             <div className='rules-table-container'>
                     <div className='rules-table-nav'>
-                        <p>Alerts</p>
+                        <p>Rules</p>
                         <div className='filters-container'>
                             <select name='select-priority' className='select-filter' onChange={filterList}>
                                 <option value="Priority" disabled value>Priority</option>
