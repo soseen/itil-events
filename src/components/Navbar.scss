@@ -1,21 +1,26 @@
+@import '../Variables.scss';
+
+
 .navbar {
-    background-color: #181818;
-    height: 2rem;
-    color: white;
+    background-color: $main-color;
+    height: 3.3rem;
+    color: $text-color;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 0.6rem;
-    border-bottom: 2px solid #0daaa2;
-    font-size: 1.4rem;
+    border-bottom: 2px solid  $text-color;
+    font-size: 1.5rem;
     position: fixed;
     top: 0;
     width: 100%;
     font-family: 'Dosis', sans-serif;
+    z-index: 5;
+    font-weight: bolder;
 }
 
 .menu {
-    color: #ffffff;
+    color: $text-color;
     background: none;  
 }
 
@@ -29,7 +34,7 @@
 }
 
 .menu-bars:hover {
-    color:  #0daaa2;
+    color:  $text-color2;
 }
 
 .nav-title {
@@ -49,7 +54,7 @@ ul {
 }
 
 .side-menu {
-    background-color: #181818;
+    background-color: $main-color;
     display: flex;
     justify-content: center;
     width: 20rem;  
@@ -58,7 +63,7 @@ ul {
     top: 3.2rem;
     left: -100%;
     transition: 800ms;
-    border-right: 2px solid #0daaa2;
+    border-right: 2px solid $text-color;
     z-index: 5;
 }
 
@@ -81,7 +86,7 @@ ul {
 
 .nav-item a {
     text-decoration: none;
-    color: white;
+    color: $text-color;
     font-size: 1.2rem;
     display: flex; 
     align-items: center;
@@ -92,7 +97,7 @@ ul {
 }
 
 .nav-item a:hover {
-    background-color: #242424;
+    background-color: $secondary-color;
 }
 
 .side-menu-links {

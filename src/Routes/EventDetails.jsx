@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import './EventDetails.css';
 import {ServicesData} from '../components/ServicesData.jsx';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 const EventDetails = ({eventToDisplay}) => {
 
+    let history = useHistory();
     const [affectedServices, setAffectedServices] = useState([]);
 
     useEffect(() => {
@@ -25,16 +26,13 @@ const EventDetails = ({eventToDisplay}) => {
             }
         }
         setAffectedServices(servicesArray);
-        console.log(affectedServices);
     },[]);
 
     return(
         <div className='page-container'>
             <div className='event-details-container'>
                 <div className='event-details-buttons'>
-                    <Link to="/alerts">
-                        <button>Back</button>
-                    </Link>
+                        <button onClick={() => history.goBack()}>Back</button>
                     <button>Apply Task</button>
                     <button>Resolve</button>
                 </div>
@@ -68,7 +66,7 @@ const EventDetails = ({eventToDisplay}) => {
                             <label className='event-details-label'>Source</label>
                             <p>{eventToDisplay.source}</p>
                             <label className='event-details-label'>Date</label>
-                            <p>Date: {eventToDisplay.startDate}</p>
+                            <p>{eventToDisplay.startDate}</p>
                             <label className='event-details-label'>Last Update</label>
                             <p>{eventToDisplay.endDate}</p>
                             <label className='event-details-label'>Resolved</label>
@@ -79,7 +77,7 @@ const EventDetails = ({eventToDisplay}) => {
                             <div className='event-details-services'>
                                 {affectedServices.map((item,index) => {
                                     return (
-                                        <p>{item.serviceName}</p>
+                                        <p key={item.serviceID}>{item.serviceName}</p>
                                     )
                                 })
                                 }

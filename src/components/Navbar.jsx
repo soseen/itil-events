@@ -3,7 +3,7 @@ import { FaBars } from "react-icons/fa";
 import {Link} from 'react-router-dom';
 import { SideNavData } from './SideNavData';
 import { IconContext} from 'react-icons';
-import './Navbar.css';
+import './Navbar.scss';
 
 const Navbar = () => {
 

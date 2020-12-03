@@ -1,0 +1,347 @@
+@import '../Variables.scss';
+
+* {box-sizing: border-box;}
+
+.page-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.new-event-form-container {
+    width: 100%;
+    margin: 50px auto;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: $main-color;
+    border-radius: 5px;
+    border-top: 2px solid $accent-color;
+}
+
+.new-event-form-header {
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.new-event-form-header p {
+    margin-right: auto;
+}
+
+.new-event-form-header button {
+    padding: 20px 50px;
+    width: 180px;
+    background-color: $secondary-color;
+    border: none;
+    color: $text-color;
+    font-weight: bolder;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 50px;
+}
+
+.new-event-form-header button:focus {
+    outline: none;
+}
+
+.new-event-form-header button:active {
+    background-color: #333333;
+}
+
+.new-event-inputs-validation {
+    color: #960316;
+    width: 80%;
+    font-size: 1.1rem;
+    height: 30px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.validation-message-hidden {
+    display: none;
+}
+
+.new-event-form-header p{
+    background-color: $secondary-color;
+    color: $text-color;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 1.5rem;
+    width: 250px;
+    padding: 20px 0;
+    box-shadow: 2px 5px 15px 2px black;
+}
+
+.new-event-inputs-container{
+    width: 80%;
+    height: 100%;
+    /* background-color: #1a1a1a; */
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.new-event-inputs {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 1 1 400px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0px 1000px $secondary-color inset;
+    border: 2px solid $secondary-color;
+    -webkit-text-fill-color: $text-color;
+}
+
+.new-event-inputs-row {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    margin-bottom: 5px;
+}
+
+.new-event-inputs-label {
+    color: $text-color;
+    font-weight: 500;
+    letter-spacing: 0.15rem;
+    font-size: 1.2rem;
+}
+
+.new-event-inputs-input {
+    position: relative;
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: $secondary-color;
+    color: $text-color;
+    border: none;
+    font-weight: bold;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+}
+
+
+.new-event-inputs-input:focus {
+    outline: none;
+    background-color: #333333;
+    border: 2px solid $text-color;
+}
+
+.new-event-inputs-span {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.new-event-inputs-column {
+    width: 49.5%;
+}
+
+.input-required:after {
+    content: '*';
+    color: #960316;
+}
+
+.new-event-inputs-severity-buttons {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.new-event-inputs-resolved-buttons {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.new-event-inputs-resolved-buttons button {
+    width: 49.5%;
+    padding: 15px;
+    background-color: $secondary-color;
+    border: none;
+    color: $text-color;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.resolved-button-highlighted {
+    background-color: #333333 !important;
+}
+
+.new-event-inputs-severity-buttons button{
+    width: 24.2%;
+    padding: 15px;
+    background-color: $secondary-color;
+    border: none;
+    color: $text-color;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.new-event-inputs-resolved-buttons button:focus,
+.new-event-inputs-severity-buttons button:focus {
+    outline: none;
+}
+
+.new-event-inputs-button-warning {
+    background-color: $warning-color !important;
+}
+
+.new-event-inputs-button-minor {
+    background-color: $minor-color !important;
+    color: black !important;
+}
+
+.new-event-inputs-button-major {
+    background-color: $major-color !important;
+}
+
+.new-event-inputs-button-critical {
+    background-color: $critical-color !important;
+}
+
+.new-event-inputs-services-container {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.new-event-inputs-select {
+    width: 100%;
+    padding: 14px;
+    outline: none;
+    border: none;
+    background-color: $secondary-color;
+    cursor: pointer;
+    color: $text-color;
+    font-weight: bold;
+    border: 2px solid transparent;
+}
+
+.new-event-inputs-select:focus {
+    border: 2px solid $text-color;
+    background-color: #333333;
+}
+
+.new-event-inputs-select option {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.new-event-inputs-services-container button {
+    width: 30%;
+    padding: 15px;
+    background-color: $secondary-color;
+    border: none;
+    color: $text-color;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.new-event-inputs-services-container button:focus {
+    outline: none;
+}
+
+.new-event-inputs-services-container button:active {
+    background-color: #181818;
+}
+.new-event-inputs-services-container button:hover {
+    background-color: #2c2c2c;
+}
+
+.new-event-services-list {
+    width: 100%;
+    min-height: 400px;
+    margin-top: 10px;
+    color: $text-color;
+}
+
+.new-event-service-item {
+    list-style: none;
+    width: 100%;
+    padding: 12px 15px;
+    background-color: $secondary-color;
+    margin-bottom: 20px;
+    color: $text-color;
+    font-weight: bolder;
+    border: 1px solid transparent;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.new-event-service-item svg {
+    color: $text-color;
+    width: 24px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.new-event-service-item svg:hover {
+    color: $main-color;
+}
+
+
+.add-event-button {
+    padding: 20px 50px;
+    width: 180px;
+    background-color: $secondary-color;
+    border: none;
+    color: $text-color;
+    font-weight: bolder;
+    cursor: pointer;
+    align-self: flex-end;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 50px;
+}
+
+.add-event-button:focus {
+    outline: none;
+}
+
+.add-event-button:hover {
+    background-color: #2c2c2c;
+}
+
+/* .new-event-inputs-left,
+.new-event-inputs-right {
+    width: 49%;
+    height: 100%;
+    background-color: gray;
+} */

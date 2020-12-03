@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Alerts.css'
+import './Alerts.scss'
 import { useHistory, useRouteMatch, Link} from 'react-router-dom';
 
 const Alerts = ({eventsData, itemCallback}) => {
@@ -35,9 +35,7 @@ const Alerts = ({eventsData, itemCallback}) => {
         <div className='alerts-page-container'>
             <div className='page-content'>
                 <div className='events-table-container'>
-                    <Link to={`/event-form`}>
-                    <button className='new-event-button'>New Event</button>
-                    </Link>
+                    
                     <div className='events-table-nav'>
                         <p>Alerts</p>
                         <div className='filters-container'>
@@ -50,6 +48,9 @@ const Alerts = ({eventsData, itemCallback}) => {
                             </div>
                         </div>       
                     </div>
+                    <Link to={`/event-form`}>
+                    <button className='new-event-button'>New Event</button>
+                    </Link>
                     <table className='content-table'>
                         <thead>
                             <tr>
@@ -79,7 +80,7 @@ const Alerts = ({eventsData, itemCallback}) => {
                                             <td><span className='severity-critical'>{item.severity}</span></td>
                                         }
                                         <td>{item.startDate}</td>
-                                        <td>{item.resolved.toString()}</td>
+                                        <td>{item.resolved.toString().toUpperCase()}</td>
                                     </tr>
                                 )
                             })}

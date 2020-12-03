@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import {Doughnut, defaults} from 'react-chartjs-2';
+import {Doughnut, Bar, defaults} from 'react-chartjs-2';
 import './DataChart.css'
 
-const DataChart = ({eventsData}) => {
+const DataChart = ({eventsData, type}) => {
 
     defaults.global.maintainAspectRatio = false;
     const [chartData, setChartData] = useState({});
@@ -20,21 +20,22 @@ const DataChart = ({eventsData}) => {
         console.log(eventFrequencies);
         setChartData(eventFrequencies);
         
-    },[]);
+    },[eventsData]);
 
     return(
         <div className='data-chart-container'>
-            <Doughnut 
+            {type === 'Doughnut' &&
+                <Doughnut 
                 data={{
                     labels: ['Warning', 'Minor', 'Major', 'Critical'],
                     datasets: [{
-                        label: '# of events',
+                        label: 'Number of events',
                         data: [chartData.Warning, chartData.Minor, chartData.Major, chartData.Critical],
                         backgroundColor: [
-                            '#0070b1',
-                            '#d8d400',
-                            '#e46600',
-                            '#ff0000'
+                            '#2a49b1',
+                            '#ddcb2c',
+                            '#e4880f',
+                            '#6d121e'
                         ],
                         borderColor: '#1f1f1f00',
                         borderWidth: 10
@@ -45,7 +46,41 @@ const DataChart = ({eventsData}) => {
                     maintainAspectRatio: false,
                     responsive: true,
                 }}
-            />
+                />
+            }
+
+            {type === 'Line' &&
+                <Bar 
+                data={{
+                    labels: ['Warning', 'Minor', 'Major', 'Critical'],
+                    datasets: [{
+                        label: '# of events',
+                        data: [chartData.Warning, chartData.Minor, chartData.Major, chartData.Critical],
+                        backgroundColor: [
+                            '#2a49b1',
+                            '#ddcb2c',
+                            '#e4880f',
+                            '#6d121e'
+                        ],
+                        borderColor: '#1f1f1f00',
+                        borderWidth: 10
+                    }],
+                }}
+                options= {{
+                        cutoutPercentage: 40,
+                        maintainAspectRatio: false,
+                        responsive: true,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }}
+                />
+            }
+            
         </div>
     )
 }

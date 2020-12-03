@@ -45,7 +45,7 @@ const RuleDetails = ({ruleToDisplay}) => {
                         <p>{ruleToDisplay.date}</p>
                     </div>
                     <div className='rule-details-info rule-right'>
-                        <label className='rule-details-section'>Rule Treshold</label>
+                        <label className='rule-details-section'>Rule Threshold</label>
                         <label className='rule-details-label'>Attribute</label>
                         <p>{ruleToDisplay.attribute}</p>
                         <label className='rule-details-label'>Operator</label>

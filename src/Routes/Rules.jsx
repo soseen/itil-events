@@ -1,6 +1,6 @@
 import {React, useState} from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
-import './Rules.css';
+import './Rules.scss';
 
 const Rules = ({rulesData, itemCallback}) => {
 

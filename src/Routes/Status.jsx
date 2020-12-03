@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Status.css'
+import './Status.scss'
 import {useRouteMatch, useHistory} from 'react-router-dom';
 import DataChart from '../components/DataChart';
 
@@ -75,7 +75,7 @@ const Status = ({services, itemCallback, eventsData}) => {
                             <div className='services-container'>
                                 {services.map((service, index) => {
                                     return(
-                                        <div className={`service-box service-box-priority-${service.priority} service-box-status-${service.status}`} onClick={() => displayRelatedEvents(service.events)}>
+                                        <div key ={service.id} className={`service-box service-box-priority-${service.priority} service-box-status-${service.status}`} onClick={() => displayRelatedEvents(service.events)}>
                                             <p>{service.name}</p>
                                         </div>
                                     )

@@ -9,7 +9,7 @@ export const RulesData = [
         attribute: 'CPU',
         operator: '>',
         value: '80%',
-        date: '25-03-2020'
+        date: '2020-03-13'
     },
     {
         id: 2,
@@ -19,7 +19,7 @@ export const RulesData = [
         attribute: 'Router #05423',
         operator: '=',
         value: 'disconnected',
-        date: '12-04-2020'
+        date: '2020-02-19'
     },
     {
         id: 3,
@@ -29,7 +29,7 @@ export const RulesData = [
         attribute: 'Application service',
         operator: '=',
         value: `couldn't establish connection`,
-        date: '13-03-2020'
+        date: '2020-06-21'
     },
     {
         id: 4,
@@ -39,7 +39,7 @@ export const RulesData = [
         attribute: 'Database',
         operator: '>',
         value: '70%',
-        date: '12-04-2020'
+        date: '2020-02-04'
     },
     {
         id: 5,
@@ -49,7 +49,7 @@ export const RulesData = [
         attribute: 'Latency',
         operator: '>',
         value: '150',
-        date: '11-07-2020'
+        date: '2020-02-07'
     },
     {
         id: 6,
@@ -59,7 +59,7 @@ export const RulesData = [
         attribute: 'Proxy connection',
         operator: '=',
         value: 'disconnected',
-        date: '03-01-2020'
+        date: '2020-03-01'
     },
     {
         id: 7,
@@ -69,7 +69,7 @@ export const RulesData = [
         attribute: 'Database',
         operator: '=',
         value: 'no access',
-        date: '08-07-2020'
+        date: '2020-07-06'
     },
     {
         id: 8,
@@ -79,7 +79,7 @@ export const RulesData = [
         attribute: 'Port 01',
         operator: '=',
         value: 'disconnected',
-        date: '17-08-2020'
+        date: '2020-05-17'
     },
     {
         id: 9,
@@ -89,7 +89,7 @@ export const RulesData = [
         attribute: 'Port 02',
         operator: '=',
         value: 'disconnected',
-        date: '17-08-2020'
+        date: '2020-05-17'
     },
     {
         id: 10,
@@ -99,7 +99,7 @@ export const RulesData = [
         attribute: 'Port 03',
         operator: '=',
         value: 'disconnected',
-        date: '17-08-2020'
+        date: '2020-04-17'
     },
     {
         id: 11,
@@ -109,7 +109,7 @@ export const RulesData = [
         attribute: 'Tomcat server',
         operator: '=',
         value: 'disconnected',
-        date: '11-04-2020'
+        date: '2020-04-11'
     },
     {
         id: 12,
@@ -119,17 +119,17 @@ export const RulesData = [
         attribute: 'Tibco service',
         operator: '=',
         value: 'disconnected',
-        date: '11-04-2020'
+        date: '2020-04-12'
     },
     {
         id: 13,
         name: 'Alteon service is down',
         severity: 'Major',
         priority: 3,
-        attribute: 'Alteon server',
+        attribute: 'Alteon service',
         operator: '=',
         value: 'disconnected',
-        date: '12-04-2020'
+        date: '2020-04-15'
     },
     {
         id: 14,
@@ -139,6 +139,26 @@ export const RulesData = [
         attribute: 'Server response time',
         operator: '>',
         value: '3000ms',
-        date: '10-06-2020'
+        date: '2020-04-13'
+    },
+    {
+        id: 15,
+        name: 'Server router is down',
+        severity: 'Major',
+        priority: 4,
+        attribute: 'Router 33H65JW7',
+        operator: '=',
+        value: 'disconnected',
+        date: '2020-05-07'
+    },
+    {
+        id: 16,
+        name: 'Keylogger detected',
+        severity: 'Major',
+        priority: 4,
+        attribute: 'Malicious software',
+        operator: '=',
+        value: 'detected',
+        date: '2020-05-07'
     }
 ]

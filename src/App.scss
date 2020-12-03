@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+@import './Variables.scss';
 
 .App {
   text-align: center;
   font-size: 16px;
   height: 100%;
   width: 100%;
-  font-family: 'Alata', sans-serif;
-  font-weight: 400;
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 600;
   position: relative;
   background-color: #202020;
 

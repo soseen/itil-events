@@ -1,0 +1,16 @@
+@import './Variables.scss';
+
+@mixin button-1{
+    padding: 20px 50px;
+    width: 180px;
+    background-color: $secondary-color;
+    border: none;
+    color: $text-color;
+    font-weight: bolder;
+    cursor: pointer;
+    text-align: center;
+
+    &:focus {
+        outline: none;
+    }
+}
