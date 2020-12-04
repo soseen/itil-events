@@ -57,7 +57,7 @@ const Task = ({task, displayEvent}) => {
                         
                     </div>
                 </div>
-                {taskDetails.updates !== null && taskDetails.updates.map((update, index) => {
+                {taskDetails?.updates && taskDetails.updates.map((update, index) => {
                     return(
                     <div key={index} className='task-update-container'>
                         <div className='task-update-header'>
