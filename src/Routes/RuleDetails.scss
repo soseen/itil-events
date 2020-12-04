@@ -1,3 +1,6 @@
+@import '../Variables.scss';
+@import '../Mixins.scss';
+
 .page-container {
     width: 100%;
     min-height: 100vh;
@@ -7,12 +10,12 @@
 }
 
 .rule-details-container {
-    margin: 150px auto;
-    width: 80%;
+    margin: 50px auto;
+    width: 100%;
     min-height: 500px;
-    background-color: #111111;
+    background-color: $main-color;
     box-shadow: 2px 10px 15px 4px black;
-    color: white;
+    color: $text-color;
     font-size: 1.1rem;
     display: flex;
     flex-direction: column;
@@ -23,8 +26,8 @@
 
 .rule-header {
     width: 100%;
-    background-color:#0daaa2;
-    color: black;
+    background-color: $secondary-color;
+    color: $text-color;
     padding: 2px 20px;
     box-sizing: border-box;
     font-size: 1.6rem;
@@ -44,27 +47,27 @@
     padding: 15px 50px;
     font-size: 1.5rem;
     margin-left: auto;
-    color: black;
+    color: $main-color;
 }
 
 .rule-warning {
-    background-color: #0070b1;
-    box-shadow: 0px 0px 10px 2px  #0070b1;
+    background-color: $warning-color;
+    box-shadow: 0px 0px 4px 2px  $warning-color;
 }
 
 .rule-minor {
-    background-color: #d8d400;
-    box-shadow: 0px 0px 10px 2px #d8d400;
+    background-color: $minor-color;
+    box-shadow: 0px 0px 4px 2px $major-color;
 }
 
 .rule-major {
-    background-color: #e46600;
-    box-shadow: 0px 0px 10px 2px #e46600;
+    background-color: $major-color;
+    box-shadow: 0px 0px 10px 2px $major-color;
 }
 
 .rule-critical {
-    background-color: #ff0000;
-    box-shadow: 0px 0px 10px 2px  #ff0000;
+    background-color: $critical-color;
+    box-shadow: 0px 0px 10px 2px  $critical-color;
 }
 
 .rule-details-info-container {
@@ -75,6 +78,7 @@
     align-items: flex-start;
     flex-wrap: wrap;
     box-sizing: border-box;
+    color: $text-color;
 }
 
 .rule-details-info {
@@ -89,28 +93,29 @@
 }
 
 .rule-details-label {
-    color: #0daaa2;
+    color: $text-color;
     font-weight: 500;
     letter-spacing: 0.15rem;
     font-size: 1.2rem;
     margin-bottom: 10px;
     margin-top: 0;
     text-align: left;
+
 }
 
 .rule-details-info p {
     position: relative;
     width: 100%;
     text-align: left;
-    color: rgb(255, 255, 255);
+    color: $text-color;
     min-height: 20px;
     margin-top: 2px;
     margin-bottom: 30px;
     cursor: pointer;
     padding: 15px;
     margin-bottom: 20px;
-    background-color: #222222;
-    color: white;
+    background-color: $secondary-color;
+    color: $text-color;
     border: none;
     font-weight: bold;
     box-sizing: border-box;
@@ -125,7 +130,8 @@
     padding: 10px 0;
     box-sizing: border-box;
     border-radius: 5px;
-    border-bottom: 2px solid #0daaa2;
+    color: $text-color;
+    border-bottom: 2px solid $text-color;
 }
 
 .rule-buttons {
@@ -138,31 +144,8 @@
 }
 
 .rule-buttons button {
-    background-color: #1a1a1a;
-    border: none;
-    cursor: pointer;
-    color: #ffffff;
-    font-weight: bold;
-    padding: 12px 0px;
-    margin-right: 15px;
-    width: 100px;
-    border-radius: 2px;
-    /* border-bottom: 2px solid #0daaa2; */
-    box-shadow: 3px 3px 10px 0px #000000;
+    // box-shadow: 3px 3px 10px 0px #000000;
     transition: background-color 0.5s;
+    @include button-1;
+    margin-right: 15px;
 }
-
-.rule-buttons button:hover {
-    background-color: #0daaa2;
-}
-
-.rule-buttons button:focus {
-    outline: none;
-}
-
-.rule-buttons button:active {
-    opacity: 0.5;
-}
-/* .rule-buttons button:nth-child(2) {
-    margin-left: auto;
-} */

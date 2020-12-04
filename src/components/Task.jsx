@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp} from 'react-icons/md';
 import './Task.scss'
+import {Link} from 'react-router-dom';
+import {EventsData as eventsData} from './EventsData';
 
-const Task = ({task}) => {
+const Task = ({task, displayEvent}) => {
 
+
+    
     const [taskDetails, setTaskDetails] = useState(task);
+    const eventToDisplay = eventsData.find(e => e.id === task.eventID);
 
     const displayTaskDetails = () => {
         setTaskDetails({
@@ -37,7 +42,7 @@ const Task = ({task}) => {
                     <div className='task-expanded-details-info'>
                         <div>
                         <label>View Event</label>
-                        <button>Display</button>
+                        <button onClick={() => displayEvent(eventToDisplay)}>Display</button>
                         </div>
                         <div>
                         <label>Status</label>
@@ -54,7 +59,7 @@ const Task = ({task}) => {
                 </div>
                 {taskDetails.updates !== null && taskDetails.updates.map((update, index) => {
                     return(
-                    <div key={update.id} className='task-update-container'>
+                    <div key={index} className='task-update-container'>
                         <div className='task-update-header'>
                             <div className='update-desc'>
                                 {update.desc}

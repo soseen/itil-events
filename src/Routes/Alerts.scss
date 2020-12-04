@@ -1,4 +1,5 @@
 @import '../Variables.scss';
+@import '../Mixins.scss';
 
 .alerts-page-container {
     width: 100%;
@@ -60,21 +61,12 @@
     }
     
     .events-table-container .new-event-button {
-        border: none;
-        cursor: pointer;
+        @include button-1;
         margin-right: 20px;
         margin-left: auto;
         margin-bottom: 30px;
         /* border-bottom: 2px solid  $accent-color; */
         align-self: flex-end;
-        padding: 20px 50px;
-        width: 180px;
-        background-color: $secondary-color;
-        color: $text-color;
-        font-weight: bolder;
-        cursor: pointer;
-        align-self: flex-end;
-        text-align: center;
     }
     
     .events-table-container .new-event-button:focus {

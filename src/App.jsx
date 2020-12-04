@@ -81,6 +81,7 @@ const App = () => {
               services={services}
               itemCallback={itemCallback}
               eventsData={eventsData}
+              tasksData={tasksData}
             />
           </Route>
           <Route path="/alerts" exact>
@@ -99,7 +100,7 @@ const App = () => {
             <RuleDetails ruleToDisplay={ruleToDisplay} />
           </Route>
           <Route path="/tasks" exact>
-            <Tasks tasksData={tasksData} />
+            <Tasks tasksData={tasksData} itemCallback={itemCallback} />
           </Route>
         </Switch>
       </Router>

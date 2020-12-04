@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import './EventDetails.css';
+import './EventDetails.scss';
 import {ServicesData} from '../components/ServicesData.jsx';
 import {Link, useHistory} from 'react-router-dom';
 

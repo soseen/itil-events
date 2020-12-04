@@ -9,8 +9,13 @@
     font-weight: bolder;
     cursor: pointer;
     text-align: center;
+    box-shadow: 3px 3px 10px 0px #000000;
 
     &:focus {
         outline: none;
+    }
+
+    &:active {
+        opacity: 0.5;
     }
 }

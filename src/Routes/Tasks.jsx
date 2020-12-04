@@ -4,12 +4,11 @@ import {useHistory} from 'react-router-dom';
 import Task from '../components/Task'
 
 
-const Tasks = ({tasksData}) => {
+const Tasks = ({tasksData, itemCallback}) => {
 
     let history = useHistory();
 
     let taskArray = tasksData.map((task => ({...task, expanded: false})));
-
     const [displayedTasks, setDisplayedTasks] = useState(taskArray);
 
     const filterTasks = (attributeValue) => {
@@ -19,6 +18,11 @@ const Tasks = ({tasksData}) => {
             []);
         console.log(filteredTasks);
         setDisplayedTasks(filteredTasks);
+    }
+
+    const displayEvent = (event) => {
+        itemCallback('event', event);
+        history.push(`alerts/${event.id}`);
     }
     
     return(
@@ -40,7 +44,7 @@ const Tasks = ({tasksData}) => {
                     </div>
                         {displayedTasks.map((task, index) => {
                             return(
-                                <Task key={index} task={task} />
+                                <Task key={task.id} task={task} displayEvent={displayEvent}/>
                             )
                         })}
                     </div>

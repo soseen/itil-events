@@ -1,5 +1,5 @@
 import React from 'react';
-import './RuleDetails.css'
+import './RuleDetails.scss'
 import { Link } from 'react-router-dom'
 
 const RuleDetails = ({ruleToDisplay}) => {

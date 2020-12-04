@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Doughnut, Bar, defaults} from 'react-chartjs-2';
 import './DataChart.css'
 
-const DataChart = ({eventsData, type}) => {
+const DataChart = ({tasksChartData, eventsData, type}) => {
 
     defaults.global.maintainAspectRatio = false;
     const [chartData, setChartData] = useState({});
@@ -52,22 +52,20 @@ const DataChart = ({eventsData, type}) => {
             {type === 'Line' &&
                 <Bar 
                 data={{
-                    labels: ['Warning', 'Minor', 'Major', 'Critical'],
+                    labels: ['All', 'Active', 'Closed'],
                     datasets: [{
-                        label: '# of events',
-                        data: [chartData.Warning, chartData.Minor, chartData.Major, chartData.Critical],
+                        label: 'Tasks',
+                        data: [tasksChartData.all, tasksChartData.active, tasksChartData.closed],
                         backgroundColor: [
-                            '#2a49b1',
-                            '#ddcb2c',
-                            '#e4880f',
-                            '#6d121e'
+                            '#a89378',
+                            '#610a0a',
+                            '#1a7516',
                         ],
                         borderColor: '#1f1f1f00',
-                        borderWidth: 10
+                        borderWidth: 5
                     }],
                 }}
                 options= {{
-                        cutoutPercentage: 40,
                         maintainAspectRatio: false,
                         responsive: true,
                     scales: {

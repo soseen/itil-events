@@ -284,6 +284,32 @@
     background-color: $table-border;
 }
 
+.severity-box {
+    padding: 3px;
+    margin: auto;
+    color: black;
+}
+
+.severity-warning {
+    background-color: $warning-color;
+    box-shadow: 0px 0px 2px 1px $warning-color;
+}
+
+.severity-minor {
+    background-color: $minor-color;
+    box-shadow: 0px 0px 2px 1px$minor-color;
+}
+
+.severity-major {
+    background-color: $major-color;
+    box-shadow: 0px 0px 2px 1px $major-color;
+}
+
+.severity-critical {
+    background-color: $critical-color;
+    box-shadow: 0px 0px 2px 1px $critical-color;
+}
+
 
 @media (max-width: 1190px){
 
