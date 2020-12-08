@@ -37,7 +37,7 @@
     }
 
     .task-closed {
-        background-color: #1a7516;
+        background-color: #303030;
     }
 
     .task-active {
@@ -177,7 +177,7 @@
                 border-radius: 2px;
                 box-sizing: border-box;
                 background-color: $text-color2;
-                color: $main-color;
+                color: $secondary-color;
                 font-weight: bold;
                 cursor: pointer;
 
@@ -325,5 +325,63 @@
             background-color: $text-color;
         }
     }
+
+
+}
+
+.task-expanded-new-update {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    p {
+        margin: 0;
+    }
+}
+.new-update-button {
+    padding: 8px 30px;
+    border: none;
+    border-radius: 2px;
+    box-sizing: border-box;
+    background-color: #1f1f1f;
+    border: 1px solid #272727;
+    color: $secondary-color;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 5px;
+
+    &:focus {
+        outline: none;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    &:active {
+        opacity: 0.5;
+    }
+
+    &:hover {
+        background-color: #272727;
+        color: $secondary-color;
+    }
+
+    svg {
+        color: $text-color;
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+}
+
+.new-update-hidden{
+    display: none;
 }
 

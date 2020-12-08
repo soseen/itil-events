@@ -22,20 +22,19 @@
     padding: 20px 40px;
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 }
 
 .event-details-container button,
 .event-details-buttons button {
     @include button-1;
-    padding: 20px 50px;
-    width: 200px;
     border: 2px solid $main-color;
+    border-radius: 2px;
 }
 
-.event-details-buttons button:nth-child(2){
-    margin-left: auto;
+.event-details-buttons button:nth-child(1){
+    margin-right: auto;
 }
 
 .event-details-buttons button:focus {
@@ -182,6 +181,7 @@
     width: 100%;
     background-color: $secondary-color;
     text-align: center;
-    padding: 10px 0;
+    padding: 15px;
+    border-radius: 2px;
 
 }

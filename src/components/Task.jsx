@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp} from 'react-icons/md';
 import './Task.scss'
-import {Link} from 'react-router-dom';
 import {EventsData as eventsData} from './EventsData';
+import { AiFillPlusCircle, AiOutlinePlus } from 'react-icons/ai';
 
-const Task = ({task, displayEvent}) => {
+const Task = ({task, displayEvent, displayNewUpdateForm}) => {
 
 
     
@@ -67,10 +67,10 @@ const Task = ({task, displayEvent}) => {
                             <div className='task-update-status'>
                                 <label>Status: <span className={`span-status-${update.status}`}>{update.status}</span></label>
                                 {update.status === 400 &&
-                                <p>In progress</p>
+                                <p>Active</p>
                                 }
                                 {update.status === 200 &&
-                                <p>Issue resolved</p>
+                                <p>Resolved</p>
                                 }
                                 {update.status === 100 &&
                                 <p>Applying changes</p>
@@ -88,15 +88,16 @@ const Task = ({task, displayEvent}) => {
                             </div>
                         </div>
                     </div>
-
-
-
-
-                    
-                    
                     )
                     })
                 }
+                <div className={taskDetails.closed ? 'task-expanded-new-update new-update-hidden' : 'task-expanded-new-update'}>
+                    <p>New Update</p>
+                    <button className='new-update-button' onClick={() => displayNewUpdateForm(task)}>
+                     {/* <AiFillPlusCircle /> */}
+                     <AiOutlinePlus />
+                    </button>
+                </div>
             </div>
         }
     </div>

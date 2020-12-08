@@ -6,6 +6,8 @@ import Task from '../components/Task'
 
 const Tasks = ({tasksData, itemCallback}) => {
 
+    console.log(tasksData);
+
     let history = useHistory();
 
     let taskArray = tasksData.map((task => ({...task, expanded: false})));
@@ -23,6 +25,11 @@ const Tasks = ({tasksData, itemCallback}) => {
     const displayEvent = (event) => {
         itemCallback('event', event);
         history.push(`alerts/${event.id}`);
+    }
+
+    const displayNewUpdateForm = (task) => {
+        itemCallback('task', task);
+        history.push(`tasks/${task.id}/new-update`);
     }
     
     return(
@@ -44,7 +51,7 @@ const Tasks = ({tasksData, itemCallback}) => {
                     </div>
                         {displayedTasks.map((task, index) => {
                             return(
-                                <Task key={task.id} task={task} displayEvent={displayEvent}/>
+                                <Task key={task.id} task={task} displayEvent={displayEvent} displayNewUpdateForm={displayNewUpdateForm}/>
                             )
                         })}
                     </div>

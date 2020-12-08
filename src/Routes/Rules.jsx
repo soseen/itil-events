@@ -1,5 +1,6 @@
 import {React, useState} from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
+import { Link } from 'react-router-dom';
 import './Rules.scss';
 
 const Rules = ({rulesData, itemCallback}) => {
@@ -55,7 +56,7 @@ const Rules = ({rulesData, itemCallback}) => {
                         <p>Rules</p>
                         <div className='filters-container'>
                             <select name='select-priority' className='select-filter' onChange={filterList}>
-                                <option value="Priority" disabled value>Priority</option>
+                                <option value="Priority" disabled>Priority</option>
                                 <option value='All'>All</option>
                                 <option value={1}>1</option>
                                 <option value={2}>2</option>
@@ -72,6 +73,9 @@ const Rules = ({rulesData, itemCallback}) => {
                             </div>
                         </div>                    
                     </div>
+                    <Link to={`/rules/new-rule`}>
+                    <button className='new-rule-button'>New Rule</button>
+                    </Link>
                     <table className='content-table'>
                         <thead>
                             <tr>

@@ -1,0 +1,174 @@
+@import '../Variables.scss';
+@import '../Mixins.scss';
+
+
+.new-rule-page-container > * {
+    box-sizing: border-box;
+}
+
+.new-rule-page-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .new-rule-form-container {
+        width: 100%;
+        margin: 50px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: $main-color;
+        border-radius: 5px;
+        border-top: 2px solid $accent-color;
+    }
+
+    .new-rule-form-header {
+        width: 100%;
+        height: 100%;
+        padding: 10px 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    
+    .new-rule-form-header p{
+        background-color: $secondary-color;
+        color: $text-color;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        font-size: 1.5rem;
+        width: 250px;
+        padding: 20px 0;
+        box-shadow: 2px 5px 15px 2px black;
+        margin-right: auto;
+    }
+    
+    .new-rule-form-header button {
+        @include button-1;
+        margin-right: 2%;
+    }
+
+    .new-rule-inputs-container{
+        width: 90%;
+        height: 100%;
+        /* background-color: #1a1a1a; */
+        padding: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+
+    .new-rule-inputs-validation {
+        @include validation-msg;
+    }
+    
+    .validation-message-hidden {
+        display: none;
+    }
+
+    .new-rule-inputs {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        flex: 1 1 400px;
+    }
+
+    .new-rule-inputs-row {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        text-align: start;
+        margin-bottom: 5px;
+    }
+
+    .direction-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .new-rule-inputs-column {
+        width: 49.5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    
+
+    .new-rule-inputs-select {
+        @include input-1;
+        cursor: pointer;
+        padding: 15px 15px;
+        border: 2px solid transparent;
+        box-sizing: border-box;
+        height: 55px;
+    }
+
+    .new-rule-inputs-input {
+        @include input-1;
+    }
+
+    .new-rule-inputs-label {
+        @include input-label;
+    }
+
+    .new-rule-inputs-severity-buttons {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .new-rule-inputs-severity-buttons button{
+        @include button-1;
+        width: 24.2%;
+        padding: 15px;
+    }
+
+    .new-rule-inputs-button-warning {
+        background-color: $warning-color !important;
+    }
+    
+    .new-rule-inputs-button-minor {
+        background-color: $minor-color !important;
+        color: black !important;
+    }
+    
+    .new-rule-inputs-button-major {
+        background-color: $major-color !important;
+    }
+    
+    .new-rule-inputs-button-critical {
+        background-color: $critical-color !important;
+    }
+
+    .column-49 {
+        width: 49.5%;
+    }
+
+    .column-25 {
+        width: 24.25%;
+
+        .new-rule-inputs-select {
+            height: 51px;
+        }
+    }
+
+    .add-rule-button {
+        @include button-1;
+        align-self: flex-end;
+        margin: 25px 0;
+        margin-right: 2%;
+    }
+}

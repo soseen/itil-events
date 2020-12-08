@@ -69,15 +69,6 @@
         align-self: flex-end;
     }
     
-    .events-table-container .new-event-button:focus {
-        outline: 0;
-    }
-    
-    .events-table-container .new-event-button:active {
-        background-color:  $accent-color;
-        opacity: 0.5;
-    }
-    
     .content-table {
         background-color: $table-row1;
         border-collapse: collapse;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
 import './EventDetails.scss';
 import {ServicesData} from '../components/ServicesData.jsx';
 import {Link, useHistory} from 'react-router-dom';
@@ -26,15 +25,16 @@ const EventDetails = ({eventToDisplay}) => {
             }
         }
         setAffectedServices(servicesArray);
-    },[]);
+    },[eventToDisplay.service]);
 
     return(
         <div className='page-container'>
             <div className='event-details-container'>
                 <div className='event-details-buttons'>
                         <button onClick={() => history.goBack()}>Back</button>
-                    <button>Apply Task</button>
-                    <button>Resolve</button>
+                    <Link to={`/alerts/${eventToDisplay.id}/new-task`}>
+                        <button>Apply Task</button>
+                    </Link>
                 </div>
                 <div className='event-details-info-container'>
                     {eventToDisplay.severity === "Warning" &&

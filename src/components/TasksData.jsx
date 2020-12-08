@@ -188,7 +188,12 @@ export const TasksData = [
         eventID: 8,
         startDate: '2020-07-11',
         closed: false,
-        updates: null
+        updates: [{
+            id: 1,
+            date: '2020-07-14',
+            desc: 'Resetting network settings',
+            status: 400
+        }]
     },
     {
         id: 7,

@@ -1,15 +1,16 @@
 @import './Variables.scss';
 
 @mixin button-1{
-    padding: 20px 50px;
-    width: 180px;
+    padding: 20px 20px;
+    width: 160px;
     background-color: $secondary-color;
     border: none;
     color: $text-color;
     font-weight: bolder;
     cursor: pointer;
     text-align: center;
-    box-shadow: 3px 3px 10px 0px #000000;
+    // box-shadow: 3px 3px 10px 0px #000000;
+    border-radius: 2px;
 
     &:focus {
         outline: none;
@@ -18,4 +19,64 @@
     &:active {
         opacity: 0.5;
     }
+}
+
+@mixin input-1 {
+    position: relative;
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: $secondary-color;
+    color: $text-color;
+    border: none;
+    font-weight: bold;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+
+    &:focus {
+        outline: none;
+        background-color: #333333;
+        border: 2px solid $text-color;
+    }
+
+    &:-webkit-autofill,
+    :-webkit-autofill:hover, 
+    :-webkit-autofill:focus, 
+    :-webkit-autofill:active  {
+        -webkit-box-shadow: 0 0 0px 1000px $secondary-color inset;
+        border: 2px solid $secondary-color;
+        -webkit-text-fill-color: $text-color;
+    }
+
+    &:disabled {
+        background-color: #161616;
+        color: $text-color;
+        border-color: #202020;
+    }
+
+}
+
+@mixin validation-msg {
+    color: #960316;
+    margin: auto;
+    width: 80%;
+    font-size: 1.1rem;
+    height: 30px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin input-label {
+    color: $text-color;
+    font-weight: 500;
+    letter-spacing: 0.15rem;
+    font-size: 1.2rem;
 }

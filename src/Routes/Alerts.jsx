@@ -48,7 +48,7 @@ const Alerts = ({eventsData, itemCallback}) => {
                             </div>
                         </div>       
                     </div>
-                    <Link to={`/event-form`}>
+                    <Link to={`/alerts/new-event`}>
                     <button className='new-event-button'>New Event</button>
                     </Link>
                     <table className='content-table'>

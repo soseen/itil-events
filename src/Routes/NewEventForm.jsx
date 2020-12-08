@@ -1,12 +1,20 @@
 import {React, useState} from 'react';
 import './NewEventForm.scss';
 import {AiOutlineClose} from 'react-icons/ai';
-import {Link, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 const NewEventForm = ({eventsData, services}) => {
 
+    const assignNewId = () => {
+        if(eventsData && eventsData.length > 0) {
+            return eventsData[eventsData.length -1].id + 1;
+        } else {
+            return 1;
+        }
+    }
+
     const CURRENT_DATE = new Date().toISOString().slice(0, 10);
-    const NEW_ID = eventsData[eventsData.length -1].id + 1;
+    const NEW_ID = assignNewId();
 
     let history = useHistory();
 
@@ -110,12 +118,15 @@ const NewEventForm = ({eventsData, services}) => {
                     <p>New Event</p>
                     <button onClick={() => history.goBack()}>Back</button>
                 </div>
-                
                 <div className='new-event-inputs-container'>
                     <div className='new-event-inputs-validation'>
                         <p className={validated ? 'validation-message-hidden' : ''}>Please fill in all the required fields</p>
                     </div>
                     <div className='new-event-inputs'>
+                        <div className='new-event-inputs-row'>
+                            <label className='new-event-inputs-label input-required'>ID</label>
+                            <input disabled type='text' name='id' value={NEW_ID} className='new-event-inputs-input'></input>
+                        </div>
                         <div className='new-event-inputs-row'>
                             <label className='new-event-inputs-label input-required'>Name</label>
                             <input type='text' name='desc' value={newEvent.desc} className='new-event-inputs-input' onChange={handleChange}></input>

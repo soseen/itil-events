@@ -1,0 +1,153 @@
+@import '../Variables.scss';
+@import '../Mixins.scss';
+
+.task-update-container > * {
+    box-sizing: border-box;
+}
+
+.task-update-page-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .new-update-form-container {
+        width: 100%;
+        min-height: 100vh;
+        margin: 50px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: $main-color;
+        border-radius: 5px;
+        border-top: 2px solid $accent-color;
+    }
+
+    .new-update-form-header {
+        width: 100%;
+        height: 100%;
+        padding: 10px 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    
+    .new-update-form-header p{
+        background-color: $secondary-color;
+        color: $text-color;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        font-size: 1.5rem;
+        width: 250px;
+        padding: 20px 0;
+        box-shadow: 2px 5px 15px 2px black;
+        margin-right: auto;
+    }
+    
+    .new-update-form-header button {
+        @include button-1;
+        margin-right: 2%;
+    }
+
+    .new-update-inputs-container{
+        width: 70%;
+        height: 100%;
+        /* background-color: #1a1a1a; */
+        padding: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+
+    .new-update-inputs-validation {
+        @include validation-msg;
+    }
+    
+    .validation-message-hidden {
+        display: none;
+    }
+
+    .new-update-inputs {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        flex: 1 1 400px;
+    }
+
+    .new-update-inputs-row {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: start;
+        margin-bottom: 5px;
+    }
+
+    .direction-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .new-update-inputs-closed-buttons{
+        width: 100%;
+        display: flex;
+        text-align: start;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .task-closed-button {
+        @include button-1;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+
+    .new-update-inputs-input {
+        @include input-1;
+    }
+
+    .new-update-inputs-label {
+        @include input-label;
+    }
+
+    .new-update-inputs-column {
+        width: 49.5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .new-update-inputs-select {
+        @include input-1;
+        cursor: pointer;
+        padding: 18px 15px;
+        border: 2px solid transparent;
+        box-sizing: border-box;
+        // -moz-appearance:none;
+        // -webkit-appearance:none;
+        // appearance:none;
+    }
+
+    .add-update-button {
+        @include button-1;
+        margin: 35px 0;
+        margin-right: 2%;
+        align-self: flex-end;
+    }
+
+    .task-closed-button-highlighted {
+        background-color: #303030;
+    }
+
+}

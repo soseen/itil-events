@@ -1,0 +1,246 @@
+@import '../Variables.scss';
+@import '../Mixins.scss';
+
+.task-page-container > * {
+    box-sizing: border-box;
+}
+
+.task-page-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    .new-task-form-container {
+        width: 100%;
+        margin: 50px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: $main-color;
+        border-radius: 5px;
+        border-top: 2px solid $accent-color;
+    }
+    
+    .new-task-form-header {
+        width: 100%;
+        height: 100%;
+        padding: 10px 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    
+    .new-task-form-header p{
+        background-color: $secondary-color;
+        color: $text-color;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        font-size: 1.5rem;
+        width: 250px;
+        padding: 20px 0;
+        box-shadow: 2px 5px 15px 2px black;
+        margin-right: auto;
+    }
+    
+    .new-task-form-header button {
+        @include button-1;
+        margin-right: 2%;
+    }
+    
+    .new-task-inputs-container{
+        width: 90%;
+        height: 100%;
+        /* background-color: #1a1a1a; */
+        padding: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .new-task-inputs {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        flex: 1 1 400px;
+    }
+    
+    .new-task-inputs-validation {
+        @include validation-msg;
+    }
+    
+    .validation-message-hidden {
+        display: none;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active  {
+        -webkit-box-shadow: 0 0 0px 1000px $secondary-color inset;
+        border: 2px solid $secondary-color;
+        -webkit-text-fill-color: $text-color;
+    }
+
+    .new-task-inputs-row {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        text-align: start;
+        margin-bottom: 5px;
+    }
+
+    .new-task-inputs-label {
+        @include input-label;
+    }
+
+    .new-task-inputs-input {
+        @include input-1;
+    }
+
+
+    .new-task-inputs-input:focus {
+        outline: none;
+        background-color: #333333;
+        border: 2px solid $text-color;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        color: $text-color;
+        opacity: 1;
+    }
+
+    .new-task-event-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid $text-color;
+        margin-top: 10px;
+
+        .new-task-event-header {
+            display: flex;
+            justify-content: flex-start;
+            padding: 25px 15px;
+            color: $text-color;
+            background-color: $secondary-color;
+            font-weight: bold;
+            font-size: 1rem;
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                height: 1px;
+                background-color: $text-color;
+            }
+
+            p {
+                margin: 0;
+            }
+
+            .new-task-event-id{
+                margin-right: 10px;
+                width: 25px;
+                height: 25px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 2px;
+                background-color: $main-color;
+            }
+        }
+
+        .new-task-event-details {
+            width: 100%;
+            background-color: $secondary-color;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .new-task-event-row {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 25px 0;
+            position: relative;
+
+            p {
+                margin: 0;
+            }
+
+            &:nth-child(1)::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                height: 1px;
+                background-color: $text-color;
+            }
+        }
+
+        .new-task-event-column {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 12px 0;
+            background-color: #1f1f1f;
+            border: 1px solid #272727;
+
+            p {
+                margin: 0;
+                color: $text-color2;
+                padding: 0;
+            }
+
+            label {
+                color: $text-color;
+                margin: 0;
+            }
+
+            &:nth-child(1)::after {
+                content: '';
+                position: absolute;
+                width: 1px;
+                height: 60%;
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+                background-color: $text-color;
+            }
+
+            &:nth-child(1){
+                border-right: none;
+            }
+
+            &:nth-child(2){
+                border-left: none;
+            }
+        }
+    }
+
+    .add-task-button {
+        @include button-1;
+        align-self: flex-end;
+        margin: 25px 0;
+        margin-right: 2%;
+    }
+}
+

@@ -9,6 +9,9 @@ import Tasks from "./Routes/Tasks";
 import EventDetails from "./Routes/EventDetails";
 import RuleDetails from "./Routes/RuleDetails";
 import NewEventForm from "./Routes/NewEventForm";
+import NewTaskForm from "./Routes/NewTaskForm";
+import NewRuleForm from "./Routes/NewRuleForm";
+import TaskUpdateForm from "./Routes/TaskUpdateForm";
 import { EventsData as eventsData } from "./components/EventsData";
 import { RulesData } from "./components/RulesData";
 import { ServicesData } from "./components/ServicesData";
@@ -25,6 +28,7 @@ const SEVERITIES_STATUSES = {
 const App = () => {
   const [eventToDisplay, setEventToDisplay] = useState(eventsData[0]);
   const [ruleToDisplay, setRuleToDisplay] = useState(RulesData[0]);
+  const [taskToDisplay, setTaskToDisplay] = useState(tasksData[0]);
 
   const services = useMemo(() => {
     let data = ServicesData.map((service) => ({
@@ -67,8 +71,10 @@ const App = () => {
       setEventToDisplay(item);
     } else if (itemType === "rule") {
       setRuleToDisplay(item);
-    }
+    } else if (itemType === "task") {
+      setTaskToDisplay(item);
     console.log(ruleToDisplay);
+    }
   };
 
   return (
@@ -87,20 +93,29 @@ const App = () => {
           <Route path="/alerts" exact>
             <Alerts eventsData={eventsData} itemCallback={itemCallback} />
           </Route>
-          <Route path="/alerts/:eventID">
-            <EventDetails eventToDisplay={eventToDisplay} exact />
+          <Route path="/alerts/:eventID/new-task" exact>
+            <NewTaskForm event={eventToDisplay} tasksData={tasksData} />
           </Route>
-          <Route path="/event-form">
+          <Route path="/alerts/new-event">
             <NewEventForm eventsData={eventsData} services={services} />
+          </Route>
+          <Route path="/alerts/:eventID">
+            <EventDetails eventToDisplay={eventToDisplay}/>
           </Route>
           <Route path="/rules" exact>
             <Rules rulesData={RulesData} itemCallback={itemCallback} />
+          </Route>
+          <Route path="/rules/new-rule" exact>
+            <NewRuleForm rulesData={RulesData} />
           </Route>
           <Route path="/rules/:ruleID">
             <RuleDetails ruleToDisplay={ruleToDisplay} />
           </Route>
           <Route path="/tasks" exact>
             <Tasks tasksData={tasksData} itemCallback={itemCallback} />
+          </Route>
+          <Route path="/tasks/:taskID/new-update">
+            <TaskUpdateForm tasksData={tasksData} taskToDisplay={taskToDisplay} />
           </Route>
         </Switch>
       </Router>
