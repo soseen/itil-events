@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import './TaskUpdateForm.scss';
 
-const TaskUpdateForm = ({tasksData, taskToDisplay}) => {
+const TaskUpdateForm = ({tasksData, taskToDisplay, eventsData}) => {
 
 
     const assignNewId = () => {
@@ -42,13 +42,18 @@ const TaskUpdateForm = ({tasksData, taskToDisplay}) => {
             setValidated(true);
             if(taskToDisplay.updates && taskToDisplay.updates.length > 0){
                 tasksData.find(task => task.id === taskToDisplay.id).updates.push(newUpdate);
-                console.log(newUpdate);
-                console.log(taskToDisplay);
             } else {
                 tasksData.find(task => task.id === taskToDisplay.id).updates = [newUpdate];
             }
         tasksData.find(task => task.id === taskToDisplay.id).closed = taskClosed;
-        history.goBack();
+        if(newUpdate.status === 200){
+            let updatedEvent = eventsData.find(event => event.id === taskToDisplay.eventID);
+            updatedEvent.resolved = true;
+            updatedEvent.endDate = newUpdate.date;
+            console.log(updatedEvent);
+            console.log(eventsData.find(event => event.id === taskToDisplay.eventID));
+        }
+        // history.goBack();
         } else {
             setValidated(false);
         }
@@ -81,7 +86,7 @@ const TaskUpdateForm = ({tasksData, taskToDisplay}) => {
                             </div>
                             <div className='new-update-inputs-column'>
                                 <label className='new-update-inputs-label input-required'>Status</label>
-                                <select name='status' value={newUpdate.status} className={`new-update-inputs-select`} onChange={handleChange}>
+                                <select name='status' value={newUpdate.status} className={`new-update-inputs-select`} onChange={(e) => setNewUpdate({...newUpdate, [e.target.name]: parseInt(e.target.value)})}>
                                     <option value={400}>Active</option>
                                     <option value={200}>Resolved</option>
                                     <option value={100}>Applying Changes</option>

@@ -25,7 +25,7 @@ const NewRuleForm = ({rulesData}) => {
         severity: '',
         priority: 1,
         attribute: '',
-        operator: '',
+        operator: '=',
         value: ``,
         date: CURRENT_DATE
     });
@@ -33,8 +33,15 @@ const NewRuleForm = ({rulesData}) => {
     const handleChange = (e) => {
         setNewRule({
             ...newRule, 
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.value
         });
+    }
+
+    const selectPriority = (e) => {
+        setNewRule({
+            ...newRule,
+            priority: parseInt(e.target.value)
+        })
     }
 
     const triggerButton = (e) => {
@@ -50,7 +57,6 @@ const NewRuleForm = ({rulesData}) => {
             setValidated(true);
             rulesData.push(newRule);
             history.goBack();
-            console.log(newRule);
          } else {
             setValidated(false);
          }
@@ -90,12 +96,12 @@ const NewRuleForm = ({rulesData}) => {
                             </div>
                             <div className='new-rule-inputs-column'>
                             <label className='new-rule-inputs-label input-required'>Priority</label>
-                            <select name='priority' className='new-rule-inputs-select' onChange={handleChange}>
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
-                                <option value={4}>4</option>
-                                <option value={5}>5</option>
+                            <select name='priority' className='new-rule-inputs-select' onChange={selectPriority}>
+                                <option style={{fontWeight: "bold"}} value={1}>1</option>
+                                <option style={{fontWeight: "bold"}} value={2}>2</option>
+                                <option style={{fontWeight: "bold"}} value={3}>3</option>
+                                <option style={{fontWeight: "bold"}} value={4}>4</option>
+                                <option style={{fontWeight: "bold"}} value={5}>5</option>
                             </select>
                             </div>
                         </div>
@@ -109,9 +115,9 @@ const NewRuleForm = ({rulesData}) => {
                             <div className='new-rule-inputs-column column-25'>
                                 <label className='new-rule-inputs-label input-required'>Operator</label>
                                 <select type='text' name='operator' value={newRule.operator} className='new-rule-inputs-select' onChange={handleChange}>
-                                    <option value={'='}>=</option>
-                                    <option value={'>'}>&gt;</option>
-                                    <option value={'<'}>&lt;</option>
+                                    <option style={{fontWeight: "bold"}} value={'='}>=</option>
+                                    <option style={{fontWeight: "bold"}} value={'>'}>&gt;</option>
+                                    <option style={{fontWeight: "bold"}} value={'<'}>&lt;</option>
                                 </select>
                             </div>
                             <div className='new-rule-inputs-column column-25'>

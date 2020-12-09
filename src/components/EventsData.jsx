@@ -17,7 +17,7 @@ export const EventsData = [
         service: [3, 4, 5],
         desc: 'Memory Issue',
         startDate: '2020-05-03',
-        endDate: '2020-06-21',
+        endDate: '2020-06-23',
         resolved: true
     },
     {
@@ -27,7 +27,7 @@ export const EventsData = [
         service: [1],
         desc: 'CPU percentage over 80%',
         startDate: '2020-06-02',
-        endDate: '2020-06-28',
+        endDate: '2020-06-23',
         resolved: true
     },
     {
@@ -47,7 +47,7 @@ export const EventsData = [
         service: [4, 6],
         desc: `Couldn't establish connection`,
         startDate: '2020-04-27',
-        endDate: '2020-05-11',
+        endDate: '2020-05-07',
         resolved: true
     },
     {
@@ -97,7 +97,7 @@ export const EventsData = [
         service: [8],
         desc: 'Unauthorized activity',
         startDate: '2020-08-01',
-        endDate: '2020-08-17',
+        endDate: '2020-08-15',
         resolved: true
     },
 ];

@@ -17,9 +17,7 @@ const Rules = ({rulesData, itemCallback}) => {
                 setRulesDisplayed(rulesData);
             } else {
                 let temp = [];
-                console.log(`prio z e.target.vaule ${e.target.value}`);
                 for(let i=0; i < rulesData.length; i++){
-                    console.log(`prio z rules data ${rulesData[i].priority}`);
                     if(rulesData[i].priority.toString() === e.target.value.toString()){
                         temp.push(rulesData[i]);
                     }
@@ -56,13 +54,13 @@ const Rules = ({rulesData, itemCallback}) => {
                         <p>Rules</p>
                         <div className='filters-container'>
                             <select name='select-priority' className='select-filter' onChange={filterList}>
-                                <option value="Priority" disabled>Priority</option>
-                                <option value='All'>All</option>
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
-                                <option value={4}>4</option>
-                                <option value={5}>5</option>
+                                <option style={{fontWeight: "bold"}} value="Priority" disabled>Priority</option>
+                                <option style={{fontWeight: "bold"}} value='All'>All</option>
+                                <option style={{fontWeight: "bold"}} value={1}>1</option>
+                                <option style={{fontWeight: "bold"}} value={2}>2</option>
+                                <option style={{fontWeight: "bold"}} value={3}>3</option>
+                                <option style={{fontWeight: "bold"}} value={4}>4</option>
+                                <option style={{fontWeight: "bold"}} value={5}>5</option>
                             </select>
                             <div className='buttons-container'>
                                 <button name='button-filter' className='button-filter' onClick={filterList} value={'All'}>All</button>

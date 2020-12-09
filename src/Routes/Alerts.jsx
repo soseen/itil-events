@@ -14,20 +14,27 @@ const Alerts = ({eventsData, itemCallback}) => {
         if(e.target.value === 'All'){
             setEventsDisplayed(eventsData);
         } else {
-            let temp = [];
-            for(let i=0; i < eventsData.length; i++){
-                if(eventsData[i].severity === e.target.value){
-                    console.log(eventsData[i]);
-                    temp.push(eventsData[i]);
-                }
-            setEventsDisplayed(temp);
-            }
+            let filteredArray = eventsData.reduce((newDisplayed, eventObject) =>
+            eventObject.severity === e.target.value ? [...newDisplayed, eventObject] : newDisplayed, 
+            []);
+            setEventsDisplayed(filteredArray);
         }
     }
 
     const handleRowClick = (item) => {
         itemCallback('event', item);
         history.push(`${url}/${item.id}`);
+    }
+
+    const filterResolved = (e) => {
+        if(e.target.value === 'All'){
+            setEventsDisplayed(eventsData);
+        } else {
+        let filteredArray = eventsData.reduce((displayed, eventObject) =>
+            eventObject.resolved === JSON.parse(e.target.value) ? [...displayed, eventObject] : displayed, 
+            []);
+        setEventsDisplayed(filteredArray);
+        }
     }
 
 
@@ -39,6 +46,12 @@ const Alerts = ({eventsData, itemCallback}) => {
                     <div className='events-table-nav'>
                         <p>Alerts</p>
                         <div className='filters-container'>
+                            <select name='select-resolved' className='select-filter' onChange={filterResolved}>
+                                <option style={{fontWeight: "bold"}} value="Priority" disabled>Resolved</option>
+                                <option style={{fontWeight: "bold"}} value='All'>All</option>
+                                <option style={{fontWeight: "bold"}} value={false}>False</option>
+                                <option style={{fontWeight: "bold"}} value={true}>True</option>  
+                            </select>
                             <div className='buttons-container'>
                                 <button name='button-filter' className='button-filter' onClick={filterList} value={'All'}>All</button>
                                 <button name='button-filter' className='button-filter' onClick={filterList} value={'Warning'}>Warning</button>

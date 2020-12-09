@@ -38,7 +38,7 @@ const NewTaskForm = ({event, tasksData}) => {
         if(fieldsToValidate.find(s => s === '') === undefined){
             setValidated(true);
             tasksData.push(newTask);
-            history.goBack();
+            history.push('/alerts');
          } else {
             setValidated(false);
          }

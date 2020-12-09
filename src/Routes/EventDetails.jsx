@@ -65,9 +65,9 @@ const EventDetails = ({eventToDisplay}) => {
                             <p>{eventToDisplay.desc}</p>
                             <label className='event-details-label'>Source</label>
                             <p>{eventToDisplay.source}</p>
-                            <label className='event-details-label'>Date</label>
+                            <label className='event-details-label'>Start Date</label>
                             <p>{eventToDisplay.startDate}</p>
-                            <label className='event-details-label'>Last Update</label>
+                            <label className='event-details-label'>End Date</label>
                             <p>{eventToDisplay.endDate}</p>
                             <label className='event-details-label'>Resolved</label>
                             <p>{eventToDisplay.resolved.toString()}</p>

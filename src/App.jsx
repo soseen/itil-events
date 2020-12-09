@@ -115,7 +115,7 @@ const App = () => {
             <Tasks tasksData={tasksData} itemCallback={itemCallback} />
           </Route>
           <Route path="/tasks/:taskID/new-update">
-            <TaskUpdateForm tasksData={tasksData} taskToDisplay={taskToDisplay} />
+            <TaskUpdateForm tasksData={tasksData} taskToDisplay={taskToDisplay} eventsData={eventsData}/>
           </Route>
         </Switch>
       </Router>
