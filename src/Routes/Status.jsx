@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Status.scss'
-import {useRouteMatch, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import DataChart from '../components/DataChart';
 
 const Status = ({services, itemCallback, eventsData, tasksData}) => {
+
+    console.log(services);
+    console.log(eventsData);
 
     const [serviceEvents, setServiceEvents] = useState([]);
     let history = useHistory();

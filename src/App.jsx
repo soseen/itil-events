@@ -62,7 +62,7 @@ const App = () => {
 
     return data
     // ServicesData tutaj jak bedzie to dynamiczne
-  }, [])
+  }, [eventsData]);
 
 
 

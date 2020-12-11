@@ -60,7 +60,7 @@ const NewEventForm = ({eventsData, services}) => {
     }
 
     const selectService = (e) => {
-       let service = services.find(s => s.id.toString() === e.target.value); 
+       let service = services.find(s => s.id === parseInt(e.target.value)); 
        setServiceToAdd(service);
     }
 
@@ -71,8 +71,7 @@ const NewEventForm = ({eventsData, services}) => {
             setAffectedServices([...affectedServices, serviceToAdd]);
             setNewEvent({
                 ...newEvent, 
-                service: [...affectedServices, serviceToAdd].reduce((IDArray, serviceItem) =>
-                        [...IDArray, serviceItem.id], [])
+                service: newEvent.service? [...newEvent.service, serviceToAdd.id] : [serviceToAdd.id]
             });
         }
     }
