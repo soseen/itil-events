@@ -3,7 +3,7 @@ import './NewEventForm.scss';
 import {AiOutlineClose} from 'react-icons/ai';
 import {useHistory} from 'react-router-dom';
 
-const NewEventForm = ({eventsData, services}) => {
+const NewEventForm = ({eventsData, services, setEventsData}) => {
 
     const assignNewId = () => {
         if(eventsData && eventsData.length > 0) {
@@ -103,7 +103,7 @@ const NewEventForm = ({eventsData, services}) => {
     const validateAndSubmit = (fieldsToValidate) => {
         if(fieldsToValidate.find(s => s === '') === undefined){
             setValidated(true);
-            eventsData.push(newEvent);
+            setEventsData(eventsData.concat(newEvent));
             history.goBack();
          } else {
             setValidated(false);

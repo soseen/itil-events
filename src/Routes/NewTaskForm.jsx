@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {useHistory} from 'react-router-dom';
 import './NewTaskForm.scss';
 
-const NewTaskForm = ({event, tasksData}) => {
+const NewTaskForm = ({event, tasksData, teamsData}) => {
 
     const assignNewId = () => {
         if(tasksData && tasksData.length > 0) {
@@ -24,6 +24,7 @@ const NewTaskForm = ({event, tasksData}) => {
         eventID: event.id,
         startDate: CURRENT_DATE,
         closed: false,
+        team: teamsData[0],
         updates: null
     })
 
@@ -33,6 +34,14 @@ const NewTaskForm = ({event, tasksData}) => {
             [e.target.name]: e.target.value,
         });
     }
+
+    const selectTeam = (e) => {
+        let team = teamsData.find(t => t.id === parseInt(e.target.value)); 
+        setNewTask({
+            ...newTask,
+            team: team
+        })
+     }
 
     const validateAndSubmit = (fieldsToValidate) => {
         if(fieldsToValidate.find(s => s === '') === undefined){
@@ -64,10 +73,24 @@ const NewTaskForm = ({event, tasksData}) => {
                             <label className='new-task-inputs-label input-required'>Name</label>
                             <input type='text' name='name' value={newTask.name} className='new-task-inputs-input' onChange={handleChange}></input>
                         </div>
-                        <div className='new-task-inputs-row'>
+                        <div className='new-task-inputs-row direction-row'>
+                            <div className='new-task-inputs-column'>
+                                <label className='new-task-inputs-label input-required'>Team</label>
+                                <select name='team' value={newTask.team} className={`new-task-inputs-select`} onChange={selectTeam}>
+                                    {teamsData.map((team, index) => {
+                                        return(
+                                            <option key={team.id} value={team.id} style={{fontWeight: "bold"}}>{team.name}</option>
+                                        )
+                                    })}
+                                </select>
+                            </div>
+                            <div className='new-task-inputs-column'>
                             <label className='new-task-inputs-label input-required'>Date</label>
                             <input type='date' name='startDate' value={newTask.startDate} className='new-task-inputs-input' onChange={handleChange}></input>
                         </div>
+
+                        </div>
+                        
                     </div>
                     <div className='new-task-inputs'>
                         <div className='new-task-inputs-row'>

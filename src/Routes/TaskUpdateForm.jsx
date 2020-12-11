@@ -50,10 +50,8 @@ const TaskUpdateForm = ({tasksData, taskToDisplay, eventsData}) => {
             let updatedEvent = eventsData.find(event => event.id === taskToDisplay.eventID);
             updatedEvent.resolved = true;
             updatedEvent.endDate = newUpdate.date;
-            console.log(updatedEvent);
-            console.log(eventsData.find(event => event.id === taskToDisplay.eventID));
         }
-        // history.goBack();
+        history.goBack();
         } else {
             setValidated(false);
         }

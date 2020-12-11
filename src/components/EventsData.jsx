@@ -100,4 +100,24 @@ export const EventsData = [
         endDate: '2020-08-15',
         resolved: true
     },
+    {
+        id: 11,
+        severity: 'Warning',
+        source: 'SCOM',
+        service: [5],
+        desc: 'Driver is out of date',
+        startDate: '2020-09-11',
+        endDate: '',
+        resolved: false
+    },
+    {
+        id: 12,
+        severity: 'Minor',
+        source: 'Group Alert',
+        service: [6],
+        desc: 'User application is not responding',
+        startDate: '2020-09-11',
+        endDate: null,
+        resolved: false
+    },
 ];

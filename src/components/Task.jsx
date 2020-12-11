@@ -45,10 +45,8 @@ const Task = ({task, displayEvent, displayNewUpdateForm}) => {
                         <button onClick={() => displayEvent(eventToDisplay)}>Display</button>
                         </div>
                         <div>
-                        <label>Status</label>
-                        {taskDetails.closed? 
-                            <p>Closed</p> : <p>Active</p>
-                        }
+                        <label>Team</label>
+                        <p>{taskDetails.team.name}</p>
                         </div>
                         <div>
                         <label>Last Update</label>

@@ -53,11 +53,11 @@
 
     .tasks-content-container{
         position: relative;
-        width: 90%;
+        width: 95%;
         height: 100%;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: flex-start;
 
         &::before {
@@ -81,14 +81,16 @@
             padding: 0 5px;
 
             .tasks-content-panel {
-                width: 80%;
+                width: 95%;
                 padding: 20px 0;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                position: relative;
 
                 p {
                     margin: 0;
+                    padding: 10px 0;
                     color: $text-color;
                     font-size: 1.3rem;
                 }
@@ -110,17 +112,16 @@
                         opacity: 0.5;
                     }
                 }
+
             }
         }
 
         .tasks-content:nth-child(1) {
-            flex: 1 1 900px;
+            flex: 1 1 65%;
         }
 
         .tasks-content:nth-child(2) {
-            background-color: yellow;
-            width: 20%;
-            flex-grow: 1;
+            flex: 1 1 450px;
         }
     }
 
