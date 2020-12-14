@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Team.scss';
-import { Bar } from 'react-chartjs-2';
 
 const Team = ({team, tasksData, filterByTeam}) => {
-
-    const [expanded, setExpanded] = useState(false);
 
     let teamTasks = tasksData.reduce((tasks, taskObject) => 
         taskObject.team.id === team.id ? [...tasks, taskObject] : tasks

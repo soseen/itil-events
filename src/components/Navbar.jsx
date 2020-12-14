@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { FaBars } from "react-icons/fa";
 import {Link} from 'react-router-dom';
 import { SideNavData } from './SideNavData';
-import { IconContext} from 'react-icons';
 import './Navbar.scss';
 
 const Navbar = () => {
@@ -23,11 +22,6 @@ const Navbar = () => {
         </div> 
         <nav className={sideNav ? 'side-menu active' : 'side-menu'}>
             <ul className='side-menu-links'>
-                {/* <li className='navbar-toggle'>
-                    <Link to='#' className='menu'>
-                        <AiFillCloseCircle onClick={showSideNav}/>
-                    </Link>
-                </li> */}
                 {SideNavData.map((item, index) => {
                     return (
                         <li key={index} className='nav-item'>
