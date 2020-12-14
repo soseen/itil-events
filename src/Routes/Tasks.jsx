@@ -28,19 +28,11 @@ const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData}) => {
 
     const filterByTeam = (team) => {
 
-        // let teamsHiglighted = teamsDefault.reduce((newTeams, teamObject) => 
-        // teamObject.id === team.id ? [...newTeams, {...teamObject, highlighted: !highlighted}] : [...newTeams, teamObject],
-        // []);
-
-        let teamsHiglighted = teamsDefault.reduce((newTeams, teamObject) => {
-            if(teamObject.id === team.id){
-                teamObject.highlighted = !teamObject.highlighted;
-            }
-            newTeams.push(teamObject);
-            return newTeams;
-        }, []);
+        let teamsHighlighted = teamsDefault.reduce((newTeams, defaultTeam) =>
+        defaultTeam.id === team.id ? [...newTeams, { ...defaultTeam, highlighted: !defaultTeam.highlighted }] : [...newTeams, defaultTeam],
+        []);
         
-        setTeams(teamsHiglighted);
+        setTeams(teamsHighlighted);
 
         let tasksToDisplay = tasksDefault.reduce((filtered, taskObject) => 
         taskObject.team.id === team.id ? [...filtered, taskObject] : filtered,
