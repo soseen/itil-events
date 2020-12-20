@@ -3,37 +3,25 @@ import './EventForm.scss';
 import {AiOutlineClose} from 'react-icons/ai';
 import {useHistory} from 'react-router-dom';
 
-const NewEventForm = ({eventsData, services, setEventsData}) => {
-
-    const assignNewId = () => {
-        if(eventsData && eventsData.length > 0) {
-            return eventsData[eventsData.length -1].id + 1;
-        } else {
-            return 1;
-        }
-    }
-
-    const CURRENT_DATE = new Date().toISOString().slice(0, 10);
-    const NEW_ID = assignNewId();
+const EditEventForm = ({eventsData, services, setEventsData, eventToDisplay, setEventToDisplay}) => {
 
     let history = useHistory();
 
-    console.log(CURRENT_DATE.toString());
+    console.log(eventToDisplay)
 
-    const [buttonActive, setButtonActive] = useState(null);
+    let servicesToDisplay = eventToDisplay.service.reduce((currentServices, serviceID) => {
+        currentServices = currentServices.concat(services.find(s => s.id === serviceID));
+        return currentServices
+    } , []);
+
+    console.log(servicesToDisplay)
+
+    const [newEvent, setNewEvent] = useState(eventToDisplay);
     const [serviceToAdd, setServiceToAdd] = useState(services[0]);
-    const [affectedServices, setAffectedServices] = useState([]);
-    const [newEvent, setNewEvent] = useState({
-        id: NEW_ID,
-        severity: '',
-        source: '',
-        service: null,
-        desc: '',
-        startDate: CURRENT_DATE,
-        endDate: '',
-        resolved: false
-    });
+    const [affectedServices, setAffectedServices] = useState(servicesToDisplay);
     const [validated, setValidated] = useState(true);
+    const [buttonActive, setButtonActive] = useState(newEvent.severity);
+
 
     const handleChange = (e) => {
 
@@ -66,7 +54,6 @@ const NewEventForm = ({eventsData, services, setEventsData}) => {
 
     const addService = () => {
 
-        
         if(!affectedServices?.find(service => service.id === serviceToAdd.id)){
             setAffectedServices([...affectedServices, serviceToAdd]);
             setNewEvent({
@@ -77,6 +64,7 @@ const NewEventForm = ({eventsData, services, setEventsData}) => {
     }
 
     const removeService = (service) => {
+        console.log(affectedServices);
 
         let filteredServices = affectedServices.reduce((newServices, serviceItem) => 
            serviceItem.id !== service.id ? [...newServices, serviceItem] : newServices, 
@@ -102,8 +90,13 @@ const NewEventForm = ({eventsData, services, setEventsData}) => {
     const validateAndSubmit = (fieldsToValidate) => {
         if(fieldsToValidate.find(s => s === '') === undefined){
             setValidated(true);
-            setEventsData(eventsData.concat(newEvent));
+            let newEventsData = eventsData.reduce((newData, event) => 
+            event.id === newEvent.id ? [...newData, newEvent] : [...newData, event],
+            []);
+            setEventToDisplay(newEvent);
+            setEventsData(newEventsData);
             history.goBack();
+            console.log(newEventsData);
          } else {
             setValidated(false);
          }
@@ -123,7 +116,7 @@ const NewEventForm = ({eventsData, services, setEventsData}) => {
                     <div className='event-inputs'>
                         <div className='event-inputs-row'>
                             <label className='event-inputs-label input-required'>ID</label>
-                            <input disabled type='text' name='id' value={NEW_ID} className='event-inputs-input'></input>
+                            <input disabled type='text' name='id' value={newEvent.id} className='event-inputs-input'></input>
                         </div>
                         <div className='event-inputs-row'>
                             <label className='event-inputs-label input-required'>Name</label>
@@ -183,7 +176,7 @@ const NewEventForm = ({eventsData, services, setEventsData}) => {
                             <ul className='event-services-list'>
                                 {affectedServices.length > 0 && affectedServices.map((service, index) => 
                                 (
-                                    <li key={service.id} className='event-service-item'>{service.name} <AiOutlineClose onClick={() => removeService(service)}/></li>
+                                    <li key={service.id} className='event-service-item'>{service.name}<AiOutlineClose onClick={() => removeService(service)}/></li>
                                 )
                                 )}
                             </ul>
@@ -193,10 +186,10 @@ const NewEventForm = ({eventsData, services, setEventsData}) => {
                     </div>
                    
                 </div>
-                <button className='add-event-button' onClick={() => validateAndSubmit([newEvent.desc, newEvent.severity, newEvent.source, newEvent.startDate])}>Add Event</button>
+                <button className='add-event-button' onClick={() => validateAndSubmit([newEvent.desc, newEvent.severity, newEvent.source, newEvent.startDate])}>Apply</button>
             </div>
         </div>
     )
 }
 
-export default NewEventForm
+export default EditEventForm

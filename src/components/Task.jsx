@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp} from 'react-icons/md';
 import './Task.scss'
-import {EventsData as eventsData} from './EventsData';
 import { AiFillPlusCircle, AiOutlinePlus } from 'react-icons/ai';
 
-const Task = ({task, displayEvent, displayNewUpdateForm}) => {
+const Task = ({task, displayEvent, displayNewUpdateForm, eventsData}) => {
 
 
     

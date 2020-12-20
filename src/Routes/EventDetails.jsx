@@ -32,6 +32,9 @@ const EventDetails = ({eventToDisplay}) => {
             <div className='event-details-container'>
                 <div className='event-details-buttons'>
                         <button onClick={() => history.goBack()}>Back</button>
+                    <Link to={`/alerts/${eventToDisplay.id}/edit-event`}>
+                        <button>Edit</button>
+                    </Link>
                     <Link to={`/alerts/${eventToDisplay.id}/new-task`}>
                         <button>Apply Task</button>
                     </Link>

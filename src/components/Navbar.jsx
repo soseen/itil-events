@@ -8,24 +8,20 @@ const Navbar = () => {
 
     const [sideNav, setSideNav] = useState(false);
 
-    const showSideNav = () => {
-        setSideNav(!sideNav); 
-    }
-
     return( 
         <>
         <div className='navbar'>
             <Link to='#' className='menu'>
-                <FaBars className='menu-bars' onClick={showSideNav}/>
+                <FaBars className='menu-bars' onClick={() =>setSideNav(!sideNav)}/>
             </Link>
             <p className='nav-title'>Event Management</p>
         </div> 
         <nav className={sideNav ? 'side-menu active' : 'side-menu'}>
-            <ul className='side-menu-links'>
+            <ul className='side-menu-links'  onClick={() =>setSideNav(false)}>
                 {SideNavData.map((item, index) => {
                     return (
                         <li key={index} className='nav-item'>
-                            <Link to={item.route} onClick={() =>setSideNav(false)}>
+                            <Link to={item.route}>
                                 {item.icon}
                                 <span>{item.name}</span>
                             </Link>

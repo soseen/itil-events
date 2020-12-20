@@ -9,6 +9,8 @@ import Tasks from "./Routes/Tasks";
 import EventDetails from "./Routes/EventDetails";
 import RuleDetails from "./Routes/RuleDetails";
 import NewEventForm from "./Routes/NewEventForm";
+import EditEventForm from "./Routes/EditEventForm";
+import EditRuleForm from "./Routes/EditRuleForm";
 import NewTaskForm from "./Routes/NewTaskForm";
 import NewRuleForm from "./Routes/NewRuleForm";
 import TaskUpdateForm from "./Routes/TaskUpdateForm";
@@ -28,6 +30,7 @@ const SEVERITIES_STATUSES = {
 
 const App = () => {
   const [eventsData, setEventsData] = useState(EventsData);
+  const [rulesData, setRulesData] = useState(RulesData);
   const [eventToDisplay, setEventToDisplay] = useState(eventsData[0]);
   const [ruleToDisplay, setRuleToDisplay] = useState(RulesData[0]);
   const [taskToDisplay, setTaskToDisplay] = useState(tasksData[0]);
@@ -102,20 +105,26 @@ const App = () => {
           <Route path="/alerts/new-event">
             <NewEventForm eventsData={eventsData} services={services} setEventsData={setEventsData} />
           </Route>
+          <Route path="/alerts/:eventID/edit-event">
+            <EditEventForm eventsData={eventsData} services={services} setEventsData={setEventsData} eventToDisplay={eventToDisplay} setEventToDisplay={setEventToDisplay}/>
+          </Route>
           <Route path="/alerts/:eventID">
             <EventDetails eventToDisplay={eventToDisplay}/>
           </Route>
           <Route path="/rules" exact>
-            <Rules rulesData={RulesData} itemCallback={itemCallback} />
+            <Rules rulesData={rulesData} itemCallback={itemCallback} />
           </Route>
           <Route path="/rules/new-rule" exact>
-            <NewRuleForm rulesData={RulesData} />
+            <NewRuleForm rulesData={rulesData} setRulesData={setRulesData}/>
+          </Route>
+          <Route path="/rules/:ruleID/edit-rule" exact>
+            <EditRuleForm ruleToDisplay={ruleToDisplay} rulesData={rulesData} setRulesData={setRulesData} setRuleToDisplay={setRuleToDisplay}/>
           </Route>
           <Route path="/rules/:ruleID">
             <RuleDetails ruleToDisplay={ruleToDisplay} />
           </Route>
           <Route path="/tasks" exact>
-            <Tasks tasksData={tasksData} setTaskToDisplay={setTaskToDisplay} setEventToDisplay={setEventToDisplay} teamsData={teamsData}/>
+            <Tasks tasksData={tasksData} setTaskToDisplay={setTaskToDisplay} setEventToDisplay={setEventToDisplay} teamsData={teamsData} eventsData={eventsData}/>
           </Route>
           <Route path="/tasks/:taskID/new-update">
             <TaskUpdateForm tasksData={tasksData} taskToDisplay={taskToDisplay} eventsData={eventsData} />

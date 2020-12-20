@@ -14,7 +14,9 @@ const RuleDetails = ({ruleToDisplay}) => {
                     <Link to='/rules'>
                         <button>Back</button>
                     </Link>
-                    <button>Edit</button>
+                    <Link to={`/rules/${ruleToDisplay.id}/edit-rule`}>
+                        <button>Edit</button>
+                    </Link>
                 </div>
                 <div className='rule-header'>
                     <p className='rule-header-title'>Rule Details</p>

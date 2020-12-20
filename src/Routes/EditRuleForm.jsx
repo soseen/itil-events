@@ -1,34 +1,16 @@
-import React, { useState } from 'react';
-import {useHistory} from 'react-router';
+import {React, useState} from 'react'
+import { useHistory } from 'react-router-dom';
 import './NewRuleForm.scss';
 
-const NewRuleForm = ({rulesData, setRulesData}) => {
-
+const EditRuleForm = ({ruleToDisplay, rulesData, setRulesData, setRuleToDisplay}) => {
+    
     let history = useHistory();
 
-    const assignNewId = () => {
-        if(rulesData && rulesData.length > 0) {
-            return rulesData[rulesData.length - 1].id;
-        } else {
-            return 1;
-        }
-    }
+    console.log(ruleToDisplay);
 
-    const NEW_ID = assignNewId();
-    const CURRENT_DATE = new Date().toISOString().slice(0, 10);
-
-    const [buttonActive, setButtonActive] = useState(null);
+    const [buttonActive, setButtonActive] = useState(ruleToDisplay.severity);
     const [validated, setValidated] = useState(true);
-    const [newRule, setNewRule] = useState({
-        id: NEW_ID,
-        name: '',
-        severity: '',
-        priority: 1,
-        attribute: '',
-        operator: '=',
-        value: ``,
-        date: CURRENT_DATE
-    });
+    const [newRule, setNewRule] = useState(ruleToDisplay);
 
     const handleChange = (e) => {
         setNewRule({
@@ -55,7 +37,11 @@ const NewRuleForm = ({rulesData, setRulesData}) => {
     const validateAndSubmit = (fieldsToValidate) => {
         if(fieldsToValidate.find(s => s === '') === undefined){
             setValidated(true);
-            setRulesData(rulesData.concat(newRule));
+            let newRulesData = rulesData.reduce((newData, rule) => 
+            rule.id === newRule.id ? [...newData, newRule] : [...newData, rule],
+            []);
+            setRuleToDisplay(newRule);
+            setRulesData(newRulesData);
             history.goBack();
          } else {
             setValidated(false);
@@ -76,7 +62,7 @@ const NewRuleForm = ({rulesData, setRulesData}) => {
                     <div className='new-rule-inputs'>
                         <div className='new-rule-inputs-row'>
                             <label className='new-rule-inputs-label input-required'>ID</label>
-                            <input disabled type='text' name='id' value={NEW_ID} className='new-rule-inputs-input'></input>
+                            <input disabled type='text' name='id' value={newRule.id} className='new-rule-inputs-input'></input>
                         </div>
                         <div className='new-rule-inputs-row'>
                             <label className='new-rule-inputs-label input-required'>Name</label>
@@ -89,7 +75,7 @@ const NewRuleForm = ({rulesData, setRulesData}) => {
                             </div>
                             <div className='new-rule-inputs-column'>
                             <label className='new-rule-inputs-label input-required'>Priority</label>
-                            <select name='priority' className='new-rule-inputs-select' onChange={selectPriority}>
+                            <select value={newRule.priority} name='priority' className='new-rule-inputs-select' onChange={selectPriority}>
                                 <option style={{fontWeight: "bold"}} value={1}>1</option>
                                 <option style={{fontWeight: "bold"}} value={2}>2</option>
                                 <option style={{fontWeight: "bold"}} value={3}>3</option>
@@ -135,5 +121,4 @@ const NewRuleForm = ({rulesData, setRulesData}) => {
     )
 }
 
-export default NewRuleForm;
-
+export default EditRuleForm;

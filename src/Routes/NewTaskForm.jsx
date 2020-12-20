@@ -28,6 +28,8 @@ const NewTaskForm = ({event, tasksData, teamsData}) => {
         updates: null
     })
 
+    console.log(teamsData[0]);
+
     const handleChange = (e) => {
         setNewTask({
             ...newTask, 
@@ -48,6 +50,7 @@ const NewTaskForm = ({event, tasksData, teamsData}) => {
             setValidated(true);
             tasksData.push(newTask);
             history.push('/alerts');
+            console.log(newTask);
          } else {
             setValidated(false);
          }
@@ -76,7 +79,7 @@ const NewTaskForm = ({event, tasksData, teamsData}) => {
                         <div className='new-task-inputs-row direction-row'>
                             <div className='new-task-inputs-column'>
                                 <label className='new-task-inputs-label input-required'>Team</label>
-                                <select name='team' value={newTask.team} className={`new-task-inputs-select`} onChange={selectTeam}>
+                                <select name='team' value={newTask.team.id} className={`new-task-inputs-select`} onChange={selectTeam}>
                                     {teamsData.map((team, index) => {
                                         return(
                                             <option key={team.id} value={team.id} style={{fontWeight: "bold"}}>{team.name}</option>

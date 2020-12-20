@@ -5,7 +5,7 @@ import Task from '../components/Task'
 import Team from '../components/Team';
 
 
-const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData}) => {
+const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData, eventsData}) => {
 
 
     let history = useHistory();
@@ -75,7 +75,7 @@ const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData}) => {
                         </div>
                         {displayedTasks.map((task, index) => {
                             return(
-                                <Task key={task.id} task={task} displayEvent={displayEvent} displayNewUpdateForm={displayNewUpdateForm}/>
+                                <Task key={task.id} task={task} displayEvent={displayEvent} displayNewUpdateForm={displayNewUpdateForm} eventsData={eventsData}/>
                             )
                         })}
                     </div>
