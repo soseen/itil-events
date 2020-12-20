@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/itil-events/static/css/main.752d2f0f.chunk.css",
-    "main.js": "/itil-events/static/js/main.c52f311e.chunk.js",
-    "main.js.map": "/itil-events/static/js/main.c52f311e.chunk.js.map",
+    "main.css": "/itil-events/static/css/main.71f57ea5.chunk.css",
+    "main.js": "/itil-events/static/js/main.6b82a3dc.chunk.js",
+    "main.js.map": "/itil-events/static/js/main.6b82a3dc.chunk.js.map",
     "runtime-main.js": "/itil-events/static/js/runtime-main.78580795.js",
     "runtime-main.js.map": "/itil-events/static/js/runtime-main.78580795.js.map",
     "static/js/2.b03dd4eb.chunk.js": "/itil-events/static/js/2.b03dd4eb.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.754983e1.chunk.js": "/itil-events/static/js/3.754983e1.chunk.js",
     "static/js/3.754983e1.chunk.js.map": "/itil-events/static/js/3.754983e1.chunk.js.map",
     "index.html": "/itil-events/index.html",
-    "static/css/main.752d2f0f.chunk.css.map": "/itil-events/static/css/main.752d2f0f.chunk.css.map",
+    "static/css/main.71f57ea5.chunk.css.map": "/itil-events/static/css/main.71f57ea5.chunk.css.map",
     "static/js/2.b03dd4eb.chunk.js.LICENSE.txt": "/itil-events/static/js/2.b03dd4eb.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/itil-events/static/media/dark-bg.8de6a20a.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.78580795.js",
     "static/js/2.b03dd4eb.chunk.js",
-    "static/css/main.752d2f0f.chunk.css",
-    "static/js/main.c52f311e.chunk.js"
+    "static/css/main.71f57ea5.chunk.css",
+    "static/js/main.6b82a3dc.chunk.js"
   ]
 }
