@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {useHistory} from 'react-router';
-import './NewRuleForm.scss';
+import './RuleForm.scss';
 
 const NewRuleForm = ({rulesData, setRulesData}) => {
 
@@ -63,33 +63,33 @@ const NewRuleForm = ({rulesData, setRulesData}) => {
     }
 
     return(
-        <div className='new-rule-page-container'>
-            <div className='new-rule-form-container'>
-                <div className='new-rule-form-header'>
+        <div className='rule-page-container'>
+            <div className='rule-form-container'>
+                <div className='rule-form-header'>
                         <p>New Rule</p>
                         <button onClick={() => history.goBack()}>Back</button>
                 </div>
-                <div className ='new-rule-inputs-container'>
-                    <div className='new-rule-inputs-validation'>
+                <div className ='rule-inputs-container'>
+                    <div className='rule-inputs-validation'>
                         <p className={validated ? 'validation-message-hidden' : ''}>Please fill in all the required fields</p>
                     </div>
-                    <div className='new-rule-inputs'>
-                        <div className='new-rule-inputs-row'>
-                            <label className='new-rule-inputs-label input-required'>ID</label>
-                            <input disabled type='text' name='id' value={NEW_ID} className='new-rule-inputs-input'></input>
+                    <div className='rule-inputs'>
+                        <div className='rule-inputs-row'>
+                            <label className='rule-inputs-label input-required'>ID</label>
+                            <input disabled type='text' name='id' value={NEW_ID} className='rule-inputs-input'></input>
                         </div>
-                        <div className='new-rule-inputs-row'>
-                            <label className='new-rule-inputs-label input-required'>Name</label>
-                            <input type='text' name='name' value={newRule.name} className='new-rule-inputs-input' onChange={handleChange}></input>
+                        <div className='rule-inputs-row'>
+                            <label className='rule-inputs-label input-required'>Name</label>
+                            <input type='text' name='name' value={newRule.name} className='rule-inputs-input' onChange={handleChange}></input>
                         </div>
-                        <div className='new-rule-inputs-row direction-row'>
-                            <div className='new-rule-inputs-column column-49'>
-                            <label className='new-rule-inputs-label input-required'>Date</label>
-                            <input type='date' name='date' value={newRule.date} className='new-rule-inputs-input' onChange={handleChange}></input>
+                        <div className='rule-inputs-row direction-row'>
+                            <div className='rule-inputs-column column-49'>
+                            <label className='rule-inputs-label input-required'>Date</label>
+                            <input type='date' name='date' value={newRule.date} className='rule-inputs-input' onChange={handleChange}></input>
                             </div>
-                            <div className='new-rule-inputs-column'>
-                            <label className='new-rule-inputs-label input-required'>Priority</label>
-                            <select name='priority' className='new-rule-inputs-select' onChange={selectPriority}>
+                            <div className='rule-inputs-column'>
+                            <label className='rule-inputs-label input-required'>Priority</label>
+                            <select name='priority' className='rule-inputs-select' onChange={selectPriority}>
                                 <option style={{fontWeight: "bold"}} value={1}>1</option>
                                 <option style={{fontWeight: "bold"}} value={2}>2</option>
                                 <option style={{fontWeight: "bold"}} value={3}>3</option>
@@ -99,32 +99,32 @@ const NewRuleForm = ({rulesData, setRulesData}) => {
                             </div>
                         </div>
                     </div>
-                    <div className='new-rule-inputs'>
-                        <div className='new-rule-inputs-row direction-row'>
-                            <div className='new-rule-inputs-column column-49'>
-                                <label className='new-rule-inputs-label input-required'>Attribute</label>
-                                <input type='text' name='attribute' value={newRule.attribute} className='new-rule-inputs-input' onChange={handleChange}></input>
+                    <div className='rule-inputs'>
+                        <div className='rule-inputs-row direction-row'>
+                            <div className='rule-inputs-column column-49'>
+                                <label className='rule-inputs-label input-required'>Attribute</label>
+                                <input type='text' name='attribute' value={newRule.attribute} className='rule-inputs-input' onChange={handleChange}></input>
                             </div>
-                            <div className='new-rule-inputs-column column-25'>
-                                <label className='new-rule-inputs-label input-required'>Operator</label>
-                                <select type='text' name='operator' value={newRule.operator} className='new-rule-inputs-select' onChange={handleChange}>
+                            <div className='rule-inputs-column column-25'>
+                                <label className='rule-inputs-label input-required'>Operator</label>
+                                <select type='text' name='operator' value={newRule.operator} className='rule-inputs-select' onChange={handleChange}>
                                     <option style={{fontWeight: "bold"}} value={'='}>=</option>
                                     <option style={{fontWeight: "bold"}} value={'>'}>&gt;</option>
                                     <option style={{fontWeight: "bold"}} value={'<'}>&lt;</option>
                                 </select>
                             </div>
-                            <div className='new-rule-inputs-column column-25'>
-                                <label className='new-rule-inputs-label input-required'>Value</label>
-                                <input type='text' name='value' value={newRule.value} className='new-rule-inputs-input' onChange={handleChange}></input>
+                            <div className='rule-inputs-column column-25'>
+                                <label className='rule-inputs-label input-required'>Value</label>
+                                <input type='text' name='value' value={newRule.value} className='rule-inputs-input' onChange={handleChange}></input>
                             </div>
                         </div>
-                        <div className='new-rule-inputs-row'>
-                            <label className='new-rule-inputs-label input-required'>Severity</label>
-                            <div className='new-rule-inputs-severity-buttons'>
-                                <button value='Warning' className={buttonActive === 'Warning' ? 'new-rule-inputs-button-warning' : ''} onClick={triggerButton}>Warning</button>
-                                <button value='Minor' className={buttonActive === 'Minor' ? 'new-rule-inputs-button-minor' : ''} onClick={triggerButton}>Minor</button>
-                                <button value='Major' className={buttonActive === 'Major' ? 'new-rule-inputs-button-major' : ''} onClick={triggerButton}>Major</button>
-                                <button value='Critical' className={buttonActive === 'Critical' ? 'new-rule-inputs-button-critical' : ''} onClick={triggerButton}>Critical</button>
+                        <div className='rule-inputs-row'>
+                            <label className='rule-inputs-label input-required'>Severity</label>
+                            <div className='rule-inputs-severity-buttons'>
+                                <button value='Warning' className={buttonActive === 'Warning' ? 'rule-inputs-button-warning' : ''} onClick={triggerButton}>Warning</button>
+                                <button value='Minor' className={buttonActive === 'Minor' ? 'rule-inputs-button-minor' : ''} onClick={triggerButton}>Minor</button>
+                                <button value='Major' className={buttonActive === 'Major' ? 'rule-inputs-button-major' : ''} onClick={triggerButton}>Major</button>
+                                <button value='Critical' className={buttonActive === 'Critical' ? 'rule-inputs-button-critical' : ''} onClick={triggerButton}>Critical</button>
                             </div>
                         </div>
                     </div>

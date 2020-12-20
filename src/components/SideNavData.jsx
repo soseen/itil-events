@@ -5,7 +5,7 @@ import {BsFillPersonFill} from "react-icons/bs";
 export const SideNavData = [
     {
         name: 'Status',
-        route: '/',
+        route: '/itil-events',
         icon: <AiFillHome />
     },
     {

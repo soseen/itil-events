@@ -88,7 +88,7 @@ const App = () => {
       <Router>
       <Navbar />
         <Switch>
-          <Route path="/" exact>
+          <Route path="/itil-events" exact>
             <Status
               services={services}
               itemCallback={itemCallback}

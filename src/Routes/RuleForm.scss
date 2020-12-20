@@ -2,18 +2,18 @@
 @import '../Mixins.scss';
 
 
-.new-rule-page-container > * {
+.rule-page-container > * {
     box-sizing: border-box;
 }
 
-.new-rule-page-container {
+.rule-page-container {
     width: 100%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 
-    .new-rule-form-container {
+    .rule-form-container {
         width: 100%;
         margin: 50px auto;
         display: flex;
@@ -25,7 +25,7 @@
         border-top: 2px solid $accent-color;
     }
 
-    .new-rule-form-header {
+    .rule-form-header {
         width: 100%;
         height: 100%;
         padding: 10px 0;
@@ -34,7 +34,7 @@
         align-items: center;
     }
     
-    .new-rule-form-header p{
+    .rule-form-header p{
         background-color: $secondary-color;
         color: $text-color;
         border-top-right-radius: 5px;
@@ -46,12 +46,12 @@
         margin-right: auto;
     }
     
-    .new-rule-form-header button {
+    .rule-form-header button {
         @include button-1;
         margin-right: 2%;
     }
 
-    .new-rule-inputs-container{
+    .rule-inputs-container{
         width: 90%;
         height: 100%;
         /* background-color: #1a1a1a; */
@@ -63,7 +63,7 @@
     }
 
 
-    .new-rule-inputs-validation {
+    .rule-inputs-validation {
         @include validation-msg;
     }
     
@@ -71,7 +71,7 @@
         display: none;
     }
 
-    .new-rule-inputs {
+    .rule-inputs {
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -80,7 +80,7 @@
         flex: 1 1 400px;
     }
 
-    .new-rule-inputs-row {
+    .rule-inputs-row {
         width: 90%;
         display: flex;
         flex-direction: column;
@@ -94,7 +94,7 @@
         align-items: center;
     }
 
-    .new-rule-inputs-column {
+    .rule-inputs-column {
         width: 49.5%;
         display: flex;
         flex-direction: column;
@@ -104,7 +104,7 @@
 
     
 
-    .new-rule-inputs-select {
+    .rule-inputs-select {
         @include input-1;
         cursor: pointer;
         padding: 15px 15px;
@@ -113,15 +113,15 @@
         height: 55px;
     }
 
-    .new-rule-inputs-input {
+    .rule-inputs-input {
         @include input-1;
     }
 
-    .new-rule-inputs-label {
+    .rule-inputs-label {
         @include input-label;
     }
 
-    .new-rule-inputs-severity-buttons {
+    .rule-inputs-severity-buttons {
         width: 100%;
         height: 100%;
         display: flex;
@@ -130,26 +130,26 @@
         margin-bottom: 20px;
     }
 
-    .new-rule-inputs-severity-buttons button{
+    .rule-inputs-severity-buttons button{
         @include button-1;
         width: 24.2%;
         padding: 15px;
     }
 
-    .new-rule-inputs-button-warning {
+    .rule-inputs-button-warning {
         background-color: $warning-color !important;
     }
     
-    .new-rule-inputs-button-minor {
+    .rule-inputs-button-minor {
         background-color: $minor-color !important;
         color: black !important;
     }
     
-    .new-rule-inputs-button-major {
+    .rule-inputs-button-major {
         background-color: $major-color !important;
     }
     
-    .new-rule-inputs-button-critical {
+    .rule-inputs-button-critical {
         background-color: $critical-color !important;
     }
 
@@ -160,7 +160,7 @@
     .column-25 {
         width: 24.25%;
 
-        .new-rule-inputs-select {
+        .rule-inputs-select {
             height: 51px;
         }
     }
