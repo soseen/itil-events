@@ -3,7 +3,7 @@ import { useHistory, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
 import './Rules.scss';
 
-const Rules = ({rulesData, itemCallback}) => {
+const Rules = ({rulesData, itemCallback, user}) => {
 
     let history = useHistory();
     let { url } = useRouteMatch();
@@ -70,10 +70,11 @@ const Rules = ({rulesData, itemCallback}) => {
                                 <button name='button-filter' className='button-filter' onClick={filterList} value={'Critical'}>Critical</button>
                             </div>
                         </div>                    
-                    </div>
-                    <Link to={`/rules/new-rule`}>
-                    <button className='new-rule-button'>New Rule</button>
-                    </Link>
+                    </div>{user.team &&
+                        <Link to={`/rules/new-rule`}>
+                        <button className='new-rule-button'>New Rule</button>
+                        </Link>
+                    }
                     <table className='content-table'>
                         <thead>
                             <tr>

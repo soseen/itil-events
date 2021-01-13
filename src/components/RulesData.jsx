@@ -1,9 +1,7 @@
-
-
 export const RulesData = [
     {
         id: 1,
-        name: 'CPU percentage over 80%',
+        name: 'Obciążenie procesora powyżej 80%',
         severity: 'Warning',
         priority: 2,
         attribute: 'CPU',
@@ -13,7 +11,7 @@ export const RulesData = [
     },
     {
         id: 2,
-        name: 'Router disconnected',
+        name: 'Router został odłączony',
         severity: 'Major',
         priority: 4,
         attribute: 'Router #05423',
@@ -23,7 +21,7 @@ export const RulesData = [
     },
     {
         id: 3,
-        name: 'Application not accesible',
+        name: 'Brak dostępu do aplikacji',
         severity: 'Major',
         priority: 5,
         attribute: 'Application service',
@@ -33,7 +31,7 @@ export const RulesData = [
     },
     {
         id: 4,
-        name: 'Database capacity over 70%',
+        name: 'Zapełnienie bazy danych powyżej 70% pojemności',
         severity: 'Warning',
         priority: 1,
         attribute: 'Database',
@@ -43,7 +41,7 @@ export const RulesData = [
     },
     {
         id: 5,
-        name: 'Latency over 150ms',
+        name: 'Opóźnienie powyżej 150ms',
         severity: 'Warning',
         priority: 1,
         attribute: 'Latency',
@@ -53,7 +51,7 @@ export const RulesData = [
     },
     {
         id: 6,
-        name: 'Proxy server not working',
+        name: 'Serwer Proxy nie odpowiada',
         severity: 'Critical',
         priority: 5,
         attribute: 'Proxy connection',
@@ -63,7 +61,7 @@ export const RulesData = [
     },
     {
         id: 7,
-        name: `Couldn't access data`,
+        name: `Brak dostępu do danych`,
         severity: 'Major',
         priority: 4,
         attribute: 'Database',
@@ -73,7 +71,7 @@ export const RulesData = [
     },
     {
         id: 8,
-        name: 'Port is not responding',
+        name: 'Port 03 nie odpowiada',
         severity: 'Minor',
         priority: 2,
         attribute: 'Port 01',
@@ -83,7 +81,7 @@ export const RulesData = [
     },
     {
         id: 9,
-        name: 'Port is not responding',
+        name: 'Port 04 nie odpowiada',
         severity: 'Minor',
         priority: 2,
         attribute: 'Port 02',
@@ -93,7 +91,7 @@ export const RulesData = [
     },
     {
         id: 10,
-        name: 'Port is not responding',
+        name: 'Port 05 nie odpowiada',
         severity: 'Minor',
         priority: 2,
         attribute: 'Port 03',
@@ -103,7 +101,7 @@ export const RulesData = [
     },
     {
         id: 11,
-        name: 'Tomcat server is down',
+        name: 'Serwer Tomcat jest nieaktywny',
         severity: 'Major',
         priority: 3,
         attribute: 'Tomcat server',
@@ -113,7 +111,7 @@ export const RulesData = [
     },
     {
         id: 12,
-        name: 'Tibco service is down',
+        name: 'Serwis Tibco nie odpowiada',
         severity: 'Major',
         priority: 3,
         attribute: 'Tibco service',
@@ -123,7 +121,7 @@ export const RulesData = [
     },
     {
         id: 13,
-        name: 'Alteon service is down',
+        name: 'Serwis Alteon nie odpowiada',
         severity: 'Major',
         priority: 3,
         attribute: 'Alteon service',
@@ -133,7 +131,7 @@ export const RulesData = [
     },
     {
         id: 14,
-        name: 'Server response time over 3000ms',
+        name: 'Czas oczekiwania na odpowiedź serwera powyżej 3000ms',
         severity: 'Minor',
         priority: 2,
         attribute: 'Server response time',
@@ -143,7 +141,7 @@ export const RulesData = [
     },
     {
         id: 15,
-        name: 'Server router is down',
+        name: 'Brak dostępu do Routera',
         severity: 'Major',
         priority: 4,
         attribute: 'Router 33H65JW7',
@@ -153,7 +151,7 @@ export const RulesData = [
     },
     {
         id: 16,
-        name: 'Keylogger detected',
+        name: 'Wykryto niechciane oprogramowanie',
         severity: 'Major',
         priority: 4,
         attribute: 'Malicious software',

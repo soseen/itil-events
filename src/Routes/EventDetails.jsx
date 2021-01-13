@@ -1,43 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import './EventDetails.scss';
-import {ServicesData} from '../components/ServicesData.jsx';
 import {Link, useHistory} from 'react-router-dom';
+import { axios } from '../Axios';
 
-const EventDetails = ({eventToDisplay}) => {
+const EventDetails = ({eventToDisplay, eventServices, servicesData, userRole}) => {
 
     let history = useHistory();
-    const [affectedServices, setAffectedServices] = useState([]);
-
+    // const [affectedServices, setAffectedServices] = useState([]);
+    const [servicesArray, setServicesArray] = useState(eventServices);
     useEffect(() => {
-
-        let servicesArray = []
-        if(eventToDisplay.service !== null){
-            for(let i=0; i<eventToDisplay.service.length; i++){
-                for(let j=0; j<ServicesData.length; j++){
-                    if (eventToDisplay.service[i] === ServicesData[j].id){
-                        servicesArray.push({
-                            serviceID: ServicesData[j].id,
-                            serviceName: ServicesData[j].name,
-                            servicePriority: ServicesData[j].priority
-                        });
-                    }
-                }
-            }
-        }
-        setAffectedServices(servicesArray);
-    },[eventToDisplay.service]);
+        axios.get('/api/eventServices')
+                .then(response => {
+                    setServicesArray(response.data)
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+    },[eventServices])
+    
+    const affectedServices = useMemo(() => {
+        let services = servicesArray.reduce((servicesArray, row) =>
+        row.event === eventToDisplay.id ? [...servicesArray, servicesData.find(s => s.id === row.service)] : servicesArray,
+        [])
+        return services
+    }, [servicesArray, eventToDisplay, servicesData])
 
     return(
         <div className='page-container'>
             <div className='event-details-container'>
                 <div className='event-details-buttons'>
                         <button onClick={() => history.goBack()}>Back</button>
-                    <Link to={`/alerts/${eventToDisplay.id}/edit-event`}>
+                    {userRole === 'system' && 
+                        <Link to={`/alerts/${eventToDisplay.id}/edit-event`}>
                         <button>Edit</button>
-                    </Link>
-                    <Link to={`/alerts/${eventToDisplay.id}/new-task`}>
+                        </Link>
+                    }
+                    
+                    {userRole === 'expert' && 
+                        <Link to={`/alerts/${eventToDisplay.id}/new-task`}>
                         <button>Apply Task</button>
-                    </Link>
+                        </Link>
+                    }
                 </div>
                 <div className='event-details-info-container'>
                     {eventToDisplay.severity === "Warning" &&
@@ -65,7 +68,7 @@ const EventDetails = ({eventToDisplay}) => {
                             <label className='event-details-label'>ID</label>
                             <p>{eventToDisplay.id}</p>
                             <label className='event-details-label'>Description</label>
-                            <p>{eventToDisplay.desc}</p>
+                            <p>{eventToDisplay.name}</p>
                             <label className='event-details-label'>Source</label>
                             <p>{eventToDisplay.source}</p>
                             <label className='event-details-label'>Start Date</label>
@@ -80,7 +83,7 @@ const EventDetails = ({eventToDisplay}) => {
                             <div className='event-details-services'>
                                 {affectedServices.map((item,index) => {
                                     return (
-                                        <p key={item.serviceID}>{item.serviceName}</p>
+                                        <p key={item.id}>{item.name}</p>
                                     )
                                 })
                                 }

@@ -173,13 +173,13 @@
 
             .new-task-event-id{
                 margin-right: 10px;
-                width: 25px;
-                height: 25px;
+                padding: 4px;
+                font-size: 0.9rem;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 border-radius: 2px;
-                background-color: $main-color;
+                background-color: $accent-color;
             }
         }
 

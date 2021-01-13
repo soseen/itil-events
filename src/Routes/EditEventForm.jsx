@@ -1,26 +1,42 @@
-import {React, useState} from 'react';
+import {React, useMemo, useState} from 'react';
 import './EventForm.scss';
 import {AiOutlineClose} from 'react-icons/ai';
 import {useHistory} from 'react-router-dom';
-
-const EditEventForm = ({eventsData, services, setEventsData, eventToDisplay, setEventToDisplay}) => {
+import axios from 'axios';
+const EditEventForm = ({eventsData, servicesData, eventServices, setEventsData, eventToDisplay, setEventToDisplay, setEventServices}) => {
 
     let history = useHistory();
 
-    console.log(eventToDisplay)
 
-    let servicesToDisplay = eventToDisplay.service.reduce((currentServices, serviceID) => {
-        currentServices = currentServices.concat(services.find(s => s.id === serviceID));
-        return currentServices
-    } , []);
+    // let servicesToDisplay = eventToDisplay.service.reduce((currentServices, serviceID) => {
+    //     currentServices = currentServices.concat(services.find(s => s.id === serviceID));
+    //     return currentServices
+    // } , []);
 
-    console.log(servicesToDisplay)
+    const initialServices = useMemo(() => {
+        const data = eventServices.reduce((filteredArray, row) => 
+        row.event === eventToDisplay.id ? [...filteredArray, servicesData.find(s => s.id === row.service)] : filteredArray,
+        []);
+
+        return data
+    }, [eventServices, eventToDisplay, servicesData]);
+    
+    
+
+    // console.log(initialServices);
+
+    const affectedEventServices = eventServices.reduce((newServices, row) => 
+        row.event === eventToDisplay.id ? [...newServices, row] : newServices,
+    []);
+
+    console.log(affectedEventServices);
 
     const [newEvent, setNewEvent] = useState(eventToDisplay);
-    const [serviceToAdd, setServiceToAdd] = useState(services[0]);
-    const [affectedServices, setAffectedServices] = useState(servicesToDisplay);
+    const [serviceToAdd, setServiceToAdd] = useState(servicesData[0]);
+    const [affectedServices, setAffectedServices] = useState(initialServices);
     const [validated, setValidated] = useState(true);
     const [buttonActive, setButtonActive] = useState(newEvent.severity);
+    const [servicesToRemove, setServicesToRemove] = useState([]);
 
 
     const handleChange = (e) => {
@@ -48,7 +64,7 @@ const EditEventForm = ({eventsData, services, setEventsData, eventToDisplay, set
     }
 
     const selectService = (e) => {
-       let service = services.find(s => s.id === parseInt(e.target.value)); 
+       let service = servicesData.find(s => s.id === parseInt(e.target.value)); 
        setServiceToAdd(service);
     }
 
@@ -61,10 +77,15 @@ const EditEventForm = ({eventsData, services, setEventsData, eventToDisplay, set
                 service: newEvent.service? [...newEvent.service, serviceToAdd.id] : [serviceToAdd.id]
             });
         }
+
+        if(servicesToRemove.length > 0 && servicesToRemove.find(s => s.id === serviceToAdd.id)){
+            let newServicesToRemove = servicesToRemove.filter(service => service.id !== serviceToAdd.id);
+            console.log(newServicesToRemove);
+            setServicesToRemove(newServicesToRemove);
+        }
     }
 
     const removeService = (service) => {
-        console.log(affectedServices);
 
         let filteredServices = affectedServices.reduce((newServices, serviceItem) => 
            serviceItem.id !== service.id ? [...newServices, serviceItem] : newServices, 
@@ -76,6 +97,13 @@ const EditEventForm = ({eventsData, services, setEventsData, eventToDisplay, set
             service: filteredServices.reduce((IDArray, serviceItem) =>
                     [...IDArray, serviceItem.id], [])
         });
+
+        if(initialServices.find(s => s.id === service.id)){
+            let newServicesToRemove = servicesToRemove.concat(service);
+            console.log(newServicesToRemove);
+            setServicesToRemove(newServicesToRemove);
+        }
+        
     }
 
     const setResolvedFalse = () => {
@@ -87,16 +115,61 @@ const EditEventForm = ({eventsData, services, setEventsData, eventToDisplay, set
             });
     }
 
-    const validateAndSubmit = (fieldsToValidate) => {
+    const submitData = () => {
+        // const requestOne = axios.put(`http://localhost:8080/api/events/${newEvent.id}`, newEvent);
+
+        // const x = affectedServices.reduce((y, service) => {
+        //     let row = eventServices.
+        // },[])
+
+        let promises = []
+
+        servicesToRemove.forEach(service => {
+            const eventServiceToRemove = affectedEventServices.find(es => es.service === service.id)
+            promises.push(axios.delete(`http://localhost:8080/api/eventServices/${eventServiceToRemove.id}`).catch(err => console.log(err)))
+        });
+
+        affectedServices.forEach(serviceToAdd => {
+            if(affectedEventServices?.find(s => s.service === serviceToAdd.id)){
+                promises.push(axios.post(`http://localhost:8080/api/eventServices/`, {
+                    service: serviceToAdd.id,
+                    event: newEvent.id
+                })
+                .catch(err => console.log(err)))
+            }
+            
+        })
+        promises.push(axios.put(`http://localhost:8080/api/events/${newEvent.id}`, newEvent))
+
+        axios.all(promises).then(axios.spread((...responses) => {
+                axios.get('http://localhost:8080/api/events')
+                .then(response => {
+                    setEventsData(response.data);
+                    axios.get('http://localhost:8080/api/eventServices')
+                        .then(response => {
+                            setEventServices(response.data);
+                            history.goBack();
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                })
+                .catch(err => {
+                    console.log(err)
+                })         
+                
+        }))
+        .catch(err => {
+            console.log(err);
+        })
+
+    }
+
+    const validateAndSubmit = async (fieldsToValidate) => {
         if(fieldsToValidate.find(s => s === '') === undefined){
             setValidated(true);
-            let newEventsData = eventsData.reduce((newData, event) => 
-            event.id === newEvent.id ? [...newData, newEvent] : [...newData, event],
-            []);
             setEventToDisplay(newEvent);
-            setEventsData(newEventsData);
-            history.goBack();
-            console.log(newEventsData);
+            submitData()
          } else {
             setValidated(false);
          }
@@ -120,13 +193,13 @@ const EditEventForm = ({eventsData, services, setEventsData, eventToDisplay, set
                         </div>
                         <div className='event-inputs-row'>
                             <label className='event-inputs-label input-required'>Name</label>
-                            <input type='text' name='desc' value={newEvent.desc} className='event-inputs-input' onChange={handleChange}></input>
+                            <input type='text' name='name' value={newEvent.name} className='event-inputs-input' onChange={handleChange}></input>
                         </div>
                         <div className='event-inputs-row'>
                             <label className='event-inputs-label input-required'>Source</label>
                             <input type='text' name='source' value={newEvent.source} className='event-inputs-input' onChange={handleChange}></input>
                         </div>
-                        <div className='event-inputs-row'>
+                        {/* <div className='event-inputs-row'>
                             <div className='event-inputs-span'>
                                 <div className='event-inputs-column'>
                                     <label className='event-inputs-label input-required'>Start Date</label>
@@ -137,7 +210,11 @@ const EditEventForm = ({eventsData, services, setEventsData, eventToDisplay, set
                                     <input type='date' name='endDate' value={newEvent.endDate} className='event-inputs-input' onChange={handleChange}></input>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
+                        {/* <div className='event-inputs-row'>
+                            <label className='event-inputs-label'>End Date</label>
+                            <input type='date' name='endDate' value={newEvent.endDate} className='event-inputs-input' onChange={handleChange}></input>
+                        </div> */}
                         <div className='event-inputs-row'>
                             <label className='event-inputs-label input-required'>Severity</label>
                             <div className='event-inputs-severity-buttons'>
@@ -147,13 +224,13 @@ const EditEventForm = ({eventsData, services, setEventsData, eventToDisplay, set
                                 <button value='Critical' className={buttonActive === 'Critical' ? 'event-inputs-button-critical' : ''} onClick={triggerButton}>Critical</button>
                             </div>
                         </div>
-                        <div className='event-inputs-row'>
+                        {/* <div className='event-inputs-row'>
                             <label className='event-inputs-label input-required'>Resolved</label>
                             <div className='event-inputs-resolved-buttons'>
                                 <button className={newEvent.resolved ? 'resolved-button-highlighted' : ''}>True</button>
                                 <button className={newEvent.resolved  ? '' : 'resolved-button-highlighted'} onClick={() => setResolvedFalse()}>False</button>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className='event-inputs'>
                         <div className='event-inputs-row'>
@@ -161,7 +238,7 @@ const EditEventForm = ({eventsData, services, setEventsData, eventToDisplay, set
                             <div className='event-inputs-span'>
                                 <div className='event-inputs-services-container'>
                                     <select name='select-services' className='event-inputs-select' onChange={selectService}>
-                                        {services.map((service) =>
+                                        {servicesData.map((service) =>
                                         (
                                             <option key={service.id} value={service.id}>{service.name}</option>
                                         )
@@ -186,7 +263,7 @@ const EditEventForm = ({eventsData, services, setEventsData, eventToDisplay, set
                     </div>
                    
                 </div>
-                <button className='add-event-button' onClick={() => validateAndSubmit([newEvent.desc, newEvent.severity, newEvent.source, newEvent.startDate])}>Apply</button>
+                <button className='add-event-button' onClick={() => validateAndSubmit([newEvent.desc, newEvent.severity, newEvent.source, newEvent.startDate])}>Apply Changes</button>
             </div>
         </div>
     )

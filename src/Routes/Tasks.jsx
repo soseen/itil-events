@@ -5,13 +5,15 @@ import Task from '../components/Task'
 import Team from '../components/Team';
 
 
-const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData, eventsData}) => {
+const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData, eventsData, taskUpdatesData, user}) => {
 
 
     let history = useHistory();
 
     const tasksDefault = tasksData.map((task => ({...task, expanded: false})));
-    const teamsDefault = teamsData.map((team => ({...team, highlighted: false})));
+    const teamsDefault = teamsData.map((team => (
+        {...team, highlighted: false}
+        )));
 
     const [displayedTasks, setDisplayedTasks] = useState(tasksDefault);
     const [teams, setTeams] = useState(teamsDefault);
@@ -35,7 +37,7 @@ const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData, event
         setTeams(teamsHighlighted);
 
         let tasksToDisplay = tasksDefault.reduce((filtered, taskObject) => 
-        taskObject.team.id === team.id ? [...filtered, taskObject] : filtered,
+        taskObject.team === team.id ? [...filtered, taskObject] : filtered,
         []);
 
         setDisplayedTasks(tasksToDisplay);
@@ -75,7 +77,7 @@ const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData, event
                         </div>
                         {displayedTasks.map((task, index) => {
                             return(
-                                <Task key={task.id} task={task} displayEvent={displayEvent} displayNewUpdateForm={displayNewUpdateForm} eventsData={eventsData}/>
+                                <Task key={task.id} task={task} displayEvent={displayEvent} displayNewUpdateForm={displayNewUpdateForm} eventsData={eventsData} teamsData={teamsData} taskUpdatesData={taskUpdatesData} user={user}/>
                             )
                         })}
                     </div>

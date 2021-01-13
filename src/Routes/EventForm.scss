@@ -158,6 +158,10 @@ input:-webkit-autofill:active  {
     color: $text-color;
     font-weight: bolder;
     cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .resolved-button-highlighted {

@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Alerts.scss'
 import { useHistory, useRouteMatch, Link} from 'react-router-dom';
+import { axios } from '../Axios';
 
-const Alerts = ({eventsData, itemCallback}) => {
+const Alerts = ({eventsData, setEventsData, setEventToDisplay, userRole}) => {
 
     let history = useHistory();
     let { url } = useRouteMatch();
 
-
+    useEffect(() => {
+        axios.get('/api/events')
+            .then((response) => {
+                setEventsData(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, [setEventsData])
     const [eventsDisplayed, setEventsDisplayed] = useState(eventsData);
 
     const filterList = (e) => {
@@ -22,7 +31,7 @@ const Alerts = ({eventsData, itemCallback}) => {
     }
 
     const handleRowClick = (item) => {
-        itemCallback('event', item);
+        setEventToDisplay(item);
         history.push(`${url}/${item.id}`);
     }
 
@@ -60,10 +69,12 @@ const Alerts = ({eventsData, itemCallback}) => {
                                 <button name='button-filter' className='button-filter' onClick={filterList} value={'Critical'}>Critical</button>
                             </div>
                         </div>       
-                    </div>
-                    <Link to={`/alerts/new-event`}>
-                    <button className='new-event-button'>New Event</button>
-                    </Link>
+                    </div>{
+                        userRole === 'system' &&
+                        <Link to={`/alerts/new-event`}>
+                            <button className='new-event-button'>New Event</button>
+                        </Link>
+                    }
                     <table className='content-table'>
                         <thead>
                             <tr>
@@ -79,7 +90,7 @@ const Alerts = ({eventsData, itemCallback}) => {
                                 return (
                                     <tr key={item.id} className='event-row' onClick={() => handleRowClick(item)}>
                                         <td>{item.id}</td>
-                                        <td>{item.desc}</td>
+                                        <td>{item.name}</td>
                                         {item.severity === 'Warning' && 
                                             <td><span className='severity-warning'>{item.severity}</span></td>
                                         }

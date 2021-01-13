@@ -1,0 +1,79 @@
+@import '../Mixins.scss';
+@import '../Variables.scss';
+
+.login-page-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-color: $secondary-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .login-form-wrapper {
+        padding: 20px 40px;
+        width: 500px;
+        background-color: $main-color;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        border-radius: 2px;
+        box-shadow: 3px 3px 10px 0px #000000;
+
+        h2 {
+            color: $text-color;
+            font-size: 1.8rem;
+            margin-bottom: 60px;
+            font-family: 'Dosis', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .login-inputs-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .login-inputs-row {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                text-align: start;
+                width: 100%;
+
+                .login-inputs-label {
+                    text-align: start;
+                    @include input-label;
+                    font-size: 0.9rem;
+                    margin-bottom: 3px
+                }
+
+                .login-inputs-input {
+                    @include input-1;
+                    font-size: 1rem;
+                    letter-spacing: 2px;
+                    margin-top: 0px;
+                }
+            }
+        }
+
+        .login-button {
+            @include button-1;
+            margin-top: 40px;
+            width: 200px;
+            background-color: $text-color;
+            color: $main-color;
+            font-size: 1rem;
+
+        }
+
+        .validation-message {
+            margin-bottom: 20px;
+            @include validation-msg;
+        }
+    }
+
+}

@@ -1,5 +1,6 @@
 import {React, useState} from 'react'
 import { useHistory } from 'react-router-dom';
+import { axios } from '../Axios';
 import './RuleForm.scss';
 
 const EditRuleForm = ({ruleToDisplay, rulesData, setRulesData, setRuleToDisplay}) => {
@@ -34,15 +35,17 @@ const EditRuleForm = ({ruleToDisplay, rulesData, setRulesData, setRuleToDisplay}
         });
     }
 
-    const validateAndSubmit = (fieldsToValidate) => {
+    const validateAndSubmit = async (fieldsToValidate) => {
         if(fieldsToValidate.find(s => s === '') === undefined){
             setValidated(true);
             let newRulesData = rulesData.reduce((newData, rule) => 
             rule.id === newRule.id ? [...newData, newRule] : [...newData, rule],
             []);
             setRuleToDisplay(newRule);
-            setRulesData(newRulesData);
-            history.goBack();
+            await axios.put(`http://localhost:8080/api/rules/${newRule.id}`, newRule);
+            const response = await axios.get('http://localhost:8080/api/rules/');
+            setRulesData(response.data);
+            history.push('/rules');
          } else {
             setValidated(false);
          }

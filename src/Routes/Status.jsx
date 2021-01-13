@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Status.scss'
 import {useHistory} from 'react-router-dom';
 import DataChart from '../components/DataChart';
 
 const Status = ({services, itemCallback, eventsData, tasksData}) => {
-
-    console.log(services);
-    console.log(eventsData);
 
     const [serviceEvents, setServiceEvents] = useState([]);
     let history = useHistory();
@@ -68,7 +65,7 @@ const Status = ({services, itemCallback, eventsData, tasksData}) => {
                                             return (
                                                 <tr key={item.id} className='event-row' onClick={() => handleRowClick(item)}>
                                                     <td>{item.id}</td>
-                                                    <td>{item.desc}</td>
+                                                    <td>{item.name}</td>
                                                     {item.severity === 'Warning' && 
                                                         <td><span className='severity-warning'>{item.severity}</span></td>
                                                     }

@@ -1,14 +1,14 @@
 export const TeamsData = [
     {
         id: 1,
-        name: 'Service engineering'
+        name: 'Inżyniera serwisów'
     },
     {
         id: 2,
-        name: 'Network maintenance'
+        name: 'Zarządzanie siecią'
     },
     {
         id: 3,
-        name: 'Software engineering'
+        name: 'Inżynieria oprogramowania'
     }
 ]

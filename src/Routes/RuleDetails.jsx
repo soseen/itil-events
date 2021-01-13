@@ -1,11 +1,14 @@
 import React from 'react';
 import './RuleDetails.scss'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
-const RuleDetails = ({ruleToDisplay}) => {
+const RuleDetails = ({ruleToDisplay, user}) => {
     
 
     console.log(ruleToDisplay);
+    let history = useHistory();
+
+    console.log(history.location.pathname);
     
     return(
         <div className='page-container'>
@@ -14,9 +17,11 @@ const RuleDetails = ({ruleToDisplay}) => {
                     <Link to='/rules'>
                         <button>Back</button>
                     </Link>
-                    <Link to={`/rules/${ruleToDisplay.id}/edit-rule`}>
+                    {user.team && 
+                        <Link to={`/rules/${ruleToDisplay.id}/edit-rule`}>
                         <button>Edit</button>
-                    </Link>
+                        </Link>
+                    }
                 </div>
                 <div className='rule-header'>
                     <p className='rule-header-title'>Rule Details</p>
