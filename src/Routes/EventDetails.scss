@@ -2,6 +2,7 @@
 @import '../Mixins.scss';
 
 .event-details-container {
+    position: relative;
     margin: 50px auto;
     width: 100%;
     padding: 15px;
@@ -16,6 +17,43 @@
     justify-content: flex-start;
     align-items: center;
     border-radius: 2px;
+}
+
+.delete-event-popup {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 50px 90px;
+    background-color: $main-color;
+    border-radius: 3px;
+    border: 1px solid $text-color;
+    z-index: 10;
+
+    p {
+        color: $text-color
+
+    }
+
+    .delete-event-popup-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+            @include button-1;
+        }
+    }
+}
+
+.popup-hidden {
+    display: none;
 }
 
 .event-details-buttons {
@@ -123,16 +161,6 @@
     cursor: pointer;
 }
 
-/* .event-details-info-left p:hover {
-    background-color: #1d1d1d;
-} */
-
-/* .event-details-info-left p::before {
-    content: "•";
-    color: #0daaa2;
-    display: inline-block;
-} */
-
 .event-details-info-right {
     flex: 1 1 400px;
     text-align: left;
@@ -144,12 +172,6 @@
     padding: 0 50px;
     box-sizing: border-box;
 }
-
-/* .event-details-info-right p {
-    text-align: left;
-    margin-top: 0;
-} */
-
 
 .event-details-label {
     color: $text-color;

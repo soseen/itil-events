@@ -135,7 +135,6 @@ const App = () => {
     // }, [eventsData]);
 
   const services = useMemo(() => {
-    console.log('jestem w useMemo');
     let data = servicesData.map((service) => ({
       ...service,
       events: eventServices.reduce((serviceEvents, row) =>
@@ -155,7 +154,6 @@ const App = () => {
 
       return { ...service, status: SEVERITIES_STATUSES[highestSeverity] };
     });
-    console.log(data);
     return data
   }, [eventsData, servicesData, eventServices])
 
@@ -197,7 +195,7 @@ const App = () => {
               <EditEventForm eventsData={eventsData} servicesData={servicesData} eventServices={eventServices} setEventsData={setEventsData} eventToDisplay={eventToDisplay} setEventToDisplay={setEventToDisplay} setEventServices={setEventServices}/>
             </Route>
             <Route path="/alerts/:eventID">
-              <EventDetails eventToDisplay={eventToDisplay} eventServices={eventServices} servicesData={servicesData} userRole={user.role}/>
+              <EventDetails eventToDisplay={eventToDisplay} eventServices={eventServices} servicesData={servicesData} userRole={user.role} setEventsData={setEventsData} setEventServices={setEventServices} setTasksData={setTasksData}/>
             </Route>
             <Route path="/rules" exact>
               <Rules rulesData={rulesData} itemCallback={itemCallback} user={user}/>
@@ -212,7 +210,7 @@ const App = () => {
               <RuleDetails ruleToDisplay={ruleToDisplay} user={user}/>
             </Route>
             <Route path="/tasks" exact>
-              <Tasks tasksData={tasksData} setTaskToDisplay={setTaskToDisplay} setEventToDisplay={setEventToDisplay} teamsData={teamsData} eventsData={eventsData} taskUpdatesData={taskUpdatesData} user={user}/>
+              <Tasks tasksData={tasksData} setTaskToDisplay={setTaskToDisplay} setEventToDisplay={setEventToDisplay} teamsData={teamsData} eventsData={eventsData} taskUpdatesData={taskUpdatesData} user={user} setTasksData={setTasksData}/>
             </Route>
             <Route path="/tasks/:taskID/new-update">
               <TaskUpdateForm tasksData={tasksData} taskToDisplay={taskToDisplay} eventsData={eventsData} setTaskUpdatesData={setTaskUpdatesData} setEventsData={setEventsData} setTasksData={setTasksData}/>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './Tasks.scss'
 import {useHistory} from 'react-router-dom';
 import Task from '../components/Task'
@@ -10,10 +10,22 @@ const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData, event
 
     let history = useHistory();
 
-    const tasksDefault = tasksData.map((task => ({...task, expanded: false})));
-    const teamsDefault = teamsData.map((team => (
-        {...team, highlighted: false}
-        )));
+
+    const tasksDefault = useMemo(() => {
+        console.log('new tasks data arrived');
+        let data = tasksData.map((task => ({...task, expanded: false})));
+        return data;
+    }, [tasksData]) 
+    
+
+    const teamsDefault = useMemo(() => {
+        let data = teamsData.map((team => (
+            {...team, highlighted: false}
+            )));
+        return data;    
+    }, [teamsData])
+    
+    
 
     const [displayedTasks, setDisplayedTasks] = useState(tasksDefault);
     const [teams, setTeams] = useState(teamsDefault);

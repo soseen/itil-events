@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import { axios } from '../Axios';
+// import { axios } from '../Axios';
+import axios from 'axios';
 import './LoginForm.scss';
 
 const LoginForm = ({setLoggedIn, setUser}) => {
@@ -10,11 +11,17 @@ const LoginForm = ({setLoggedIn, setUser}) => {
     let history = useHistory();
 
     const [credentials, setCredentials] = useState({
-        username: "",
-        password: ""
+        username: "system",
+        password: "system123",
+    })
+    const [registrationCredentials, setRegistrationCredentials] = useState({
+        username: 'user123',
+        password: 'password',
+        role: 'expert',
+        team: 18
     })
     const [validationMessage, setValidationMessage] = useState(validationMessages[0]);
-    // const [loggedUser, setLoggedUser] = useState({});
+    const [showRegistrationForm, setShowRegistrationForm] = useState(false);
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -29,13 +36,14 @@ const LoginForm = ({setLoggedIn, setUser}) => {
             setValidationMessage(validationMessages[1]);
         }
         else {
-            axios.get('/api/users')
+            axios.get('http://localhost:8080/api/users')
                 .then((response) => {
                     let user = response.data.find(u => u.username === credentials.username)
                     if(user && user.password === credentials.password){
                         setUser(user);
                         setLoggedIn(true);
                         setValidationMessage(validationMessages[0])
+                        history.push('/itil-events')
                     } else {
                         setValidationMessage(validationMessages[2])
                     }
@@ -46,6 +54,21 @@ const LoginForm = ({setLoggedIn, setUser}) => {
             
         }
         
+    }
+
+    const handleRegistration = async () => {
+        
+        if(showRegistrationForm){
+            try {
+                await axios.post('http://localhost:8000/users', registrationCredentials)
+            }
+            catch (error) {
+                console.log(error)
+            }
+        } else {
+            setShowRegistrationForm(true);
+            return
+        }
     }
 
     return(
@@ -62,8 +85,23 @@ const LoginForm = ({setLoggedIn, setUser}) => {
                         <label className='login-inputs-label'>Password</label>
                         <input type='password' name='password' value={credentials.password} className='login-inputs-input' onChange={handleChange}></input>
                     </div>
-                    <button className='login-button' onClick={validateAndLogIn}>Log In</button>
+
+                    <button className='login-button login-1' onClick={validateAndLogIn}>Log In</button>
+
                 </div>
+                <div className={showRegistrationForm ? 'login-inputs-wrapper' : 'login-inputs-wrapper register-hidden'}>
+                        <div className='login-inputs-row'>
+                            <label className='login-inputs-label'>Username</label>
+                            <input type='text' name='username' value={registrationCredentials.username} className='login-inputs-input' onChange={(e) => setRegistrationCredentials({...registrationCredentials, username: e.target.value})}></input>
+                        </div>
+                        <div className='login-inputs-row'>
+                            <label className='login-inputs-label'>Password</label>
+                            <input type='password' name='password' value={registrationCredentials.password} className='login-inputs-input' onChange={(e) => setRegistrationCredentials({...registrationCredentials, password: e.target.value})}></input>
+                        </div>
+
+                </div>
+                <button className='login-button' onClick={() => handleRegistration()}>Register</button>
+               
             </div>
         </div>
     )

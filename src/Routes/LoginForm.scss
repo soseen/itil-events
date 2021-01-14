@@ -14,6 +14,7 @@
         padding: 20px 40px;
         width: 500px;
         background-color: $main-color;
+        opacity: 0.9;
         margin: auto;
         display: flex;
         flex-direction: column;
@@ -58,16 +59,27 @@
                     margin-top: 0px;
                 }
             }
+
+           
+        }
+
+        .register-hidden {
+            display: none;
         }
 
         .login-button {
             @include button-1;
-            margin-top: 40px;
             width: 200px;
             background-color: $text-color;
             color: $main-color;
             font-size: 1rem;
+            margin: auto;
+            margin-top: 10px;
 
+        }
+
+        .login-1 {
+            margin-bottom: 30px;
         }
 
         .validation-message {
@@ -76,4 +88,24 @@
         }
     }
 
+}
+
+.login-page-wrapper::before {
+    content: '';
+    position: absolute;
+    background-image: url('../img/dark-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.1;
+    z-index: 0;
+  }
+  
+.login-inputs-wrapper:nth-child(1){
+    background-color: green;
 }

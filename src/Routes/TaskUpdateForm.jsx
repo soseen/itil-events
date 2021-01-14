@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import axios from 'axios';
+import { axios } from '../Axios'
 import './TaskUpdateForm.scss';
 
 const TaskUpdateForm = ({tasksData, taskToDisplay, eventsData, setTaskUpdatesData, setEventsData, setTasksData}) => {
@@ -29,80 +29,56 @@ const TaskUpdateForm = ({tasksData, taskToDisplay, eventsData, setTaskUpdatesDat
         });
     }
 
-    const validateAndSubmit = (fieldsToValidate) => {
+    const validateAndSubmit = async (fieldsToValidate) => {
         if(fieldsToValidate.find(s => s === '') === undefined){
             setValidated(true);
 
-        let requests = [];
+        let promises = [];
+    
         if(taskClosed) {
+            
             let closedTask = {
                 ...taskToDisplay,
                 closed: true
             }
-            requests.push(axios.put(`http://localhost:8080/api/tasks/${taskToDisplay.id}`, closedTask)
-                .then((response) => {
-                    axios.get('http://localhost:8080/api/tasks')
-                        .then(response => {
-                            
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        })
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-            );
+            
+            promises.push(axios.put(`/api/tasks/${taskToDisplay.id}`, closedTask));
         }
 
         if(newUpdate.status === 200 || (newUpdate.status === 100 & !relatedEvent.resolved)){
-            requests.push(axios.put(`http://localhost:8080/api/events/${taskToDisplay.event}`, {
+            promises.push(axios.put(`/api/events/${taskToDisplay.event}`, {
                 ...relatedEvent,
                 resolved: true,
                 endDate: CURRENT_DATE
             })
-            .then((response) => {
-                axios.get('/api/events/')
-                .then(response => {
-                    setEventsData(response.data);
-                })
-            })
-            .catch(error => {
-                console.log(error)
-            })
         );
         }
         
-        requests.push(axios.post('http://localhost:8080/api/taskUpdates', {
+        promises.push(axios.post('/api/taskUpdates', {
             ...newUpdate,
             task: taskToDisplay.id
             })
-            .then((response) => {
-                axios.get('http://localhost:8080/api/taskUpdates')
-                    .then(response => {
-                    setTaskUpdatesData(response.data)
-            })
-            })
-            .catch(error => {
-                console.log(error)
-            })
         );
 
-        axios.all(requests).then(axios.spread((...responses) => {
-            axios.get('http://localhost:8080/api/tasks')
-                .then(response => {
-                    setTasksData(response.data)
-                    axios.get('http://localhost:8080/api/events')
-                        .then(response => {
-                            setEventsData(response.data)
-                            history.goBack();
-                        })
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        }));
-        
+        try {
+            await Promise.all(promises);
+        } catch (error) {
+            console.log(error);
+            return; 
+        }
+
+
+
+        try {
+            const [eventsResponse, tasksResponse, taskUpdatesResponse] = await Promise.all([axios.get('/api/events'), axios.get('/api/tasks'), axios.get('/api/taskUpdates')]);
+            setEventsData(eventsResponse.data);
+            setTasksData(tasksResponse.data);
+            setTaskUpdatesData(taskUpdatesResponse.data);
+        } catch (error) {
+            console.log(error);
+        }
+
+        history.goBack();
         
         } else {
             setValidated(false);
