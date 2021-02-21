@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import './Status.scss'
 import {useHistory} from 'react-router-dom';
 import DataChart from '../components/DataChart';
+import Payment from './Payment';
 
-const Status = ({services, itemCallback, eventsData, tasksData}) => {
+const Status = ({services, itemCallback, eventsData, tasksData, user, setUser}) => {
 
     const [serviceEvents, setServiceEvents] = useState([]);
     let history = useHistory();
@@ -30,9 +31,8 @@ const Status = ({services, itemCallback, eventsData, tasksData}) => {
 
     return(
         <div className='status-page-container'>
-            {/* <h1 className='page-title'>Status</h1> */}
-        
-            <div className='status-content-container'>
+            {user.subscriptionActive.active &&
+                <div className='status-content-container'>
                 <div className='status-header-container'>
                     <div className='status-header'>
                         <p>Status</p>
@@ -97,6 +97,10 @@ const Status = ({services, itemCallback, eventsData, tasksData}) => {
                     </div>
                 </div>
             </div>
+            }
+            {!user.subscriptionActive.active && 
+                <Payment user={user} setUser={setUser} />
+            }
         </div>
     )
 }

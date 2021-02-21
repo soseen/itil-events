@@ -198,10 +198,12 @@ input:-webkit-autofill:active  {
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
+    height: 50px;
 }
 
 .event-inputs-select {
     width: 100%;
+    height: 100%;
     padding: 14px;
     outline: none;
     border: none;

@@ -144,7 +144,7 @@ const NewTaskForm = ({event, tasksData, teamsData, setTasksData, fetchData}) => 
                         </div>
                     </div>
                 </div>
-                <button className='add-task-button' onClick={() => validateAndSubmit([newTask.name, newTask.startDate])}>Add</button>
+                <button className='add-task-button' onClick={() => validateAndSubmit([newTask.name, newTask.startDate])}>Add Task</button>
             </div>
         </div>
     )

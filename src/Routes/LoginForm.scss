@@ -60,6 +60,10 @@
                 }
             }
 
+            .select-hidden {
+                display: none;
+            }
+
            
         }
 
@@ -109,3 +113,10 @@
 .login-inputs-wrapper:nth-child(1){
     background-color: green;
 }
+
+
+.event-inputs-select {
+    @include input-1;
+    margin-top: 0;
+}
+

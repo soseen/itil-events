@@ -71,7 +71,7 @@ const EditRuleForm = ({ruleToDisplay, rulesData, setRulesData, setRuleToDisplay}
                             <label className='rule-inputs-label input-required'>Name</label>
                             <input type='text' name='name' value={newRule.name} className='rule-inputs-input' onChange={handleChange}></input>
                         </div>
-                        <div className='rule-inputs-row direction-row'>
+                        {/* <div className='rule-inputs-row direction-row'>
                             <div className='rule-inputs-column column-49'>
                             <label className='rule-inputs-label input-required'>Date</label>
                             <input type='date' name='date' value={newRule.date} className='rule-inputs-input' onChange={handleChange}></input>
@@ -86,6 +86,16 @@ const EditRuleForm = ({ruleToDisplay, rulesData, setRulesData, setRuleToDisplay}
                                 <option style={{fontWeight: "bold"}} value={5}>5</option>
                             </select>
                             </div>
+                        </div> */}
+                        <div className='rule-inputs-row'>
+                            <label className='rule-inputs-label input-required'>Priority</label>
+                            <select value={newRule.priority} name='priority' className='rule-inputs-select' onChange={selectPriority}>
+                                <option style={{fontWeight: "bold"}} value={1}>1</option>
+                                <option style={{fontWeight: "bold"}} value={2}>2</option>
+                                <option style={{fontWeight: "bold"}} value={3}>3</option>
+                                <option style={{fontWeight: "bold"}} value={4}>4</option>
+                                <option style={{fontWeight: "bold"}} value={5}>5</option>
+                            </select>
                         </div>
                     </div>
                     <div className='rule-inputs'>
@@ -118,7 +128,7 @@ const EditRuleForm = ({ruleToDisplay, rulesData, setRulesData, setRuleToDisplay}
                         </div>
                     </div>
                 </div>
-                <button className='add-rule-button' onClick={() => validateAndSubmit([newRule.name, newRule.date, newRule.severity, newRule.attribute, newRule.operator, newRule.value])}>Add</button>
+                <button className='add-rule-button' onClick={() => validateAndSubmit([newRule.name, newRule.date, newRule.severity, newRule.attribute, newRule.operator, newRule.value])}>Edit Rule</button>
             </div>
         </div>
     )

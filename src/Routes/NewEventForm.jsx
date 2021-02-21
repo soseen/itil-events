@@ -80,20 +80,28 @@ const NewEventForm = ({servicesData, setEventsData, setEventServices}) => {
     // }
     const postNewEvent = async () => {
         
+        let promises = []
+
         try {
             const responseID = await axios.post('/api/events', newEvent)
 
             affectedServices.forEach(service => {
-                    axios.post('/api/eventServices', {
+                    promises.push(axios.post('/api/eventServices', {
                     event: responseID.data,
                     service: service.id
-                })
+                }))
             })
         }
         catch (error) {
             console.log(error);
         }
 
+        try {
+            await Promise.all(promises);
+        } catch (error) {
+            console.log(error);
+            return; 
+        }
 
         axios.get('/api/events')
             .then(response => {
@@ -101,6 +109,8 @@ const NewEventForm = ({servicesData, setEventsData, setEventServices}) => {
                 axios.get('/api/eventServices')
                     .then(response => {
                         setEventServices(response.data)
+                    })
+                    .then(response => {
                         history.goBack();
                     })
                     .catch(error => {

@@ -16,6 +16,8 @@ const EditEventForm = ({eventsData, servicesData, eventServices, setEventsData, 
     //     return currentServices
     // } , []);
 
+    console.log(eventServices);
+
     const initialServices = useMemo(() => {
         const data = eventServices.reduce((filteredArray, row) => 
         row.event === eventToDisplay.id ? [...filteredArray, servicesData.find(s => s.id === row.service)] : filteredArray,
@@ -117,36 +119,6 @@ const EditEventForm = ({eventsData, servicesData, eventServices, setEventsData, 
             
         })
         promises.push(axios.put(`/api/events/${newEvent.id}`, newEvent))
-
-        // axios.all(promises).then(axios.spread((...responses) => {
-        //         axios.get('http://localhost:8080/api/events')
-        //         .then(response => {
-        //             setEventsData(response.data);
-        //             axios.get('http://localhost:8080/api/eventServices')
-        //                 .then(response => {
-        //                     setEventServices(response.data);
-        //                     history.goBack();
-        //                 })
-        //                 .catch(err => {
-        //                     console.log(err);
-        //                 })
-        //         })
-        //         .catch(err => {
-        //             console.log(err)
-        //         })         
-                
-        // }))
-        // .catch(err => {
-        //     console.log(err);
-        // })
-        // try {
-        //     await Promise.all(deletePromises);
-        // } catch (error) {
-        //     console.log(error);
-        //     return; // nie kontynuujemy z niczym nizej
-        // }
-
-        // console.log(affectedServices);
 
         try {
             await Promise.all(promises);
