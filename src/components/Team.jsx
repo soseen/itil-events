@@ -4,8 +4,10 @@ import './Team.scss';
 const Team = ({team, tasksData, filterByTeam}) => {
 
     let teamTasks = tasksData.reduce((tasks, taskObject) => 
-        taskObject.team.id === team.id ? [...tasks, taskObject] : tasks
+        taskObject.team === team.id ? [...tasks, taskObject] : tasks
     ,[]);
+
+    console.log(teamTasks);
 
     let tasksFreq = teamTasks.reduce((tasks, taskObject) => {
         if(taskObject.closed){

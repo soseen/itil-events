@@ -11,7 +11,7 @@
     align-items: flex-start;
 }
 
-.new-event-form-container {
+.event-form-container {
     width: 100%;
     margin: 50px auto;
     min-height: 600px;
@@ -24,7 +24,7 @@
     border-top: 2px solid $accent-color;
 }
 
-.new-event-form-header {
+.event-form-header {
     width: 100%;
     height: 100%;
     padding: 10px 0;
@@ -33,24 +33,24 @@
     align-items: center;
 }
 
-.new-event-form-header p {
+.event-form-header p {
     margin-right: auto;
 }
 
-.new-event-form-header button {
+.event-form-header button {
     @include button-1;
     margin-right: 50px;
 }
 
-.new-event-form-header button:focus {
+.event-form-header button:focus {
     outline: none;
 }
 
-.new-event-form-header button:active {
+.event-form-header button:active {
     background-color: #333333;
 }
 
-.new-event-inputs-validation {
+.event-inputs-validation {
     @include validation-msg;
 }
 
@@ -58,7 +58,7 @@
     display: none;
 }
 
-.new-event-form-header p{
+.event-form-header p{
     background-color: $secondary-color;
     color: $text-color;
     border-top-right-radius: 5px;
@@ -69,7 +69,7 @@
     box-shadow: 2px 5px 15px 2px black;
 }
 
-.new-event-inputs-container{
+.event-inputs-container{
     width: 80%;
     height: 100%;
     /* background-color: #1a1a1a; */
@@ -80,7 +80,7 @@
     align-items: flex-start;
 }
 
-.new-event-inputs {
+.event-inputs {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -98,7 +98,7 @@ input:-webkit-autofill:active  {
     -webkit-text-fill-color: $text-color;
 }
 
-.new-event-inputs-row {
+.event-inputs-row {
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -106,16 +106,16 @@ input:-webkit-autofill:active  {
     margin-bottom: 5px;
 }
 
-.new-event-inputs-label {
+.event-inputs-label {
     @include input-label;
 }
 
-.new-event-inputs-input {
+.event-inputs-input {
     @include input-1;
 }
 
 
-.new-event-inputs-span {
+.event-inputs-span {
     width: 100%;
     height: 100%;
     display: flex;
@@ -123,7 +123,7 @@ input:-webkit-autofill:active  {
     align-items: flex-start;
 }
 
-.new-event-inputs-column {
+.event-inputs-column {
     width: 49.5%;
 }
 
@@ -132,7 +132,7 @@ input:-webkit-autofill:active  {
     color: #960316;
 }
 
-.new-event-inputs-severity-buttons {
+.event-inputs-severity-buttons {
     width: 100%;
     height: 100%;
     display: flex;
@@ -141,7 +141,7 @@ input:-webkit-autofill:active  {
     margin-bottom: 20px;
 }
 
-.new-event-inputs-resolved-buttons {
+.event-inputs-resolved-buttons {
     width: 100%;
     height: 100%;
     display: flex;
@@ -150,7 +150,7 @@ input:-webkit-autofill:active  {
     margin-bottom: 20px;
 }
 
-.new-event-inputs-resolved-buttons button {
+.event-inputs-resolved-buttons button {
     width: 49.5%;
     padding: 15px;
     background-color: $secondary-color;
@@ -158,46 +158,52 @@ input:-webkit-autofill:active  {
     color: $text-color;
     font-weight: bolder;
     cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .resolved-button-highlighted {
     background-color: #333333 !important;
 }
 
-.new-event-inputs-severity-buttons button{
+.event-inputs-severity-buttons button{
     @include button-1;
     width: 24.2%;
     padding: 15px;
 }
 
 
-.new-event-inputs-button-warning {
+.event-inputs-button-warning {
     background-color: $warning-color !important;
 }
 
-.new-event-inputs-button-minor {
+.event-inputs-button-minor {
     background-color: $minor-color !important;
     color: black !important;
 }
 
-.new-event-inputs-button-major {
+.event-inputs-button-major {
     background-color: $major-color !important;
 }
 
-.new-event-inputs-button-critical {
+.event-inputs-button-critical {
     background-color: $critical-color !important;
 }
 
-.new-event-inputs-services-container {
+.event-inputs-services-container {
     width: 100%;
     margin-top: 10px;
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
+    height: 50px;
 }
 
-.new-event-inputs-select {
+.event-inputs-select {
     width: 100%;
+    height: 100%;
     padding: 14px;
     outline: none;
     border: none;
@@ -208,23 +214,23 @@ input:-webkit-autofill:active  {
     border: 2px solid $secondary-color;
 }
 
-.new-event-inputs-select:focus {
+.event-inputs-select:focus {
     border: 2px solid $text-color;
     background-color: #333333;
 }
 
 
-.new-event-inputs-select option {
+.event-inputs-select option {
     font-weight: bold;
     font-size: 0.9rem;
     cursor: pointer;
 }
 
-.new-event-inputs-select option::selection {background: #333333;}
-.new-event-inputs-select option::-moz-selection {background: #333;}
-.new-event-inputs-select option::-webkit-selection {background: #333; color:$text-color;}
+.event-inputs-select option::selection {background: #333333;}
+.event-inputs-select option::-moz-selection {background: #333;}
+.event-inputs-select option::-webkit-selection {background: #333; color:$text-color;}
 
-.new-event-inputs-services-container button {
+.event-inputs-services-container button {
     width: 30%;
     padding: 15px;
     background-color: $secondary-color;
@@ -235,25 +241,25 @@ input:-webkit-autofill:active  {
     margin-left: 5px;
 }
 
-.new-event-inputs-services-container button:focus {
+.event-inputs-services-container button:focus {
     outline: none;
 }
 
-.new-event-inputs-services-container button:active {
+.event-inputs-services-container button:active {
     background-color: #181818;
 }
-.new-event-inputs-services-container button:hover {
+.event-inputs-services-container button:hover {
     background-color: #2c2c2c;
 }
 
-.new-event-services-list {
+.event-services-list {
     width: 100%;
     min-height: 400px;
     margin-top: 10px;
     color: $text-color;
 }
 
-.new-event-service-item {
+.event-service-item {
     list-style: none;
     width: 100%;
     padding: 12px 15px;
@@ -269,14 +275,14 @@ input:-webkit-autofill:active  {
     align-items: center;
 }
 
-.new-event-service-item svg {
+.event-service-item svg {
     color: $text-color;
     width: 24px;
     height: 20px;
     cursor: pointer;
 }
 
-.new-event-service-item svg:hover {
+.event-service-item svg:hover {
     color: $main-color;
 }
 
@@ -290,10 +296,3 @@ input:-webkit-autofill:active  {
     margin-bottom: 20px;
     margin-right: 50px;
 }
-
-/* .new-event-inputs-left,
-.new-event-inputs-right {
-    width: 49%;
-    height: 100%;
-    background-color: gray;
-} */

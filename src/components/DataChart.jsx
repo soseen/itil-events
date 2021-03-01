@@ -17,7 +17,6 @@ const DataChart = ({tasksChartData, eventsData, type}) => {
             {},
         );
 
-        console.log(eventFrequencies);
         setChartData(eventFrequencies);
         
     },[eventsData]);

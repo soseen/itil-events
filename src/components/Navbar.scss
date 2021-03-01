@@ -78,13 +78,13 @@ ul {
     justify-content: flex-start;
     align-items: center;
     list-style: none;
-    padding: 8px 0 8px 0px;
-    /* background-color: teal; */
+    padding: 12px 45px 12px 45px;
     height: 60px ;
     width: 100%;
+    border-radius: 2px;
 }
 
-.nav-item a {
+.nav-item span {
     text-decoration: none;
     color: $text-color;
     font-size: 1.2rem;
@@ -93,11 +93,22 @@ ul {
     justify-content: center;
     width: 100%;
     height: 100%;
-    padding: 0 16px;
 }
 
-.nav-item a:hover {
+.nav-item svg {
+    text-decoration: none;
+    color: $text-color;
+    font-size: 1rem;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 80%;
+}
+
+.nav-item:hover {
     background-color: $secondary-color;
+    cursor: pointer;
 }
 
 .side-menu-links {
@@ -122,4 +133,57 @@ span {
     width: 100%;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+.nav-user-info {
+    margin-left: auto;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-end;
+
+    p {
+        margin: 0;
+
+        &:nth-child(1){
+            color: $text-color2;
+            font-size: 0.8rem;
+        }
+        &:nth-child(2){
+            color: $text-color;
+            font-size: 0.7rem;
+        }
+    }
+}
+
+.subscription-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    list-style: none;
+    padding: 10px 45px;
+    width: 100%;
+    background-color: $secondary-color;
+    margin-bottom: 10px;
+    border-radius: 2px;
+
+    .subscription-details-row{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        label {
+            color: $text-color2;
+        }
+
+        p {
+            margin: 0;
+            color: $text-color;
+        }
+    }
 }

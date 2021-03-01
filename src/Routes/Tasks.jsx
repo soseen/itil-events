@@ -1,17 +1,31 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './Tasks.scss'
 import {useHistory} from 'react-router-dom';
 import Task from '../components/Task'
 import Team from '../components/Team';
 
 
-const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData}) => {
+const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData, eventsData, taskUpdatesData, user}) => {
 
 
     let history = useHistory();
 
-    const tasksDefault = tasksData.map((task => ({...task, expanded: false})));
-    const teamsDefault = teamsData.map((team => ({...team, highlighted: false})));
+
+    const tasksDefault = useMemo(() => {
+        console.log('new tasks data arrived');
+        let data = tasksData.map((task => ({...task, expanded: false})));
+        return data;
+    }, [tasksData]) 
+    
+
+    const teamsDefault = useMemo(() => {
+        let data = teamsData.map((team => (
+            {...team, highlighted: false}
+            )));
+        return data;    
+    }, [teamsData])
+    
+    
 
     const [displayedTasks, setDisplayedTasks] = useState(tasksDefault);
     const [teams, setTeams] = useState(teamsDefault);
@@ -35,7 +49,7 @@ const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData}) => {
         setTeams(teamsHighlighted);
 
         let tasksToDisplay = tasksDefault.reduce((filtered, taskObject) => 
-        taskObject.team.id === team.id ? [...filtered, taskObject] : filtered,
+        taskObject.team === team.id ? [...filtered, taskObject] : filtered,
         []);
 
         setDisplayedTasks(tasksToDisplay);
@@ -75,7 +89,7 @@ const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData}) => {
                         </div>
                         {displayedTasks.map((task, index) => {
                             return(
-                                <Task key={task.id} task={task} displayEvent={displayEvent} displayNewUpdateForm={displayNewUpdateForm}/>
+                                <Task key={task.id} task={task} displayEvent={displayEvent} displayNewUpdateForm={displayNewUpdateForm} eventsData={eventsData} teamsData={teamsData} taskUpdatesData={taskUpdatesData} user={user}/>
                             )
                         })}
                     </div>

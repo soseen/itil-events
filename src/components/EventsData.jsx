@@ -5,7 +5,7 @@ export const EventsData = [
         severity: 'Warning',
         source: 'SolarWinds',
         service: [1, 3, 5],
-        desc: 'Storage Capacity over 70%',
+        desc: 'Przekroczono 70% pojemności magazynu',
         startDate: '2020-05-06',
         endDate: null,
         resolved: false
@@ -15,7 +15,7 @@ export const EventsData = [
         severity: 'Major',
         source: 'SolarWinds',
         service: [3, 4, 5],
-        desc: 'Memory Issue',
+        desc: 'Błąd odczytu z pamięci dysku',
         startDate: '2020-05-03',
         endDate: '2020-06-23',
         resolved: true
@@ -25,7 +25,7 @@ export const EventsData = [
         severity: 'Minor',
         source: 'Nagios',
         service: [1],
-        desc: 'CPU percentage over 80%',
+        desc: 'Obciążenie procesora powyżej 80%',
         startDate: '2020-06-02',
         endDate: '2020-06-23',
         resolved: true
@@ -35,7 +35,7 @@ export const EventsData = [
         severity: 'Warning',
         source: 'Group Alert',
         service: null,
-        desc: 'NIC card is not running',
+        desc: 'Karta NIC nie została podłączona',
         startDate: '2020-03-11',
         endDate: null,
         resolved: false
@@ -45,7 +45,7 @@ export const EventsData = [
         severity: 'Critical',
         source: 'Nagios',
         service: [4, 6],
-        desc: `Couldn't establish connection`,
+        desc: `Nie można ustanowić połączenia`,
         startDate: '2020-04-27',
         endDate: '2020-05-07',
         resolved: true
@@ -55,7 +55,7 @@ export const EventsData = [
         severity: 'Warning',
         source: 'Group Alert',
         service: [6],
-        desc: 'Virtual Machine is not running',
+        desc: 'Brak dostępu do maszyny wirtualnej Oracle VM',
         startDate: '2020-07-05',
         endDate: null,
         resolved: false
@@ -65,7 +65,7 @@ export const EventsData = [
         severity: 'Warning',
         source: 'Group Alert',
         service: [4,8],
-        desc: 'Latency over 150ms',
+        desc: 'Opóźnienie powyżej 150ms',
         startDate: '2020-05-06',
         endDate: null,
         resolved: false
@@ -75,7 +75,7 @@ export const EventsData = [
         severity: 'Critical',
         source: 'Nagios',
         service: [6],
-        desc: 'Proxy server has stopped working',
+        desc: 'Serwer Proxy przestał działać',
         startDate: '2020-07-07',
         endDate: null,
         resolved: false
@@ -85,7 +85,7 @@ export const EventsData = [
         severity: 'Minor',
         source: 'SCOM',
         service: [7, 5],
-        desc: 'Port 03 is not responding ',
+        desc: 'Port 03 nie odpowiada',
         startDate: '2020-07-04',
         endDate: null,
         resolved: false
@@ -95,7 +95,7 @@ export const EventsData = [
         severity: 'Major',
         source: 'SCOM',
         service: [8],
-        desc: 'Unauthorized activity',
+        desc: 'Nieautoryzowana aktywność',
         startDate: '2020-08-01',
         endDate: '2020-08-15',
         resolved: true
@@ -105,7 +105,7 @@ export const EventsData = [
         severity: 'Warning',
         source: 'SCOM',
         service: [5],
-        desc: 'Driver is out of date',
+        desc: 'Sterownik pamięci wymaga aktualizacji',
         startDate: '2020-09-11',
         endDate: '',
         resolved: false
@@ -115,7 +115,7 @@ export const EventsData = [
         severity: 'Minor',
         source: 'Group Alert',
         service: [6],
-        desc: 'User application is not responding',
+        desc: 'Klient aplikacji użytkownika nie odpowiada',
         startDate: '2020-09-11',
         endDate: null,
         resolved: false

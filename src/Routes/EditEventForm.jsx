@@ -1,28 +1,47 @@
-import {React, useState} from 'react';
+import {React, useMemo, useState} from 'react';
 import './EventForm.scss';
 import {AiOutlineClose} from 'react-icons/ai';
 import {useHistory} from 'react-router-dom';
-import { axios } from '../Axios.js';
+import { axios } from '../Axios';
+// import axios from 'axios';
 
-const NewEventForm = ({servicesData, setEventsData, setEventServices}) => {
 
-    const CURRENT_DATE = new Date().toISOString().slice(0, 10);
+const EditEventForm = ({eventsData, servicesData, eventServices, setEventsData, eventToDisplay, setEventToDisplay, setEventServices}) => {
 
     let history = useHistory();
 
 
-    const [buttonActive, setButtonActive] = useState(null);
+    // let servicesToDisplay = eventToDisplay.service.reduce((currentServices, serviceID) => {
+    //     currentServices = currentServices.concat(services.find(s => s.id === serviceID));
+    //     return currentServices
+    // } , []);
+
+    console.log(eventServices);
+
+    const initialServices = useMemo(() => {
+        const data = eventServices.reduce((filteredArray, row) => 
+        row.event === eventToDisplay.id ? [...filteredArray, servicesData.find(s => s.id === row.service)] : filteredArray,
+        []);
+        console.log(data);
+        return data
+    }, [eventServices, eventToDisplay, servicesData]);
+    
+    
+
+    // console.log(initialServices);
+
+    const affectedEventServices = eventServices.reduce((newServices, row) => 
+        row.event === eventToDisplay.id ? [...newServices, row] : newServices,
+    []);
+
+
+    const [newEvent, setNewEvent] = useState(eventToDisplay);
     const [serviceToAdd, setServiceToAdd] = useState(servicesData[0]);
-    const [affectedServices, setAffectedServices] = useState([]);
-    const [newEvent, setNewEvent] = useState({
-        severity: '',
-        source: '',
-        name: '',
-        startDate: CURRENT_DATE,
-        endDate: '',
-        resolved: false
-    });
+    const [affectedServices, setAffectedServices] = useState(initialServices);
     const [validated, setValidated] = useState(true);
+    const [buttonActive, setButtonActive] = useState(newEvent.severity);
+    const [servicesToRemove, setServicesToRemove] = useState([]);
+
 
     const handleChange = (e) => {
 
@@ -55,9 +74,14 @@ const NewEventForm = ({servicesData, setEventsData, setEventServices}) => {
 
     const addService = () => {
 
-        
         if(!affectedServices?.find(service => service.id === serviceToAdd.id)){
             setAffectedServices([...affectedServices, serviceToAdd]);
+            console.log(affectedServices)
+        }
+
+        if(servicesToRemove.length > 0 && servicesToRemove.find(s => s.id === serviceToAdd.id)){
+            let newServicesToRemove = servicesToRemove.filter(service => service.id !== serviceToAdd.id);
+            setServicesToRemove(newServicesToRemove);
         }
     }
 
@@ -68,33 +92,33 @@ const NewEventForm = ({servicesData, setEventsData, setEventServices}) => {
            [])
         
         setAffectedServices(filteredServices);
+
+        if(initialServices.find(s => s.id === service.id)){
+            let newServicesToRemove = servicesToRemove.concat(service);
+            setServicesToRemove(newServicesToRemove);
+        }
+        
     }
 
-    // const setResolvedFalse = () => {
-
-    //         setNewEvent({
-    //             ...newEvent,
-    //             resolved: false, 
-    //             endDate: ''
-    //         });
-    // }
-    const postNewEvent = async () => {
-        
+    const submitData = async () => {
         let promises = []
 
-        try {
-            const responseID = await axios.post('/api/events', newEvent)
+        servicesToRemove.forEach(service => {
+            const eventServiceToRemove = affectedEventServices.find(es => es.service === service.id)
+            promises.push(axios.delete(`/api/eventServices/${eventServiceToRemove.id}`).catch(err => console.log(err)))
+        });
 
-            affectedServices.forEach(service => {
-                    promises.push(axios.post('/api/eventServices', {
-                    event: responseID.data,
-                    service: service.id
-                }))
-            })
-        }
-        catch (error) {
-            console.log(error);
-        }
+        affectedServices.forEach(serviceToAdd => {
+            if(affectedEventServices.find(s => s.service === serviceToAdd.id) === undefined){
+                promises.push(axios.post(`/api/eventServices/`, {
+                    service: serviceToAdd.id,
+                    event: newEvent.id
+                })
+                .catch(err => console.log(err)))
+            }
+            
+        })
+        promises.push(axios.put(`/api/events/${newEvent.id}`, newEvent))
 
         try {
             await Promise.all(promises);
@@ -103,29 +127,24 @@ const NewEventForm = ({servicesData, setEventsData, setEventServices}) => {
             return; 
         }
 
-        axios.get('/api/events')
-            .then(response => {
-                setEventsData(response.data);
-                axios.get('/api/eventServices')
-                    .then(response => {
-                        setEventServices(response.data)
-                    })
-                    .then(response => {
-                        history.goBack();
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    })
-            })
-            .catch(error => {
-                console.log(error);
-            })
-   }
+
+
+        try {
+            const [eventResponse, eventServicesResponse] = await Promise.all([axios.get('/api/events'), axios.get('/api/eventServices')]);
+            setEventsData(eventResponse.data);
+            setEventServices(eventServicesResponse.data);
+            history.goBack();
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
 
     const validateAndSubmit = async (fieldsToValidate) => {
         if(fieldsToValidate.find(s => s === '') === undefined){
             setValidated(true);
-            postNewEvent();
+            setEventToDisplay(newEvent);
+            submitData()
          } else {
             setValidated(false);
          }
@@ -145,7 +164,7 @@ const NewEventForm = ({servicesData, setEventsData, setEventServices}) => {
                     <div className='event-inputs'>
                         <div className='event-inputs-row'>
                             <label className='event-inputs-label input-required'>ID</label>
-                            <input disabled type='text' name='id' value='autogenerated' className='event-inputs-input'></input>
+                            <input disabled type='text' name='id' value={newEvent.id} className='event-inputs-input'></input>
                         </div>
                         <div className='event-inputs-row'>
                             <label className='event-inputs-label input-required'>Name</label>
@@ -168,8 +187,8 @@ const NewEventForm = ({servicesData, setEventsData, setEventServices}) => {
                             </div>
                         </div> */}
                         {/* <div className='event-inputs-row'>
-                            <label className='event-inputs-label input-required'>Start Date</label>
-                            <input type='date' name='startDate' value={newEvent.startDate} className='event-inputs-input' onChange={handleChange}></input>
+                            <label className='event-inputs-label'>End Date</label>
+                            <input type='date' name='endDate' value={newEvent.endDate} className='event-inputs-input' onChange={handleChange}></input>
                         </div> */}
                         <div className='event-inputs-row'>
                             <label className='event-inputs-label input-required'>Severity</label>
@@ -209,7 +228,7 @@ const NewEventForm = ({servicesData, setEventsData, setEventServices}) => {
                             <ul className='event-services-list'>
                                 {affectedServices.length > 0 && affectedServices.map((service, index) => 
                                 (
-                                    <li key={service.id} className='event-service-item'>{service.name} <AiOutlineClose onClick={() => removeService(service)}/></li>
+                                    <li key={service.id} className='event-service-item'>{service.name}<AiOutlineClose onClick={() => removeService(service)}/></li>
                                 )
                                 )}
                             </ul>
@@ -219,10 +238,10 @@ const NewEventForm = ({servicesData, setEventsData, setEventServices}) => {
                     </div>
                    
                 </div>
-                <button className='add-event-button' onClick={() => validateAndSubmit([newEvent.desc, newEvent.severity, newEvent.source, newEvent.startDate])}>Add Event</button>
+                <button className='add-event-button' onClick={() => validateAndSubmit([newEvent.desc, newEvent.severity, newEvent.source, newEvent.startDate])}>Apply Changes</button>
             </div>
         </div>
     )
 }
 
-export default NewEventForm
+export default EditEventForm

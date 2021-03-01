@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp} from 'react-icons/md';
 import './Task.scss'
-import {EventsData as eventsData} from './EventsData';
 import { AiFillPlusCircle, AiOutlinePlus } from 'react-icons/ai';
+import { axios } from '../Axios';
 
-const Task = ({task, displayEvent, displayNewUpdateForm}) => {
+const Task = ({task, displayEvent, displayNewUpdateForm, eventsData, teamsData, taskUpdatesData, user}) => {
 
 
-    
-    const [taskDetails, setTaskDetails] = useState(task);
-    const eventToDisplay = eventsData.find(e => e.id === task.eventID);
+    const updates = useMemo(() => {
+        const data = taskUpdatesData.reduce((taskUpdates, update) =>
+        update.task === task.id ? [...taskUpdates, update] : taskUpdates,
+        []);
+
+        return data
+    }, [taskUpdatesData, task]) 
+
+    const newTaskProperties = {
+        ...task,
+        event : eventsData.find(e => e.id === task.event),
+        team : teamsData.find(t => t.id === task.team),
+        updates : updates,
+    }
+
+
+    const [taskDetails, setTaskDetails] = useState(newTaskProperties);
+
 
     const displayTaskDetails = () => {
         setTaskDetails({
@@ -17,6 +32,32 @@ const Task = ({task, displayEvent, displayNewUpdateForm}) => {
                 expanded: !taskDetails.expanded
         })
     }
+
+    const openRequiredTasks = () => {
+        if(taskDetails.closed && taskDetails.updates.find(u => u.status !== 400) === undefined){
+            axios.put(`api/tasks/${task.id}`, {
+                ...task,
+                closed: false
+            }).then((response) => {
+                console.log(response)
+            }).catch(error => {
+                console.log(error)
+            })
+            axios.put(`api/events/${task.event}`, {
+                ...taskDetails.event,
+                resolved: false,
+                endDate: null
+            }).then((response) => {
+                console.log(response)
+            }).catch(error => {
+                console.log(error)
+            })
+        }
+    }
+
+    useEffect(() => {
+        openRequiredTasks()
+    },[])
 
     return(
     <div className={taskDetails.expanded? 'task-container task-container-expanded' : 'task-container'} onClick={displayTaskDetails}>
@@ -42,7 +83,7 @@ const Task = ({task, displayEvent, displayNewUpdateForm}) => {
                     <div className='task-expanded-details-info'>
                         <div>
                         <label>View Event</label>
-                        <button onClick={() => displayEvent(eventToDisplay)}>Display</button>
+                        <button onClick={() => displayEvent(taskDetails.event)}>Display</button>
                         </div>
                         <div>
                         <label>Team</label>
@@ -50,28 +91,28 @@ const Task = ({task, displayEvent, displayNewUpdateForm}) => {
                         </div>
                         <div>
                         <label>Last Update</label>
-                        <p>{taskDetails.updates? taskDetails.updates[taskDetails.updates.length - 1].date : '-'}</p>
+                        <p>{taskDetails.updates.length > 0 ? taskDetails.updates[taskDetails.updates.length - 1].date : '-'}</p>
                         </div>
                         
                     </div>
                 </div>
-                {taskDetails?.updates && taskDetails.updates.map((update, index) => {
+                {updates.map((update, index) => {
                     return(
-                    <div key={index} className='task-update-container'>
+                    <div key={update.id} className='task-update-container'>
                         <div className='task-update-header'>
                             <div className='update-desc'>
-                                {update.desc}
+                                {update.description}
                             </div>
                             <div className='task-update-status'>
-                                <label>Status: <span className={`span-status-${update.status}`}>{update.status}</span></label>
-                                {update.status === 400 &&
-                                <p>Active</p>
+                                <label>Status</label>
+                                {update.status === 400 && 
+                                    <p><span className={`span-status-${update.status}`}>Active</span></p>
                                 }
-                                {update.status === 200 &&
-                                <p>Resolved</p>
+                                {update.status === 200 && 
+                                    <p><span className={`span-status-${update.status}`}>Resolved</span></p>
                                 }
-                                {update.status === 100 &&
-                                <p>Applying changes</p>
+                                {update.status === 100 && 
+                                    <p><span className={`span-status-${update.status}`}>Applying Changes</span></p>
                                 }
                             </div>
                         </div>
@@ -88,14 +129,15 @@ const Task = ({task, displayEvent, displayNewUpdateForm}) => {
                     </div>
                     )
                     })
-                }
-                <div className={taskDetails.closed ? 'task-expanded-new-update new-update-hidden' : 'task-expanded-new-update'}>
+                }{user.team === taskDetails.team.id &&
+                    <div className={taskDetails.closed ? 'task-expanded-new-update new-update-hidden' : 'task-expanded-new-update'}>
                     <p>New Update</p>
                     <button className='new-update-button' onClick={() => displayNewUpdateForm(task)}>
                      {/* <AiFillPlusCircle /> */}
                      <AiOutlinePlus />
                     </button>
                 </div>
+                }  
             </div>
         }
     </div>

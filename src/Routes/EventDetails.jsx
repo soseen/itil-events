@@ -1,40 +1,88 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import './EventDetails.scss';
-import {ServicesData} from '../components/ServicesData.jsx';
 import {Link, useHistory} from 'react-router-dom';
+import { axios } from '../Axios';
 
-const EventDetails = ({eventToDisplay}) => {
+const EventDetails = ({eventToDisplay, eventServices, servicesData, userRole, setEventsData, setEventServices, setTasksData}) => {
 
     let history = useHistory();
-    const [affectedServices, setAffectedServices] = useState([]);
+
+    const [servicesArray, setServicesArray] = useState(eventServices);
+    const [deletePopupVisible, setDeletePopupVisible] = useState(false);
 
     useEffect(() => {
+        axios.get('/api/eventServices')
+                .then(response => {
+                    setServicesArray(response.data)
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+    },[])
+    
+    const affectedServices = useMemo(() => {
+        let services = servicesArray.reduce((servicesArray, row) =>
+        row.event === eventToDisplay.id ? [...servicesArray, servicesData.find(s => s.id === row.service)] : servicesArray,
+        [])
+        return services
+    }, [servicesArray, eventToDisplay, servicesData])
 
-        let servicesArray = []
-        if(eventToDisplay.service !== null){
-            for(let i=0; i<eventToDisplay.service.length; i++){
-                for(let j=0; j<ServicesData.length; j++){
-                    if (eventToDisplay.service[i] === ServicesData[j].id){
-                        servicesArray.push({
-                            serviceID: ServicesData[j].id,
-                            serviceName: ServicesData[j].name,
-                            servicePriority: ServicesData[j].priority
-                        });
-                    }
-                }
-            }
+    const removeEvent = async () => {
+
+        try{
+            await axios.delete(`/api/events/${eventToDisplay.id}`);
         }
-        setAffectedServices(servicesArray);
-    },[eventToDisplay.service]);
+        catch (error) {
+            console.log(error)
+            return
+        }
+
+        try {
+            const [eventsResponse, eventServicesResponse] = await Promise.all([axios.get('/api/events'), axios.get('/api/eventServices')]);
+            setEventServices(eventServicesResponse.data);
+            setEventsData(eventsResponse.data);
+        } catch (error) {
+            console.log(error);
+        } 
+
+        try {
+            const tasksResponse = await axios.get('/api/tasks');
+            console.log(tasksResponse.data);
+            setTasksData(tasksResponse.data);
+            history.goBack();
+        }   catch (error) {
+            console.log(error);
+        }
+        
+        
+    }
 
     return(
         <div className='page-container'>
             <div className='event-details-container'>
+                <div className={deletePopupVisible ? 'delete-event-popup' : 'delete-event-popup popup-hidden'}>
+                    <p>Are you sure you want to remove this event?</p>
+                    <div className='delete-event-popup-buttons'>
+                        <button onClick={() => removeEvent()}>Yes</button>
+                        <button onClick={() => setDeletePopupVisible(false)}>Cancel</button>
+                    </div>
+                </div>
                 <div className='event-details-buttons'>
                         <button onClick={() => history.goBack()}>Back</button>
-                    <Link to={`/alerts/${eventToDisplay.id}/new-task`}>
+                    {userRole === 'system' && 
+                        <div>
+                             <Link to={`/alerts/${eventToDisplay.id}/edit-event`}>
+                            <button>Edit</button>
+                            </Link>
+                            <button onClick={() => setDeletePopupVisible(true)}>Delete</button>
+                        </div>
+                    }
+                    
+                    {userRole === 'expert' && 
+                        <Link to={`/alerts/${eventToDisplay.id}/new-task`}>
                         <button>Apply Task</button>
-                    </Link>
+                        </Link>
+                    }
                 </div>
                 <div className='event-details-info-container'>
                     {eventToDisplay.severity === "Warning" &&
@@ -62,7 +110,7 @@ const EventDetails = ({eventToDisplay}) => {
                             <label className='event-details-label'>ID</label>
                             <p>{eventToDisplay.id}</p>
                             <label className='event-details-label'>Description</label>
-                            <p>{eventToDisplay.desc}</p>
+                            <p>{eventToDisplay.name}</p>
                             <label className='event-details-label'>Source</label>
                             <p>{eventToDisplay.source}</p>
                             <label className='event-details-label'>Start Date</label>
@@ -77,7 +125,7 @@ const EventDetails = ({eventToDisplay}) => {
                             <div className='event-details-services'>
                                 {affectedServices.map((item,index) => {
                                     return (
-                                        <p key={item.serviceID}>{item.serviceName}</p>
+                                        <p key={item.id}>{item.name}</p>
                                     )
                                 })
                                 }
