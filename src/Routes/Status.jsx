@@ -31,7 +31,6 @@ const Status = ({services, itemCallback, eventsData, tasksData, user, setUser}) 
 
     return(
         <div className='status-page-container'>
-            {user.subscriptionActive.active &&
                 <div className='status-content-container'>
                 <div className='status-header-container'>
                     <div className='status-header'>
@@ -97,10 +96,9 @@ const Status = ({services, itemCallback, eventsData, tasksData, user, setUser}) 
                     </div>
                 </div>
             </div>
-            }
-            {!user.subscriptionActive.active && 
+            {/* {!user.subscriptionActive.active && 
                 <Payment user={user} setUser={setUser} />
-            }
+            } */}
         </div>
     )
 }

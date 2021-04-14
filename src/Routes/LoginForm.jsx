@@ -169,14 +169,14 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
                         </div>
                         <div className='login-inputs-row'>
                             <label className='login-inputs-label'>Role</label>
-                            <select name='select-role' className='event-inputs-select' onChange={selectRole}>
+                            <select name='select-role' className='register-inputs-select' onChange={selectRole}>
                                 <option value='expert'>Ekspert</option>
                                 <option value='system'>System</option>
                             </select>
                         </div>
                         <div className={teamSelectVisible ? 'login-inputs-row' : 'login-inputs-row select-hidden'}>
                             <label className='login-inputs-label'>Team</label>
-                            <select name='select-team' className='event-inputs-select' onChange={selectTeam}>
+                            <select name='select-team' className='register-inputs-select' onChange={selectTeam}>
                                 <option name='nonne' value={null}>None</option>
                                 {teamsData.map((team) => 
                                 (

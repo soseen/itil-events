@@ -18,9 +18,15 @@ const Navbar = ({setUser, setLoggedIn, user, teamsData}) => {
             history.push('/');
             setLoggedIn(false);
             // setUser({name: 'guest', role: '', team: null, Subscriptions: null, subscriptionActive: true});
-        } else if(user.subscriptionActive.active){
+        }
+        // } else if(user.subscriptionActive.active){
+        //     setSideNav(false);
+        //     history.push(navItem.route)
+        // }
+
+        else {
             setSideNav(false);
-            history.push(navItem.route)
+            history.push(navItem.route);
         }
         
     }
@@ -49,7 +55,7 @@ const Navbar = ({setUser, setLoggedIn, user, teamsData}) => {
         </div> 
         <nav className={sideNav ? 'side-menu active' : 'side-menu'}>
             <ul className='side-menu-links'>
-            <div className='subscription-details'>
+            {/* <div className='subscription-details'>
                 <div className='subscription-details-row'>
                     <label>Account Status</label>
                     <p>{userDetails.subscriptionActive.active ? 'Active' : 'Inactive'}</p>
@@ -58,7 +64,7 @@ const Navbar = ({setUser, setLoggedIn, user, teamsData}) => {
                     <label>{userDetails.subscriptionActive.active ? 'Until' : ''}</label>
                     <p>{userDetails.subscriptionActive.endDate ? userDetails.subscriptionActive.endDate : ''}</p>
                 </div>
-            </div>
+            </div> */}
                 {SideNavData.map((item, index) => {
                     return (
                         <li key={index} name={item.name} className='nav-item' onClick={() => switchRoute(item)}>

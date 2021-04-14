@@ -79,7 +79,7 @@ ul {
     align-items: center;
     list-style: none;
     padding: 12px 45px 12px 45px;
-    height: 60px ;
+    height: 60px;
     width: 100%;
     border-radius: 2px;
 }
@@ -185,5 +185,47 @@ span {
             margin: 0;
             color: $text-color;
         }
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .navbar {
+        font-size: 1rem;
+        padding: 5px;
+    }
+
+    .nav-item {
+        padding: 2px 5px 2px 5px;
+        height: 40px;
+    }
+
+    .nav-title {
+        font-size: 0.8rem;
+        margin-left: 5px;
+    }
+
+    .side-menu {
+        width: 10rem;
+    }
+
+    .nav-item svg {
+        text-decoration: none;
+        color: $text-color;
+        font-size: 0.6rem;
+        width: 40%;
+        height: 40%;
+    }
+
+    .nav-item span {
+        font-size: 0.8rem;
+    }
+
+    .nav-user-info p:nth-child(1) {
+        font-size: 0.8rem;
+    }
+
+    .nav-user-info p:nth-child(2) {
+        font-size: 0.7rem;
     }
 }

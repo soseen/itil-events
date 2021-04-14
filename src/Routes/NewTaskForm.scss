@@ -149,6 +149,7 @@
         .new-task-event-header {
             display: flex;
             justify-content: flex-start;
+            align-items: center;
             padding: 25px 15px;
             color: $text-color;
             background-color: $secondary-color;
@@ -265,6 +266,33 @@
         align-self: flex-end;
         margin: 25px 0;
         margin-right: 2%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .task-page-container .new-task-form-header p {
+        display: none;
+    }
+
+    .task-page-container .new-task-form-header button {
+        margin-left: 15px;
+    }
+
+    .task-page-container .new-task-event-container .new-task-event-header {
+        padding: 15px 10px;
+        font-size: 0.8rem;
+    }
+
+    .task-page-container .new-task-event-container .new-task-event-row {
+        padding: 12px 0;
+    }
+
+    .task-page-container .new-task-event-container .new-task-event-column label {
+        font-size: 0.7rem;
+    }
+
+    .task-page-container .new-task-event-container .new-task-event-column p {
+        font-size: 0.8rem;
     }
 }
 
