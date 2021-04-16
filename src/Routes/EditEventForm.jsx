@@ -2,7 +2,10 @@ import {React, useMemo, useState} from 'react';
 import './EventForm.scss';
 import {AiOutlineClose} from 'react-icons/ai';
 import {useHistory} from 'react-router-dom';
-import axios from 'axios';
+import { axios } from '../Axios';
+// import axios from 'axios';
+
+
 const EditEventForm = ({eventsData, servicesData, eventServices, setEventsData, eventToDisplay, setEventToDisplay, setEventServices}) => {
 
     let history = useHistory();
@@ -13,11 +16,13 @@ const EditEventForm = ({eventsData, servicesData, eventServices, setEventsData, 
     //     return currentServices
     // } , []);
 
+    console.log(eventServices);
+
     const initialServices = useMemo(() => {
         const data = eventServices.reduce((filteredArray, row) => 
         row.event === eventToDisplay.id ? [...filteredArray, servicesData.find(s => s.id === row.service)] : filteredArray,
         []);
-
+        console.log(data);
         return data
     }, [eventServices, eventToDisplay, servicesData]);
     
@@ -29,7 +34,6 @@ const EditEventForm = ({eventsData, servicesData, eventServices, setEventsData, 
         row.event === eventToDisplay.id ? [...newServices, row] : newServices,
     []);
 
-    console.log(affectedEventServices);
 
     const [newEvent, setNewEvent] = useState(eventToDisplay);
     const [serviceToAdd, setServiceToAdd] = useState(servicesData[0]);
@@ -72,15 +76,11 @@ const EditEventForm = ({eventsData, servicesData, eventServices, setEventsData, 
 
         if(!affectedServices?.find(service => service.id === serviceToAdd.id)){
             setAffectedServices([...affectedServices, serviceToAdd]);
-            setNewEvent({
-                ...newEvent, 
-                service: newEvent.service? [...newEvent.service, serviceToAdd.id] : [serviceToAdd.id]
-            });
+            console.log(affectedServices)
         }
 
         if(servicesToRemove.length > 0 && servicesToRemove.find(s => s.id === serviceToAdd.id)){
             let newServicesToRemove = servicesToRemove.filter(service => service.id !== serviceToAdd.id);
-            console.log(newServicesToRemove);
             setServicesToRemove(newServicesToRemove);
         }
     }
@@ -92,46 +92,25 @@ const EditEventForm = ({eventsData, servicesData, eventServices, setEventsData, 
            [])
         
         setAffectedServices(filteredServices);
-        setNewEvent({
-            ...newEvent, 
-            service: filteredServices.reduce((IDArray, serviceItem) =>
-                    [...IDArray, serviceItem.id], [])
-        });
 
         if(initialServices.find(s => s.id === service.id)){
             let newServicesToRemove = servicesToRemove.concat(service);
-            console.log(newServicesToRemove);
             setServicesToRemove(newServicesToRemove);
         }
         
     }
 
-    const setResolvedFalse = () => {
-
-            setNewEvent({
-                ...newEvent,
-                resolved: false, 
-                endDate: ''
-            });
-    }
-
-    const submitData = () => {
-        // const requestOne = axios.put(`http://localhost:8080/api/events/${newEvent.id}`, newEvent);
-
-        // const x = affectedServices.reduce((y, service) => {
-        //     let row = eventServices.
-        // },[])
-
+    const submitData = async () => {
         let promises = []
 
         servicesToRemove.forEach(service => {
             const eventServiceToRemove = affectedEventServices.find(es => es.service === service.id)
-            promises.push(axios.delete(`http://localhost:8080/api/eventServices/${eventServiceToRemove.id}`).catch(err => console.log(err)))
+            promises.push(axios.delete(`/api/eventServices/${eventServiceToRemove.id}`).catch(err => console.log(err)))
         });
 
         affectedServices.forEach(serviceToAdd => {
-            if(affectedEventServices?.find(s => s.service === serviceToAdd.id)){
-                promises.push(axios.post(`http://localhost:8080/api/eventServices/`, {
+            if(affectedEventServices.find(s => s.service === serviceToAdd.id) === undefined){
+                promises.push(axios.post(`/api/eventServices/`, {
                     service: serviceToAdd.id,
                     event: newEvent.id
                 })
@@ -139,29 +118,25 @@ const EditEventForm = ({eventsData, servicesData, eventServices, setEventsData, 
             }
             
         })
-        promises.push(axios.put(`http://localhost:8080/api/events/${newEvent.id}`, newEvent))
+        promises.push(axios.put(`/api/events/${newEvent.id}`, newEvent))
 
-        axios.all(promises).then(axios.spread((...responses) => {
-                axios.get('http://localhost:8080/api/events')
-                .then(response => {
-                    setEventsData(response.data);
-                    axios.get('http://localhost:8080/api/eventServices')
-                        .then(response => {
-                            setEventServices(response.data);
-                            history.goBack();
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        })
-                })
-                .catch(err => {
-                    console.log(err)
-                })         
-                
-        }))
-        .catch(err => {
-            console.log(err);
-        })
+        try {
+            await Promise.all(promises);
+        } catch (error) {
+            console.log(error);
+            return; 
+        }
+
+
+
+        try {
+            const [eventResponse, eventServicesResponse] = await Promise.all([axios.get('/api/events'), axios.get('/api/eventServices')]);
+            setEventsData(eventResponse.data);
+            setEventServices(eventServicesResponse.data);
+            history.goBack();
+        } catch (error) {
+            console.log(error);
+        }
 
     }
 

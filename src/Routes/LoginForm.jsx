@@ -1,20 +1,54 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { axios } from '../Axios';
+// import { axios } from '../Axios';
+import axios from 'axios';
 import './LoginForm.scss';
 
-const LoginForm = ({setLoggedIn, setUser}) => {
+const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
+
+    // const GUEST = {
+    //     username: 'guest',
+    //     role: 'guest',
+    //     team: null
+    //   }
 
     const validationMessages = ['', 'Please fill in all the required fields', 'Invalid Username/Password'];
 
     let history = useHistory();
 
+    axios.defaults.withCredentials = true;
+
     const [credentials, setCredentials] = useState({
-        username: "",
-        password: ""
+        username: "system",
+        password: "123",
     })
-    const [validationMessage, setValidationMessage] = useState(validationMessages[0]);
-    // const [loggedUser, setLoggedUser] = useState({});
+    const [registrationCredentials, setRegistrationCredentials] = useState({
+        username: '',
+        password: '',
+        role: 'expert',
+        team: null
+    })
+    const [validationMessage, setValidationMessage] = useState('');
+    const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+    const [teamSelectVisible, setTeamSelectVisible] = useState(true);
+
+    useEffect(() => {
+
+        // axios.defaults.withCredentials = true;
+        axios.get('http://localhost:8000/user').then((response) => {
+            if(response.data.isLoggedIn) {
+                setUser(response.data.user)
+                setLoggedIn(response.data.isLoggedIn)
+                if(response.data.user.subscriptionActive.active){
+                    history.push('/status');
+                } else {
+                    history.push('/subscribe');
+                }
+                
+            } 
+        })
+
+    }, [setLoggedIn, setUser])
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -24,28 +58,86 @@ const LoginForm = ({setLoggedIn, setUser}) => {
         })
     }
 
-    const validateAndLogIn = () => {
+    const validateAndLogIn = async () => {
         if(credentials.username === '' || credentials.password === '') {
             setValidationMessage(validationMessages[1]);
         }
         else {
-            axios.get('/api/users')
-                .then((response) => {
-                    let user = response.data.find(u => u.username === credentials.username)
-                    if(user && user.password === credentials.password){
-                        setUser(user);
-                        setLoggedIn(true);
-                        setValidationMessage(validationMessages[0])
-                    } else {
-                        setValidationMessage(validationMessages[2])
-                    }
+            const response = await axios.post("http://localhost:8000/user", {
+                username: credentials.username,
+                password: credentials.password,
                 })
-                .catch(error => {
-                    console.log(error);
-                })
-            
+            // const subscriptionActive = checkIfUserSubscribed(response.data.user);
+            setUser(response.data.user);
+            setValidationMessage(response.data.message);
+            setLoggedIn(response.data.isLoggedIn);
+            console.log(response.data)
+            // if(response.data.isLoggedIn && response.data.user.subscriptionActive.active) {
+            //     history.push('/itil-events');
+            // } else if (response.data.isLoggedIn && !response.data.user.subscriptionActive.active) {
+            //     history.push('/subscribe');
+            // }
+        }
+
+        
+        
+    }
+
+    const selectRole = (e) => {
+        if(e.target.value === 'system'){
+            setRegistrationCredentials({
+                ...registrationCredentials,
+                team: null,
+                role: 'system'
+            })
+            setTeamSelectVisible(false);
+        } else {
+            setTeamSelectVisible(true);
+            setRegistrationCredentials({
+                ...registrationCredentials,
+                role: e.target.value
+            })
+        }
+
+
+    }
+
+    const selectTeam = (e) => {
+
+        if(e.target.name !== 'null'){
+            setRegistrationCredentials({
+                ...registrationCredentials,
+                team: parseInt(e.target.value),
+            })
+        } else {
+            setRegistrationCredentials({
+                ...registrationCredentials,
+                team: null
+            })
         }
         
+    }
+
+    const handleRegistration = async () => {
+        
+        if(showRegistrationForm){
+
+            if(registrationCredentials.username === '' || registrationCredentials.password === '') {
+                setValidationMessage(validationMessages[1]);
+                return
+            } else {
+                try {
+                    const response = await axios.post('http://localhost:8000/userCreate', registrationCredentials)
+                    setValidationMessage(response.data.message);
+                }
+                catch (error) {
+                    console.log(error)
+                }
+            }
+        } else {
+            setShowRegistrationForm(true);
+            return
+        }
     }
 
     return(
@@ -62,8 +154,42 @@ const LoginForm = ({setLoggedIn, setUser}) => {
                         <label className='login-inputs-label'>Password</label>
                         <input type='password' name='password' value={credentials.password} className='login-inputs-input' onChange={handleChange}></input>
                     </div>
-                    <button className='login-button' onClick={validateAndLogIn}>Log In</button>
+
+                    <button className='login-button login-1' onClick={validateAndLogIn}>Log In</button>
+
                 </div>
+                <div className={showRegistrationForm ? 'login-inputs-wrapper' : 'login-inputs-wrapper register-hidden'}>
+                        <div className='login-inputs-row'>
+                            <label className='login-inputs-label'>Username</label>
+                            <input type='text' name='username' value={registrationCredentials.username} className='login-inputs-input' onChange={(e) => setRegistrationCredentials({...registrationCredentials, username: e.target.value})}></input>
+                        </div>
+                        <div className='login-inputs-row'>
+                            <label className='login-inputs-label'>Password</label>
+                            <input type='password' name='password' value={registrationCredentials.password} className='login-inputs-input' onChange={(e) => setRegistrationCredentials({...registrationCredentials, password: e.target.value})}></input>
+                        </div>
+                        <div className='login-inputs-row'>
+                            <label className='login-inputs-label'>Role</label>
+                            <select name='select-role' className='register-inputs-select' onChange={selectRole}>
+                                <option value='expert'>Ekspert</option>
+                                <option value='system'>System</option>
+                            </select>
+                        </div>
+                        <div className={teamSelectVisible ? 'login-inputs-row' : 'login-inputs-row select-hidden'}>
+                            <label className='login-inputs-label'>Team</label>
+                            <select name='select-team' className='register-inputs-select' onChange={selectTeam}>
+                                <option name='nonne' value={null}>None</option>
+                                {teamsData.map((team) => 
+                                (
+                                <option key={team.id} name={team.name} value={team.id}>{team.name}</option>
+                                )
+                                )}
+                            </select>
+                        </div>
+                        
+
+                </div>
+                <button className='login-button' onClick={() => handleRegistration()}>Register</button>
+               
             </div>
         </div>
     )

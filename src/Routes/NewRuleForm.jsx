@@ -146,7 +146,7 @@ const NewRuleForm = ({rulesData, setRulesData}) => {
                         </div>
                     </div>
                 </div>
-                <button className='add-rule-button' onClick={() => validateAndSubmit([newRule.name, newRule.date, newRule.severity, newRule.attribute, newRule.operator, newRule.value])}>Add</button>
+                <button className='add-rule-button' onClick={() => validateAndSubmit([newRule.name, newRule.date, newRule.severity, newRule.attribute, newRule.operator, newRule.value])}>Add Rule</button>
             </div>
         </div>
     )

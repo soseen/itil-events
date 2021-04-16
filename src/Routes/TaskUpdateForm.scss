@@ -106,7 +106,23 @@
     }
 
     .task-closed-button {
-        @include button-1;
+    padding: 20px 20px;
+    background-color: $secondary-color;
+    border: none;
+    color: $text-color;
+    font-weight: bolder;
+    cursor: pointer;
+    text-align: center;
+    // box-shadow: 3px 3px 10px 0px #000000;
+    border-radius: 2px;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:active {
+        opacity: 0.5;
+    }
         width: 100%;
         margin-top: 10px;
     }
@@ -148,6 +164,24 @@
 
     .task-closed-button-highlighted {
         background-color: #303030;
+    }
+
+}
+
+@media (max-width: 1024px) {
+    .task-update-page-container .new-update-form-header p {
+        display: none;
+    }
+
+    .task-update-page-container .new-update-form-header button {
+        margin-left: 15px;
+    }
+
+    .task-update-page-container .task-closed-button {
+        padding: 10px 10px;
+        font-size: 0.7rem;
+        margin-top: 3px;
+        margin-bottom: 10px;
     }
 
 }

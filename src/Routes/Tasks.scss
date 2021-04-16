@@ -126,3 +126,46 @@
     }
 
 }
+
+@media (max-width: 1024px) {
+    .tasks-page-container {
+
+        .tasks-header-container {
+
+            .tasks-header {
+                display: none;
+            }
+
+            button {
+                margin-left: 15px;
+            }
+        }
+
+        .tasks-content-container {
+
+            .tasks-content {
+
+                .tasks-content-panel {
+
+                    p {
+                        margin: 0;
+                        padding: 10px 0;
+                        color: $text-color;
+                        font-size: 0.8rem;
+                    }
+                    button {
+                        width: 80px;
+                        padding: 10px 10px;
+                        background-color: $secondary-color;
+                        border: none;
+                        border: 1px solid $main-color;
+                        font-weight: bold;
+                        color: $text-color;
+                        cursor: pointer;
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+    }
+}

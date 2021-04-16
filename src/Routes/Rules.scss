@@ -189,6 +189,7 @@
         width: 30px;
         height: 15px;
         margin-right: 5px;
+        margin-top: 5px;
     }
     
     .priority-box:nth-child(1) {
@@ -235,7 +236,7 @@
     
     .severity-minor {
         background-color: $minor-color;
-        box-shadow: 0px 0px 2px 1px$minor-color;
+        box-shadow: 0px 0px 2px 1px $minor-color;
     }
     
     .severity-major {
@@ -256,5 +257,96 @@
         /* border-bottom: 2px solid  $accent-color; */
     }
     
+}
+
+@media (max-width: 1024px) {
+
+    .rules-table-nav{
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .page-container {
+
+        .rules-table-container .buttons-container {
+            height: 32px;
+        }
+
+        .rules-table-container .new-rule-button {
+            margin-right: 10px;
+        }
+
+        .buttons-container button {
+            width: 50px;
+            font-size: 0.6rem;
+        }
+
+        .rules-table-container 
+        .filters-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 10px;
+
+        .select-filter {
+            height: 32px;
+            width: 90px;
+            font-size: 0.6rem;           
+        }
+
+        }
+
+        .rules-table-nav p{
+            display: none;
+        }
+
+
+
+        .content-table {
+            font-size: 0.6rem;
+        }
+
+        .content-table th,
+        .content-table td{
+        padding: 4px 4px;
+        text-align: left;
+        }
+
+        .priority-container {
+            height: 100%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .priority-box {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            margin-top: 0px;
+        }
+
+        .severity-box {
+            padding: 1px;
+            margin: auto;
+            color: black;
+        }
+    }
+
+    
+   
+}
+
+@media (max-width: 480px) {
+    .page-container .rules-table-container .filters-container .select-filter {
+        display: none;
+    }
+
+    .rules-table-container .priority-box{
+        width: 8px;
+        height: 8px;
+        margin-top: 10px;
+    }
+
 }
 

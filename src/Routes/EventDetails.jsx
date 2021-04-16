@@ -3,11 +3,13 @@ import './EventDetails.scss';
 import {Link, useHistory} from 'react-router-dom';
 import { axios } from '../Axios';
 
-const EventDetails = ({eventToDisplay, eventServices, servicesData, userRole}) => {
+const EventDetails = ({eventToDisplay, eventServices, servicesData, userRole, setEventsData, setEventServices, setTasksData}) => {
 
     let history = useHistory();
-    // const [affectedServices, setAffectedServices] = useState([]);
+
     const [servicesArray, setServicesArray] = useState(eventServices);
+    const [deletePopupVisible, setDeletePopupVisible] = useState(false);
+
     useEffect(() => {
         axios.get('/api/eventServices')
                 .then(response => {
@@ -16,7 +18,7 @@ const EventDetails = ({eventToDisplay, eventServices, servicesData, userRole}) =
                 .catch(error => {
                     console.log(error);
                 })
-    },[eventServices])
+    },[])
     
     const affectedServices = useMemo(() => {
         let services = servicesArray.reduce((servicesArray, row) =>
@@ -25,15 +27,55 @@ const EventDetails = ({eventToDisplay, eventServices, servicesData, userRole}) =
         return services
     }, [servicesArray, eventToDisplay, servicesData])
 
+    const removeEvent = async () => {
+
+        try{
+            await axios.delete(`/api/events/${eventToDisplay.id}`);
+        }
+        catch (error) {
+            console.log(error)
+            return
+        }
+
+        try {
+            const [eventsResponse, eventServicesResponse] = await Promise.all([axios.get('/api/events'), axios.get('/api/eventServices')]);
+            setEventServices(eventServicesResponse.data);
+            setEventsData(eventsResponse.data);
+        } catch (error) {
+            console.log(error);
+        } 
+
+        try {
+            const tasksResponse = await axios.get('/api/tasks');
+            console.log(tasksResponse.data);
+            setTasksData(tasksResponse.data);
+            history.goBack();
+        }   catch (error) {
+            console.log(error);
+        }
+        
+        
+    }
+
     return(
         <div className='page-container'>
             <div className='event-details-container'>
+                <div className={deletePopupVisible ? 'delete-event-popup' : 'delete-event-popup popup-hidden'}>
+                    <p>Are you sure you want to remove this event?</p>
+                    <div className='delete-event-popup-buttons'>
+                        <button onClick={() => removeEvent()}>Yes</button>
+                        <button onClick={() => setDeletePopupVisible(false)}>Cancel</button>
+                    </div>
+                </div>
                 <div className='event-details-buttons'>
                         <button onClick={() => history.goBack()}>Back</button>
                     {userRole === 'system' && 
-                        <Link to={`/alerts/${eventToDisplay.id}/edit-event`}>
-                        <button>Edit</button>
-                        </Link>
+                        <div>
+                             <Link to={`/alerts/${eventToDisplay.id}/edit-event`}>
+                            <button>Edit</button>
+                            </Link>
+                            <button onClick={() => setDeletePopupVisible(true)}>Delete</button>
+                        </div>
                     }
                     
                     {userRole === 'expert' && 

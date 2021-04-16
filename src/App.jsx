@@ -14,6 +14,7 @@ import EditRuleForm from "./Routes/EditRuleForm";
 import NewTaskForm from "./Routes/NewTaskForm";
 import NewRuleForm from "./Routes/NewRuleForm";
 import TaskUpdateForm from "./Routes/TaskUpdateForm";
+import Payment from "./Routes/Payment";
 // import { axios } from './Axios.js';
 import axios from 'axios'
 import LoginForm from "./Routes/LoginForm";
@@ -36,6 +37,14 @@ const requestTaskUpdates = axios.get(URL_TASK_UPDATES);
 
 
 
+// const SEVERITIES_STATUSES = {
+//   None: 1,
+//   Warning: 2,
+//   Minor: 3,
+//   Major: 4,
+//   Critical: 5,
+// };
+
 const SEVERITIES_STATUSES = {
   None: 1,
   Warning: 2,
@@ -46,14 +55,9 @@ const SEVERITIES_STATUSES = {
 
 const App = () => {
 
-  const GUEST = {
-    username: 'guest',
-    password: '',
-    role: 'guest'
-  }
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState(GUEST);
+  const [user, setUser] = useState({name: 'Guest', role: 'guest',  team: null, Subscriptions: null, subscriptionActive: {endDate: null, active: false}});
 
   const [eventsData, setEventsData] = useState([]);
   const [servicesData, setServicesData] = useState([])
@@ -97,45 +101,11 @@ const App = () => {
 
   useEffect(() => {
     fetchData();
-    console.log("AAA")
-  }, [])
+  }, [user])
 
-    // const services = useMemo(() => {
-    //   let data = ServicesData.map((service) => ({
-    //     ...service,
-    //     events: eventsData.reduce((serviceEvents, event) => {
-    //       if (!event.service) {
-    //         return serviceEvents;
-    //       }
-    //       const newEvents = event.service.reduce(
-    //         (events, eventServiceId) =>
-    //           eventServiceId === service.id ? [...events, event] : events,
-    //         []
-    //       );
-    //       return [...serviceEvents, ...newEvents];
-    //     }, []),
-    //     status: 1,
-    //   }));
-    
-    //   data = data.map((service) => {
-    //     if (!service.events || service.events.length === 0) {
-    //       return service;
-    //     }
-    //     const highestSeverity = service.events.reduce((current, { severity }) => 
-    //       SEVERITIES_STATUSES[severity] > SEVERITIES_STATUSES[current]
-    //         ? severity
-    //         : current
-    //     , "None");
-
-    //     return { ...service, status: SEVERITIES_STATUSES[highestSeverity] };
-    //   });
-
-    //   return data
-    //   // ServicesData tutaj jak bedzie to dynamiczne
-    // }, [eventsData]);
 
   const services = useMemo(() => {
-    console.log('jestem w useMemo');
+    
     let data = servicesData.map((service) => ({
       ...service,
       events: eventServices.reduce((serviceEvents, row) =>
@@ -143,38 +113,52 @@ const App = () => {
                 [])
     }));
 
+    console.log(data);
+
     data = data.map((service) => {
       if (!service.events || service.events.length === 0) {
         return { ...service, status: 1 }
       }
-      const highestSeverity = service.events.reduce((current, { severity }) => 
+
+      console.log(service);
+
+        const highestSeverity = service.events.reduce((current, { severity }) => 
         SEVERITIES_STATUSES[severity] > SEVERITIES_STATUSES[current]
           ? severity
           : current
       , "None");
-
-      return { ...service, status: SEVERITIES_STATUSES[highestSeverity] };
+        return { ...service, status: SEVERITIES_STATUSES[highestSeverity] };
+      
     });
-    console.log(data);
     return data
   }, [eventsData, servicesData, eventServices])
 
   return (
     <div className="App">
       
-      {loggedIn === false && 
-        <Router>
-          <Switch>
+        {loggedIn === false && 
+          <Router>
+            <Switch>
             <Route path="/" exact>
-              <LoginForm setLoggedIn={setLoggedIn} setUser={setUser} guest={GUEST}/>
+              <LoginForm setLoggedIn={setLoggedIn} setUser={setUser} teamsData={teamsData}/>
             </Route>
-          </Switch>
-        </Router>
-          
-      }
-      {loggedIn && 
+            </Switch> 
+          </Router> 
+        }
+        {/* {loggedIn && !user.subscriptionActive.active &&
+          <Router>
+            <Navbar setUser={setUser} setLoggedIn={setLoggedIn} user={user} teamsData={teamsData}/>
+            <Switch>
+            <Route path="/" exact>
+              <Payment user={user} setUser={setUser}/>
+            </Route>
+            </Switch>
+          </Router>
+        } */}
+        
+        {loggedIn &&
         <Router>
-        <Navbar setUser={setUser} setLoggedIn={setLoggedIn} GUEST={GUEST} user={user} teamsData={teamsData}/>
+        <Navbar setUser={setUser} setLoggedIn={setLoggedIn} user={user} teamsData={teamsData}/>
           <Switch>
             <Route path="/" exact>
               <Status
@@ -182,6 +166,8 @@ const App = () => {
                 itemCallback={itemCallback}
                 eventsData={eventsData}
                 tasksData={tasksData}
+                user={user}
+                setUser={setUser}
               />
             </Route>
             <Route path="/alerts" exact>
@@ -197,7 +183,7 @@ const App = () => {
               <EditEventForm eventsData={eventsData} servicesData={servicesData} eventServices={eventServices} setEventsData={setEventsData} eventToDisplay={eventToDisplay} setEventToDisplay={setEventToDisplay} setEventServices={setEventServices}/>
             </Route>
             <Route path="/alerts/:eventID">
-              <EventDetails eventToDisplay={eventToDisplay} eventServices={eventServices} servicesData={servicesData} userRole={user.role}/>
+              <EventDetails eventToDisplay={eventToDisplay} eventServices={eventServices} servicesData={servicesData} userRole={user.role} setEventsData={setEventsData} setEventServices={setEventServices} setTasksData={setTasksData}/>
             </Route>
             <Route path="/rules" exact>
               <Rules rulesData={rulesData} itemCallback={itemCallback} user={user}/>
@@ -212,14 +198,15 @@ const App = () => {
               <RuleDetails ruleToDisplay={ruleToDisplay} user={user}/>
             </Route>
             <Route path="/tasks" exact>
-              <Tasks tasksData={tasksData} setTaskToDisplay={setTaskToDisplay} setEventToDisplay={setEventToDisplay} teamsData={teamsData} eventsData={eventsData} taskUpdatesData={taskUpdatesData} user={user}/>
+              <Tasks tasksData={tasksData} setTaskToDisplay={setTaskToDisplay} setEventToDisplay={setEventToDisplay} teamsData={teamsData} eventsData={eventsData} taskUpdatesData={taskUpdatesData} user={user} setTasksData={setTasksData}/>
             </Route>
             <Route path="/tasks/:taskID/new-update">
               <TaskUpdateForm tasksData={tasksData} taskToDisplay={taskToDisplay} eventsData={eventsData} setTaskUpdatesData={setTaskUpdatesData} setEventsData={setEventsData} setTasksData={setTasksData}/>
             </Route>
           </Switch>
         </Router>
-      }
+      } 
+      
       
     </div>
   );
