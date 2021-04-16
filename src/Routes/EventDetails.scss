@@ -207,3 +207,48 @@
     border-radius: 2px;
 
 }
+
+@media (max-width: 1024px) {
+    .event-details-buttons button:nth-child(1) {
+        margin-right: 2px;
+    }
+
+    .event-details-buttons {
+        justify-content: flex-start;
+        padding: 10px 15px;
+    }
+
+    .event-details-info-container {
+        margin-top: 5px;
+    }
+
+    .event-details-severity {
+        font-size: 1rem;
+        padding: 3px 0;
+    }
+
+    .event-details-label {
+        font-size: 0.7rem;
+        margin-bottom: 2px;
+    }
+
+    .event-details-info-left p {
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+    }
+
+    .event-details-info-left p {
+        padding: 8px 5px;
+        min-height: 34px;
+    }
+
+    .event-details-info-left,
+    .event-details-info-right {
+        padding: 0;
+    }
+
+    .event-details-services p {
+        padding: 8px 5px;
+        font-size: 0.8rem;
+    }
+}

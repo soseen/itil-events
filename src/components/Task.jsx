@@ -33,31 +33,31 @@ const Task = ({task, displayEvent, displayNewUpdateForm, eventsData, teamsData, 
         })
     }
 
-    const openRequiredTasks = () => {
-        if(taskDetails.closed && taskDetails.updates.find(u => u.status !== 400) === undefined){
-            axios.put(`api/tasks/${task.id}`, {
-                ...task,
-                closed: false
-            }).then((response) => {
-                console.log(response)
-            }).catch(error => {
-                console.log(error)
-            })
-            axios.put(`api/events/${task.event}`, {
-                ...taskDetails.event,
-                resolved: false,
-                endDate: null
-            }).then((response) => {
-                console.log(response)
-            }).catch(error => {
-                console.log(error)
-            })
-        }
-    }
+    // const openRequiredTasks = () => {
+    //     if(taskDetails.closed && taskDetails.updates.find(u => u.status !== 400) === undefined){
+    //         axios.put(`api/tasks/${task.id}`, {
+    //             ...task,
+    //             closed: false
+    //         }).then((response) => {
+    //             console.log(response)
+    //         }).catch(error => {
+    //             console.log(error)
+    //         })
+    //         axios.put(`api/events/${task.event}`, {
+    //             ...taskDetails.event,
+    //             resolved: false,
+    //             endDate: null
+    //         }).then((response) => {
+    //             console.log(response)
+    //         }).catch(error => {
+    //             console.log(error)
+    //         })
+    //     }
+    // }
 
-    useEffect(() => {
-        openRequiredTasks()
-    },[])
+    // useEffect(() => {
+    //     openRequiredTasks()
+    // },[])
 
     return(
     <div className={taskDetails.expanded? 'task-container task-container-expanded' : 'task-container'} onClick={displayTaskDetails}>
