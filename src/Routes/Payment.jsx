@@ -30,13 +30,13 @@ const Payment = ({user, setUser, loggedIn}) => {
 
         try {
             console.log(product);
-            const paymentResponse = await axios.post('http://localhost:8000/payment', {
+            const paymentResponse = await axios.post('https://itil-events.herokuapp.com/payment', {
                 token,
                 product
             })
             if(paymentResponse.data.paymentSuccess){
                 try {
-                    const subscriptionResponse = await axios.post('http://localhost:8000/subscriptions', {
+                    const subscriptionResponse = await axios.post('https://itil-events.herokuapp.com/subscriptions', {
                         name: paymentResponse.data.subscription.name,
                         endDate: paymentResponse.data.subscription.endDate,
                         UserId: user.id

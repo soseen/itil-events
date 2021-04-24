@@ -19,13 +19,13 @@ import Payment from "./Routes/Payment";
 import axios from 'axios'
 import LoginForm from "./Routes/LoginForm";
 
-const URL_EVENTS = 'http://localhost:8080/api/events/';
-const URL_SERVICES = 'http://localhost:8080/api/activeServices';
-const URL_EVENT_SERVICES = 'http://localhost:8080/api/eventServices';
-const URL_RULES = 'http://localhost:8080/api/rules';
-const URL_TEAMS = 'http://localhost:8080/api/teams';
-const URL_TASKS = 'http://localhost:8080/api/tasks';
-const URL_TASK_UPDATES = 'http://localhost:8080/api/taskUpdates';
+const URL_EVENTS = 'https://itil-backend.herokuapp.com/api/events';
+const URL_SERVICES = 'https://itil-backend.herokuapp.com/api/activeServices';
+const URL_EVENT_SERVICES = 'https://itil-backend.herokuapp.com/api/eventServices';
+const URL_RULES = 'https://itil-backend.herokuapp.com/api/rules';
+const URL_TEAMS = 'https://itil-backend.herokuapp.com/api/teams';
+const URL_TASKS = 'https://itil-backend.herokuapp.com/api/tasks';
+const URL_TASK_UPDATES = 'https://itil-backend.herokuapp.com/api/taskUpdates';
 
 const requestEvents = axios.get(URL_EVENTS);
 const requestServices = axios.get(URL_SERVICES);

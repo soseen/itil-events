@@ -35,7 +35,7 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
     useEffect(() => {
 
         // axios.defaults.withCredentials = true;
-        axios.get('http://localhost:8000/user').then((response) => {
+        axios.get('https://itil-events.herokuapp.com/user').then((response) => {
             if(response.data.isLoggedIn) {
                 setUser(response.data.user)
                 setLoggedIn(response.data.isLoggedIn)
@@ -63,7 +63,7 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
             setValidationMessage(validationMessages[1]);
         }
         else {
-            const response = await axios.post("http://localhost:8000/user", {
+            const response = await axios.post("https://itil-events.herokuapp.com/user", {
                 username: credentials.username,
                 password: credentials.password,
                 })
@@ -127,7 +127,7 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
                 return
             } else {
                 try {
-                    const response = await axios.post('http://localhost:8000/userCreate', registrationCredentials)
+                    const response = await axios.post('https://itil-events.herokuapp.com/userCreate', registrationCredentials)
                     setValidationMessage(response.data.message);
                 }
                 catch (error) {
@@ -167,13 +167,13 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
                             <label className='login-inputs-label'>Password</label>
                             <input type='password' name='password' value={registrationCredentials.password} className='login-inputs-input' onChange={(e) => setRegistrationCredentials({...registrationCredentials, password: e.target.value})}></input>
                         </div>
-                        <div className='login-inputs-row'>
+                        {/* <div className='login-inputs-row'>
                             <label className='login-inputs-label'>Role</label>
                             <select name='select-role' className='register-inputs-select' onChange={selectRole}>
                                 <option value='expert'>Ekspert</option>
                                 <option value='system'>System</option>
                             </select>
-                        </div>
+                        </div> */}
                         <div className={teamSelectVisible ? 'login-inputs-row' : 'login-inputs-row select-hidden'}>
                             <label className='login-inputs-label'>Team</label>
                             <select name='select-team' className='register-inputs-select' onChange={selectTeam}>

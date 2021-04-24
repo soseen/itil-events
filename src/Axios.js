@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 export const axios = Axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "https://itil-backend.herokuapp.com",
     timeout: 3000,
     headers: {
         "Access-Control-Allow-Origin": "*",
