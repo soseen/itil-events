@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import React, { useState } from 'react';
 import './Payment.scss';
 import StripeCheckout from 'react-stripe-checkout'
 import { TiTick } from "react-icons/ti";
 import axios from 'axios';
 
-const Payment = ({user, setUser, loggedIn}) => {
-
-    let history = useHistory();
+const Payment = ({user, setUser}) => {
 
     
    const subscriptionOptions = [
@@ -24,12 +21,10 @@ const Payment = ({user, setUser, loggedIn}) => {
    ]
 
     const [product, setProduct] = useState(subscriptionOptions[0]);
-    console.log(product)
 
     const handlePayment = async (token) => {
 
         try {
-            console.log(product);
             const paymentResponse = await axios.post('https://itil-events.herokuapp.com/payment', {
                 token,
                 product

@@ -7,14 +7,6 @@ const NewRuleForm = ({rulesData, setRulesData}) => {
 
     let history = useHistory();
 
-    const assignNewId = () => {
-        if(rulesData && rulesData.length > 0) {
-            return rulesData[rulesData.length - 1].id;
-        } else {
-            return 1;
-        }
-    }
-
     const CURRENT_DATE = new Date().toISOString().slice(0, 10);
 
     const [buttonActive, setButtonActive] = useState(null);

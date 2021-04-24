@@ -38,9 +38,6 @@ const EditRuleForm = ({ruleToDisplay, rulesData, setRulesData, setRuleToDisplay}
     const validateAndSubmit = async (fieldsToValidate) => {
         if(fieldsToValidate.find(s => s === '') === undefined){
             setValidated(true);
-            let newRulesData = rulesData.reduce((newData, rule) => 
-            rule.id === newRule.id ? [...newData, newRule] : [...newData, rule],
-            []);
             setRuleToDisplay(newRule);
             await axios.put(`http://localhost:8080/api/rules/${newRule.id}`, newRule);
             const response = await axios.get('http://localhost:8080/api/rules/');

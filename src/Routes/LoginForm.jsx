@@ -30,7 +30,7 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
     })
     const [validationMessage, setValidationMessage] = useState('');
     const [showRegistrationForm, setShowRegistrationForm] = useState(false);
-    const [teamSelectVisible, setTeamSelectVisible] = useState(true);
+    // const [teamSelectVisible, setTeamSelectVisible] = useState(true);
 
     useEffect(() => {
 
@@ -39,12 +39,7 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
             if(response.data.isLoggedIn) {
                 setUser(response.data.user)
                 setLoggedIn(response.data.isLoggedIn)
-                if(response.data.user.subscriptionActive.active){
-                    history.push('/status');
-                } else {
-                    history.push('/subscribe');
-                }
-                
+                    history.push('/status');        
             } 
         })
 
@@ -67,40 +62,31 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
                 username: credentials.username,
                 password: credentials.password,
                 })
-            // const subscriptionActive = checkIfUserSubscribed(response.data.user);
             setUser(response.data.user);
             setValidationMessage(response.data.message);
             setLoggedIn(response.data.isLoggedIn);
             console.log(response.data)
-            // if(response.data.isLoggedIn && response.data.user.subscriptionActive.active) {
-            //     history.push('/itil-events');
-            // } else if (response.data.isLoggedIn && !response.data.user.subscriptionActive.active) {
-            //     history.push('/subscribe');
-            // }
         }
-
         
         
     }
 
-    const selectRole = (e) => {
-        if(e.target.value === 'system'){
-            setRegistrationCredentials({
-                ...registrationCredentials,
-                team: null,
-                role: 'system'
-            })
-            setTeamSelectVisible(false);
-        } else {
-            setTeamSelectVisible(true);
-            setRegistrationCredentials({
-                ...registrationCredentials,
-                role: e.target.value
-            })
-        }
-
-
-    }
+    // const selectRole = (e) => {
+    //     if(e.target.value === 'system'){
+    //         setRegistrationCredentials({
+    //             ...registrationCredentials,
+    //             team: null,
+    //             role: 'system'
+    //         })
+    //         setTeamSelectVisible(false);
+    //     } else {
+    //         setTeamSelectVisible(true);
+    //         setRegistrationCredentials({
+    //             ...registrationCredentials,
+    //             role: e.target.value
+    //         })
+    //     }
+    // }
 
     const selectTeam = (e) => {
 
@@ -174,7 +160,8 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
                                 <option value='system'>System</option>
                             </select>
                         </div> */}
-                        <div className={teamSelectVisible ? 'login-inputs-row' : 'login-inputs-row select-hidden'}>
+                        {/* <div className={teamSelectVisible ? 'login-inputs-row' : 'login-inputs-row select-hidden'}> */}
+                        <div className='login-inputs-row'>
                             <label className='login-inputs-label'>Team</label>
                             <select name='select-team' className='register-inputs-select' onChange={selectTeam}>
                                 <option name='nonne' value={null}>None</option>

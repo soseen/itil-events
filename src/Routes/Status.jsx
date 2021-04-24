@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Status.scss'
 import {useHistory} from 'react-router-dom';
 import DataChart from '../components/DataChart';
-import Payment from './Payment';
 
 const Status = ({services, itemCallback, eventsData, tasksData, user, setUser}) => {
 

@@ -14,7 +14,7 @@ const Navbar = ({setUser, setLoggedIn, user, teamsData}) => {
 
     const switchRoute = async (navItem) => {
         if(navItem.name === 'Log Out'){
-            await axios.get('http://localhost:8000/logout');
+            await axios.get('https://itil-events.herokuapp.com/logout');
             history.push('/');
             setLoggedIn(false);
             // setUser({name: 'guest', role: '', team: null, Subscriptions: null, subscriptionActive: true});

@@ -1,8 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp} from 'react-icons/md';
 import './Task.scss'
-import { AiFillPlusCircle, AiOutlinePlus } from 'react-icons/ai';
-import { axios } from '../Axios';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 const Task = ({task, displayEvent, displayNewUpdateForm, eventsData, teamsData, taskUpdatesData, user}) => {
 
