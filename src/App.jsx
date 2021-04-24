@@ -14,8 +14,6 @@ import EditRuleForm from "./Routes/EditRuleForm";
 import NewTaskForm from "./Routes/NewTaskForm";
 import NewRuleForm from "./Routes/NewRuleForm";
 import TaskUpdateForm from "./Routes/TaskUpdateForm";
-import Payment from "./Routes/Payment";
-// import { axios } from './Axios.js';
 import axios from 'axios'
 import LoginForm from "./Routes/LoginForm";
 
@@ -35,15 +33,6 @@ const requestTeams = axios.get(URL_TEAMS);
 const requestTasks = axios.get(URL_TASKS);
 const requestTaskUpdates = axios.get(URL_TASK_UPDATES);
 
-
-
-// const SEVERITIES_STATUSES = {
-//   None: 1,
-//   Warning: 2,
-//   Minor: 3,
-//   Major: 4,
-//   Critical: 5,
-// };
 
 const SEVERITIES_STATUSES = {
   None: 1,
@@ -112,8 +101,6 @@ const App = () => {
                 row.service === service.id ? [...serviceEvents, eventsData.find(e => e.id === row.event)] : serviceEvents,
                 [])
     }));
-
-    console.log(data);
 
     data = data.map((service) => {
       if (!service.events || service.events.length === 0) {

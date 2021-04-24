@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-// import { axios } from '../Axios';
 import axios from 'axios';
 import './LoginForm.scss';
 
 const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
 
-    // const GUEST = {
-    //     username: 'guest',
-    //     role: 'guest',
-    //     team: null
-    //   }
 
     const validationMessages = ['', 'Please fill in all the required fields', 'Invalid Username/Password'];
 
@@ -43,7 +37,7 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
             } 
         })
 
-    }, [setLoggedIn, setUser])
+    }, [setLoggedIn, setUser, history])
 
     const handleChange = (e) => {
         e.preventDefault();
