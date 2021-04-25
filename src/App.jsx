@@ -110,11 +110,11 @@ const App = () => {
     
     //   console.log(services);
 
-    let services = servicesData.filter(service => eventsData.find(e => e.id === service.event).resolved === false)
+    let services = eventServices.filter(service => eventsData.find(e => e.id === service.event).resolved === false)
 
-    let data = services.map((service) => ({
+    let data = servicesData.map((service) => ({
       ...service,
-      events: eventServices.reduce((serviceEvents, row) => {
+      events: services.reduce((serviceEvents, row) => {
         if(row.service === service.id && !service.resolved) {
           serviceEvents = [...serviceEvents, eventsData.find(e => e.id === row.event)]
         }
