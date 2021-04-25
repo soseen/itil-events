@@ -93,22 +93,6 @@ const App = () => {
   }, [user])
 
   const services = useMemo(() => {
-    
-    // let data = servicesData.map((service) => ({
-    //   ...service,
-    //   events: eventServices.reduce((serviceEvents, row) =>
-    //             row.service === service.id && !row.resolved ? [...serviceEvents, eventsData.find(e => e.id === row.event)] : serviceEvents,
-    //             [])
-    // }));
-
-    console.log(servicesData);
-
-    // let services = servicesData.map((serviceEvent => 
-    //   (
-    //     {...serviceEvent, event: eventsData.find(e => e.id === serviceEvent.event)}
-    //   )));
-    
-    //   console.log(services);
 
     let services = eventServices.filter(service => eventsData.find(e => e.id === service.event).resolved === false)
 
@@ -124,17 +108,11 @@ const App = () => {
       ,[])
     }));
 
-    console.log('after');
-    console.log(data)
-
-
 
     data = data.map((service) => {
       if (!service.events || service.events.length === 0) {
         return { ...service, status: 1 }
       }
-
-      console.log(service);
 
         const highestSeverity = service.events.reduce((current, { severity }) => 
         SEVERITIES_STATUSES[severity] > SEVERITIES_STATUSES[current]

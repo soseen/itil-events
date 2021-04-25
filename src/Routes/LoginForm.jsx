@@ -59,7 +59,6 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
             setUser(response.data.user);
             setValidationMessage(response.data.message);
             setLoggedIn(response.data.isLoggedIn);
-            console.log(response.data)
         }
         
         
