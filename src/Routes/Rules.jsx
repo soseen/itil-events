@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useState, useMemo} from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
 import './Rules.scss';
