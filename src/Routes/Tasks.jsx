@@ -13,7 +13,10 @@ const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData, event
 
     const tasksDefault = useMemo(() => {
         let data = tasksData.map((task => ({...task, expanded: false})));
-        return data;
+
+        data = data.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+        
+        return data;  
     }, [tasksData]) 
     
 
@@ -21,9 +24,6 @@ const Tasks = ({tasksData, setTaskToDisplay, setEventToDisplay, teamsData, event
         let data = teamsData.map((team => (
             {...team, highlighted: false}
             )));
-
-        data = data.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
-        
         return data;    
     }, [teamsData])
     
