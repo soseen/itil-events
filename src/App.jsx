@@ -92,15 +92,22 @@ const App = () => {
     fetchData();
   }, [user])
 
+  const events = useMemo(() => {
+
+    let data = eventsData.sort((a, b) => b.startDate.getTime() - a.endDate.getTime()); 
+
+    return data
+  },[eventsData])
 
   const services = useMemo(() => {
     
     let data = servicesData.map((service) => ({
       ...service,
       events: eventServices.reduce((serviceEvents, row) =>
-                row.service === service.id ? [...serviceEvents, eventsData.find(e => e.id === row.event)] : serviceEvents,
+                row.service === service.id && !service.resolved ? [...serviceEvents, eventsData.find(e => e.id === row.event)] : serviceEvents,
                 [])
     }));
+
 
     data = data.map((service) => {
       if (!service.events || service.events.length === 0) {
@@ -158,7 +165,7 @@ const App = () => {
               />
             </Route>
             <Route path="/alerts" exact>
-              <Alerts eventsData={eventsData} setEventsData={setEventsData} setEventToDisplay={setEventToDisplay} userRole={user.role} />
+              <Alerts eventsData={events} setEventsData={setEventsData} setEventToDisplay={setEventToDisplay} userRole={user.role} />
             </Route>
             <Route path="/alerts/:eventID/new-task" exact>
               <NewTaskForm event={eventToDisplay} tasksData={tasksData} teamsData={teamsData} setTasksData={setTasksData} fetchData={fetchData}/>

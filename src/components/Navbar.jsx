@@ -17,12 +17,7 @@ const Navbar = ({setUser, setLoggedIn, user, teamsData}) => {
             await axios.get('https://itil-events.herokuapp.com/logout');
             history.push('/');
             setLoggedIn(false);
-            // setUser({name: 'guest', role: '', team: null, Subscriptions: null, subscriptionActive: true});
         }
-        // } else if(user.subscriptionActive.active){
-        //     setSideNav(false);
-        //     history.push(navItem.route)
-        // }
 
         else {
             setSideNav(false);
