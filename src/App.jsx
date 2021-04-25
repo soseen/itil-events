@@ -92,21 +92,32 @@ const App = () => {
     fetchData();
   }, [user])
 
-  const events = useMemo(() => {
-
-    let data = eventsData.sort((a, b) => new Date(b.startDate) - new Date(a.endDate)); 
-
-    return data
-  },[eventsData])
-
   const services = useMemo(() => {
     
+    // let data = servicesData.map((service) => ({
+    //   ...service,
+    //   events: eventServices.reduce((serviceEvents, row) =>
+    //             row.service === service.id && !row.resolved ? [...serviceEvents, eventsData.find(e => e.id === row.event)] : serviceEvents,
+    //             [])
+    // }));
+
+    console.log(servicesData);
+
     let data = servicesData.map((service) => ({
       ...service,
-      events: eventServices.reduce((serviceEvents, row) =>
-                row.service === service.id && !row.resolved ? [...serviceEvents, eventsData.find(e => e.id === row.event)] : serviceEvents,
-                [])
+      events: eventServices.reduce((serviceEvents, row) => {
+        if(row.service === service.id && !service.resolved) {
+          serviceEvents = [...serviceEvents, eventsData.find(e => e.id === row.event)]
+        }
+
+        return serviceEvents
+      }
+      ,[])
     }));
+
+    console.log('after');
+    console.log(data)
+
 
 
     data = data.map((service) => {
