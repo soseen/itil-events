@@ -20,7 +20,7 @@ const Alerts = ({eventsData, setEventsData, setEventToDisplay, userRole}) => {
 
     const events = useMemo(() => {
 
-        let data = eventsData.sort((a, b) => new Date(b.startDate).getTime() > new Date(a.endDate).getTime()); 
+        let data = eventsData.sort((a, b) => new Date(b.startDate).getTime() > new Date(a.startDate).getTime()); 
 
         console.log(new Date(eventsData[0].startDate).getTime())
         console.log(eventsData.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.endDate).getTime()))
