@@ -104,7 +104,7 @@ const App = () => {
     let data = servicesData.map((service) => ({
       ...service,
       events: eventServices.reduce((serviceEvents, row) =>
-                row.service === service.id && !service.resolved ? [...serviceEvents, eventsData.find(e => e.id === row.event)] : serviceEvents,
+                row.service === service.id && !row.resolved ? [...serviceEvents, eventsData.find(e => e.id === row.event)] : serviceEvents,
                 [])
     }));
 
