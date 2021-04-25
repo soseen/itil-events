@@ -8,7 +8,13 @@ const Rules = ({rulesData, itemCallback, user}) => {
     let history = useHistory();
     let { url } = useRouteMatch();
 
-    const [rulesDisplayed, setRulesDisplayed] = useState(rulesData);
+    const rules = useMemo(() => {
+
+        let data = rulesData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); 
+        return data
+      },[rulesData])
+
+    const [rulesDisplayed, setRulesDisplayed] = useState(rules);
 
     const filterList = (e) => {
 
