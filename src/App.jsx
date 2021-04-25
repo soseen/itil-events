@@ -94,7 +94,7 @@ const App = () => {
 
   const events = useMemo(() => {
 
-    let data = eventsData.sort((a, b) => b.startDate.getTime() - a.endDate.getTime()); 
+    let data = eventsData.sort((a, b) => b.startDate - a.endDate); 
 
     return data
   },[eventsData])
