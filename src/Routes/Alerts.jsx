@@ -17,7 +17,15 @@ const Alerts = ({eventsData, setEventsData, setEventToDisplay, userRole}) => {
                 console.log(error);
             })
     }, [setEventsData])
-    const [eventsDisplayed, setEventsDisplayed] = useState(eventsData);
+
+    const events = useMemo(() => {
+
+        let data = eventsData.sort((a, b) => new Date(b.startDate) - new Date(a.endDate)); 
+    
+        return data
+      },[eventsData])
+
+    const [eventsDisplayed, setEventsDisplayed] = useState(events);
 
     const filterList = (e) => {
         if(e.target.value === 'All'){
