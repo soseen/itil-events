@@ -165,7 +165,7 @@ const App = () => {
               />
             </Route>
             <Route path="/alerts" exact>
-              <Alerts eventsData={events} setEventsData={setEventsData} setEventToDisplay={setEventToDisplay} userRole={user.role} />
+              <Alerts eventsData={eventsData} setEventsData={setEventsData} setEventToDisplay={setEventToDisplay} userRole={user.role} />
             </Route>
             <Route path="/alerts/:eventID/new-task" exact>
               <NewTaskForm event={eventToDisplay} tasksData={tasksData} teamsData={teamsData} setTasksData={setTasksData} fetchData={fetchData}/>
