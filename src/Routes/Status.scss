@@ -382,37 +382,41 @@
         height: 100%;
     }
 
+    .service-events-container {
+        height: 200px;
+    }
+
     .services-container {
         min-height: 400px;
     }
 
     .service-box-priority-1 {
-        flex-basis: 80px;
-        height: 90px;
+        flex-basis: 50px;
+        height: 100px;
         flex-grow: 1;
     }
     
     .service-box-priority-2 {
+        flex-basis: 700px;
+        height: 100px;
+        flex-grow: 1;
+    }
+    
+    .service-box-priority-3 {
+        flex-basis: 90px;
+        height: 100px;
+        flex-grow: 1;
+    }
+    
+    .service-box-priority-4 {
         flex-basis: 100px;
         height: 90px;
         flex-grow: 1;
     }
     
-    .service-box-priority-3 {
-        flex-basis: 120px;
-        height: 90px;
-        flex-grow: 1;
-    }
-    
-    .service-box-priority-4 {
-        flex-basis: 140px;
-        height: 90px;
-        flex-grow: 1;
-    }
-    
     .service-box-priority-5 {
-        flex-basis: 160px;
-        height: 90px;
+        flex-basis: 120px;
+        height: 100px;
         flex-grow: 1;
     }
     
