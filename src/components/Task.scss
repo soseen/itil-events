@@ -437,9 +437,10 @@
         margin-bottom: 1px;
     }
 
-    .task-expanded-details .task-expanded-details-info div button {
-        font-size: 0.8rem;
-        padding: 6px 10px;
+    .task-expanded-details .task-expanded-details-info div button,
+    .new-update-button {
+        font-size: 0.6rem;
+        padding: 5px 10px;
     }
 
 }
