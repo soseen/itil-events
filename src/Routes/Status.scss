@@ -377,33 +377,42 @@
 }
 
 @media (max-width: 480px) {
+
+    .dashboard-container {
+        height: 100%;
+    }
+
+    .services-container {
+        min-height: 400px;
+    }
+
     .service-box-priority-1 {
         flex-basis: 80px;
-        height: 160px;
+        height: 90px;
         flex-grow: 1;
     }
     
     .service-box-priority-2 {
         flex-basis: 100px;
-        height: 160px;
+        height: 90px;
         flex-grow: 1;
     }
     
     .service-box-priority-3 {
         flex-basis: 120px;
-        height: 160px;
+        height: 90px;
         flex-grow: 1;
     }
     
     .service-box-priority-4 {
         flex-basis: 140px;
-        height: 160px;
+        height: 90px;
         flex-grow: 1;
     }
     
     .service-box-priority-5 {
         flex-basis: 160px;
-        height: 160px;
+        height: 90px;
         flex-grow: 1;
     }
     
