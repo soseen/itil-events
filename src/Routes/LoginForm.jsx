@@ -13,7 +13,7 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
     axios.defaults.withCredentials = true;
 
     const [credentials, setCredentials] = useState({
-        username: "system",
+        username: "engineer123",
         password: "123",
     })
     const [registrationCredentials, setRegistrationCredentials] = useState({
