@@ -17,7 +17,7 @@ Application consists of:
 * [Rules view](#rules)
 * [Tasks view](#tasks)
 
-#### Status
+### Status
 
 Dashboard used as a main tool to gather the necessary information about the current state of IT infrastructure. IT services are shown as tiles where size of a particular tile represents its priority while its color describes an event with the highest severity that is related to this service. Related events are listed below. Status view also gives an access to the charts that are graphical representation of the events and tasks data that user can use to quickly identify what's happening within the examined system.
 
@@ -33,7 +33,7 @@ List of rules for the monitoring system. Rules can be displayed based on the sev
 
 List of all the tasks in the system that can be filtered by their status or by teams they are assigned to. User with an expert role can complete tasks that are related to the team he is a part of by adding task updates describing actions taken.
 
-### How to use
+## How to use
 
 - Open https://brave-montalcini-9ba6c0.netlify.app
 - Register your expert account and sign up to one of the available expert teams
@@ -49,7 +49,7 @@ List of all the tasks in the system that can be filtered by their status or by t
 - Define task and event status and proceed to add the task update
 - If required add a new rule for the monitoring system by choosing `Rules` from the navigation menu and then `New Rule` button
 
-### Roles
+## Roles
 
 - System - has most functionalities related to the monitoring tool
   * create update and delete events
@@ -61,7 +61,7 @@ List of all the tasks in the system that can be filtered by their status or by t
   * create update and delete rules for the monitoring system
   * display App data
 
-### Technologies
+## Technologies
 
 - React.js
 - Sass
