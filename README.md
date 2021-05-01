@@ -57,7 +57,7 @@ List of all the tasks in the system that can be filtered by their status or by t
   * display App data
 - Expert - has functionalities related to the Service Desk definition
   * create Tasks
-  * resolve events through task completion
+  * resolve events by completing related tasks
   * create update and delete rules for the monitoring system
   * display App data
 
