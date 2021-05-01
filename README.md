@@ -6,7 +6,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * [How to use](#how-to-use)
 * [Roles](#roles)
 * [Technologies](#technologies)
-* [Setup](#setup)
 
 
 ## General Info
