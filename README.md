@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## General Info
 
-Application allows user to manage events occuring wihting the examined IT infrastructure according to the ITIL v3 standards.
+Application allows user to manage events occuring wihtin the examined IT infrastructure according to the ITIL v3 standards.
 Application consists of:
 * [Status view](#status)
 * [Alerts view](#alerts)
