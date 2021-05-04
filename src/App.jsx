@@ -65,7 +65,7 @@ const App = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
 
     try {
       if(loggedIn) {
@@ -86,7 +86,7 @@ const App = () => {
     catch (err) {
       console.log(err.message);
     }
-  }
+  }, [])
 
   const itemCallback = (itemType, item) => {
     if (itemType === "event") {
@@ -100,7 +100,7 @@ const App = () => {
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, [user, fetchData])
 
   const services = useMemo(() => {
 
