@@ -16,6 +16,7 @@ import NewRuleForm from "./Routes/NewRuleForm";
 import TaskUpdateForm from "./Routes/TaskUpdateForm";
 import axios from 'axios'
 import LoginForm from "./Routes/LoginForm";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const URL_EVENTS = 'https://itil-backend.herokuapp.com/api/events';
 const URL_SERVICES = 'https://itil-backend.herokuapp.com/api/activeServices';
@@ -44,6 +45,14 @@ const SEVERITIES_STATUSES = {
 
 const App = () => {
 
+  const override = css`
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  border-color: red;
+`;
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({name: 'Guest', role: 'guest',  team: null, Subscriptions: null, subscriptionActive: {endDate: null, active: false}});
@@ -59,9 +68,12 @@ const App = () => {
   const [ruleToDisplay, setRuleToDisplay] = useState();
   const [taskToDisplay, setTaskToDisplay] = useState(tasksData[0]);
 
+  const [loading, setLoading] = useState(false);
+
   const fetchData = async () => {
 
-    try { 
+    try {
+      setLoading(true);
       const [responseEvents, responseServices, responseEventServices, responseRules, responseTasks, responseTeams, responseTaskUpdates] = await axios.all([requestEvents, requestServices, requestEventServices, requestRules, requestTasks, requestTeams, requestTaskUpdates]);
       
       setEventsData(responseEvents.data);
@@ -72,6 +84,7 @@ const App = () => {
       setTasksData(responseTasks.data);
       setTeamsData(responseTeams.data);
       setTaskUpdatesData(responseTaskUpdates.data);
+      setLoading(false);
     }
     catch (err) {
       console.log(err.message);
@@ -127,12 +140,12 @@ const App = () => {
 
   return (
     <div className="App">
-      
+        <ClipLoader color="#ffffff" loading={loading} css={override} size={150} />
         {loggedIn === false && 
           <Router>
             <Switch>
             <Route path="/" exact>
-              <LoginForm setLoggedIn={setLoggedIn} setUser={setUser} teamsData={teamsData}/>
+              <LoginForm setLoggedIn={setLoggedIn} setUser={setUser} teamsData={teamsData} setLoading={setLoading}/>
             </Route>
             </Switch> 
           </Router> 

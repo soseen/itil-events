@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import axios from 'axios';
 import './LoginForm.scss';
 
-const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
+const LoginForm = ({setLoggedIn, setUser, teamsData, setLoading}) => {
 
 
     const validationMessages = ['', 'Please fill in all the required fields', 'Invalid Username/Password'];
@@ -52,6 +52,7 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
             setValidationMessage(validationMessages[1]);
         }
         else {
+            setLoading(true);
             const response = await axios.post("https://itil-events.herokuapp.com/user", {
                 username: credentials.username,
                 password: credentials.password,
@@ -59,6 +60,7 @@ const LoginForm = ({setLoggedIn, setUser, teamsData}) => {
             setUser(response.data.user);
             setValidationMessage(response.data.message);
             setLoggedIn(response.data.isLoggedIn);
+            setLoading(false);
         }
         
         
