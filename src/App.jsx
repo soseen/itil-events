@@ -142,7 +142,7 @@ const App = () => {
   return (
     <div className="App">
       <div className='loading-spinner-wrapper'>
-        <PulseLoader color="#ffffff" loading={loading} css={override} size={20} />
+        <PulseLoader color="#dbc8af" loading={loading} css={override} size={20} />
       </div>
         {loggedIn === false && 
           <Router>
