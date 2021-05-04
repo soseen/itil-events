@@ -46,6 +46,10 @@ const SEVERITIES_STATUSES = {
 const App = () => {
 
   const override = `
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  transform: translate(-50%);
   z-index: 10;
   margin: 0;
   margin-top: 150px;
@@ -65,7 +69,7 @@ const App = () => {
   const [ruleToDisplay, setRuleToDisplay] = useState();
   const [taskToDisplay, setTaskToDisplay] = useState(tasksData[0]);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = useMemo(async () => {
 
@@ -139,9 +143,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className='loading-spinner-wrapper'>
+      {/* <div className='loading-spinner-wrapper'> */}
         <BeatLoader color="#dbc8af" loading={loading} css={override} size={15} />
-      </div>
+      {/* </div> */}
         {loggedIn === false && 
           <Router>
             <Switch>
