@@ -63,7 +63,7 @@ const App = () => {
   const [ruleToDisplay, setRuleToDisplay] = useState();
   const [taskToDisplay, setTaskToDisplay] = useState(tasksData[0]);
 
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
 
@@ -137,7 +137,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <PulseLoader color="#ffffff" loading={true} css={override} size={50} />
+      <PulseLoader color="#ffffff" loading={loading} css={override} size={50} />
         {loggedIn === false && 
           <Router>
             <Switch>
