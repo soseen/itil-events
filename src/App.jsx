@@ -52,7 +52,6 @@ const App = () => {
   transform: translate(-50%);
   z-index: 10;
   margin: 0;
-  margin-top: 150px;
 `;
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -143,9 +142,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* <div className='loading-spinner-wrapper'> */}
         <BeatLoader color="#dbc8af" loading={loading} css={override} size={15} />
-      {/* </div> */}
         {loggedIn === false && 
           <Router>
             <Switch>
