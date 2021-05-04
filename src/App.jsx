@@ -16,7 +16,7 @@ import NewRuleForm from "./Routes/NewRuleForm";
 import TaskUpdateForm from "./Routes/TaskUpdateForm";
 import axios from 'axios'
 import LoginForm from "./Routes/LoginForm";
-import PulseLoader from "react-spinners/PulseLoader";
+import BeatLoader from "react-spinners/PulseLoader";
 
 const URL_EVENTS = 'https://itil-backend.herokuapp.com/api/events';
 const URL_SERVICES = 'https://itil-backend.herokuapp.com/api/activeServices';
@@ -48,7 +48,7 @@ const App = () => {
   const override = `
   z-index: 10;
   margin: 0;
-  margin-top: 100px;
+  margin-top: 130px;
 `;
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -140,7 +140,7 @@ const App = () => {
   return (
     <div className="App">
       <div className='loading-spinner-wrapper'>
-        <PulseLoader color="#dbc8af" loading={loading} css={override} size={15} />
+        <BeatLoader color="#dbc8af" loading={loading} css={override} size={15} />
       </div>
         {loggedIn === false && 
           <Router>
