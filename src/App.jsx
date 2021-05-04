@@ -81,7 +81,7 @@ const App = () => {
       setTasksData(responseTasks.data);
       setTeamsData(responseTeams.data);
       setTaskUpdatesData(responseTaskUpdates.data);
-      setLoading(false);
+      // setLoading(false);
     }
     catch (err) {
       console.log(err.message);
