@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import "./App.scss";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -65,7 +65,7 @@ const App = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
 
     try {
       if(loggedIn) {
@@ -86,7 +86,7 @@ const App = () => {
     catch (err) {
       console.log(err.message);
     }
-  }
+  })
 
   const itemCallback = (itemType, item) => {
     if (itemType === "event") {
