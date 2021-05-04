@@ -16,7 +16,7 @@ import NewRuleForm from "./Routes/NewRuleForm";
 import TaskUpdateForm from "./Routes/TaskUpdateForm";
 import axios from 'axios'
 import LoginForm from "./Routes/LoginForm";
-import ClipLoader from "react-spinners/ClipLoader";
+import RotateLoader from "react-spinners/ClipLoader";
 
 const URL_EVENTS = 'https://itil-backend.herokuapp.com/api/events';
 const URL_SERVICES = 'https://itil-backend.herokuapp.com/api/activeServices';
@@ -51,7 +51,6 @@ const App = () => {
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  border-color: red;
 `;
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -140,7 +139,7 @@ const App = () => {
 
   return (
     <div className="App">
-        <ClipLoader color="#ffffff" loading={loading} css={override} size={150} />
+        <RotateLoader color="#ffffff" loading={loading} css={override} size={50} />
         {loggedIn === false && 
           <Router>
             <Switch>
