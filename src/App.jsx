@@ -63,7 +63,7 @@ const App = () => {
   const [ruleToDisplay, setRuleToDisplay] = useState();
   const [taskToDisplay, setTaskToDisplay] = useState(tasksData[0]);
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
 
