@@ -46,11 +46,9 @@ const SEVERITIES_STATUSES = {
 const App = () => {
 
   const override = `
-  position: absolute;
-  top: 150px;
-  left: 50%;
-  transform: translate(-50%, 0);
   z-index: 10;
+  margin: 0;
+  margin-top: 100px;
 `;
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -142,7 +140,7 @@ const App = () => {
   return (
     <div className="App">
       <div className='loading-spinner-wrapper'>
-        <PulseLoader color="#dbc8af" loading={loading} css={override} size={20} />
+        <PulseLoader color="#dbc8af" loading={loading} css={override} size={15} />
       </div>
         {loggedIn === false && 
           <Router>
