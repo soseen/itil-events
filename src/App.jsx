@@ -73,8 +73,10 @@ const App = () => {
   const fetchData = useMemo(async () => {
 
     try {
+      console.log(loggedIn);
       if(loggedIn) {
         setLoading(true);
+        console.log('logged in')
       }
       const [responseEvents, responseServices, responseEventServices, responseRules, responseTasks, responseTeams, responseTaskUpdates] = await axios.all([requestEvents, requestServices, requestEventServices, requestRules, requestTasks, requestTeams, requestTaskUpdates]);
       
