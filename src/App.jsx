@@ -16,7 +16,7 @@ import NewRuleForm from "./Routes/NewRuleForm";
 import TaskUpdateForm from "./Routes/TaskUpdateForm";
 import axios from 'axios'
 import LoginForm from "./Routes/LoginForm";
-import BeatLoader from "react-spinners/PulseLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const URL_EVENTS = 'https://itil-backend.herokuapp.com/api/events';
 const URL_SERVICES = 'https://itil-backend.herokuapp.com/api/activeServices';
@@ -48,7 +48,7 @@ const App = () => {
   const override = `
   z-index: 10;
   margin: 0;
-  margin-top: 130px;
+  margin-top: 150px;
 `;
 
   const [loggedIn, setLoggedIn] = useState(false);
