@@ -100,7 +100,7 @@ const App = () => {
 
   useEffect(() => {
     fetchData();
-  }, [user])
+  }, [user, fetchData])
 
   const services = useMemo(() => {
 
