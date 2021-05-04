@@ -16,7 +16,7 @@ import NewRuleForm from "./Routes/NewRuleForm";
 import TaskUpdateForm from "./Routes/TaskUpdateForm";
 import axios from 'axios'
 import LoginForm from "./Routes/LoginForm";
-import PulseLoader from "react-spinners/ClipLoader";
+import PulseLoader from "react-spinners/PulseLoader";
 
 const URL_EVENTS = 'https://itil-backend.herokuapp.com/api/events';
 const URL_SERVICES = 'https://itil-backend.herokuapp.com/api/activeServices';
@@ -46,6 +46,8 @@ const SEVERITIES_STATUSES = {
 const App = () => {
 
   const override = `
+  position: absolute;
+  top: 150px;
   z-index: 10;
 `;
 
