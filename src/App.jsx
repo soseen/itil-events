@@ -48,6 +48,8 @@ const App = () => {
   const override = `
   position: absolute;
   top: 150px;
+  left: 50%;
+  transform: translate(-50%, 0);
   z-index: 10;
 `;
 
@@ -139,7 +141,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <PulseLoader color="#ffffff" loading={loading} css={override} size={50} />
+      <div className='loading-spinner-wrapper'>
+        <PulseLoader color="#ffffff" loading={loading} css={override} size={20} />
+      </div>
         {loggedIn === false && 
           <Router>
             <Switch>
