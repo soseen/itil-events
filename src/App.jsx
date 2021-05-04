@@ -47,7 +47,7 @@ const App = () => {
 
   const override = `
   position: absolute;
-  top: 150px;
+  top: 170px;
   left: 50%;
   transform: translate(-50%);
   z-index: 10;
@@ -86,7 +86,7 @@ const App = () => {
       setTasksData(responseTasks.data);
       setTeamsData(responseTeams.data);
       setTaskUpdatesData(responseTaskUpdates.data);
-      // setLoading(false);
+      setLoading(false);
     }
     catch (err) {
       console.log(err.message);
@@ -102,10 +102,6 @@ const App = () => {
       setTaskToDisplay(item);
     }
   };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, [user, fetchData])
 
   const services = useMemo(() => {
 
@@ -152,16 +148,6 @@ const App = () => {
             </Switch> 
           </Router> 
         }
-        {/* {loggedIn && !user.subscriptionActive.active &&
-          <Router>
-            <Navbar setUser={setUser} setLoggedIn={setLoggedIn} user={user} teamsData={teamsData}/>
-            <Switch>
-            <Route path="/" exact>
-              <Payment user={user} setUser={setUser}/>
-            </Route>
-            </Switch>
-          </Router>
-        } */}
         
         {loggedIn &&
         <Router>
