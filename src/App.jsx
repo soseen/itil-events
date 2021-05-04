@@ -45,7 +45,7 @@ const SEVERITIES_STATUSES = {
 
 const App = () => {
 
-  const override = css`
+  const override = `
   position: absolute;
   top: 100px;
   left: 50%;
