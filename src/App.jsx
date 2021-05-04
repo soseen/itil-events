@@ -16,7 +16,7 @@ import NewRuleForm from "./Routes/NewRuleForm";
 import TaskUpdateForm from "./Routes/TaskUpdateForm";
 import axios from 'axios'
 import LoginForm from "./Routes/LoginForm";
-import RotateLoader from "react-spinners/ClipLoader";
+import PulseLoader from "react-spinners/ClipLoader";
 
 const URL_EVENTS = 'https://itil-backend.herokuapp.com/api/events';
 const URL_SERVICES = 'https://itil-backend.herokuapp.com/api/activeServices';
@@ -46,10 +46,6 @@ const SEVERITIES_STATUSES = {
 const App = () => {
 
   const override = `
-  position: absolute;
-  top: 100px;
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 10;
 `;
 
@@ -72,7 +68,9 @@ const App = () => {
   const fetchData = async () => {
 
     try {
-      setLoading(true);
+      if(loggedIn) {
+        setLoading(true);
+      }
       const [responseEvents, responseServices, responseEventServices, responseRules, responseTasks, responseTeams, responseTaskUpdates] = await axios.all([requestEvents, requestServices, requestEventServices, requestRules, requestTasks, requestTeams, requestTaskUpdates]);
       
       setEventsData(responseEvents.data);
@@ -139,7 +137,7 @@ const App = () => {
 
   return (
     <div className="App">
-        <RotateLoader color="#ffffff" loading={loading} css={override} size={50} />
+      <PulseLoader color="#ffffff" loading={true} css={override} size={50} />
         {loggedIn === false && 
           <Router>
             <Switch>
