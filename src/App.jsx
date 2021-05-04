@@ -65,7 +65,7 @@ const App = () => {
   const [ruleToDisplay, setRuleToDisplay] = useState();
   const [taskToDisplay, setTaskToDisplay] = useState(tasksData[0]);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = useMemo(async () => {
 
@@ -83,7 +83,7 @@ const App = () => {
       setTasksData(responseTasks.data);
       setTeamsData(responseTeams.data);
       setTaskUpdatesData(responseTaskUpdates.data);
-      // setLoading(false);
+      setLoading(false);
     }
     catch (err) {
       console.log(err.message);
