@@ -146,7 +146,10 @@
     overflow: hidden;
     flex-wrap: wrap;
     color: $main-color;
-    border: 1px solid $main-color;
+    border: 1px solid #353535;
+    padding: 5px;
+    border-radius: 20px;
+    font-weight: normal;
 }
 
 /* .service-box:hover {
@@ -185,7 +188,7 @@
 }
 
 .service-box-status-1 {
-    background-color: #157e00;
+    background-color: #1c4214;
 }
 
 .service-box-status-1:hover {
@@ -193,7 +196,7 @@
 }
 
 .service-box-status-2 {
-    background-color: #223985;
+    background-color: #1d253f;
 }
 
 .service-box-status-2:hover {
@@ -201,7 +204,7 @@
 }
 
 .service-box-status-3 {
-    background-color: #b3a100;
+    background-color: #7e7311;
 }
 
 .service-box-status-3:hover {
@@ -210,7 +213,7 @@
 
 
 .service-box-status-4 {
-    background-color: #8d5500;
+    background-color: #633f0a;
 }
 
 .service-box-status-4:hover {
@@ -218,7 +221,7 @@
 }
 
 .service-box-status-5 {
-    background-color: #5f1010;
+    background-color: #4e1f1f;
 }
 
 .service-box-status-5:hover {
